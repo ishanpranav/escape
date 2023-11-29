@@ -1,8 +1,12 @@
-﻿using System;
+﻿// Display.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.IO;
 using System.Reflection;
 
-namespace haunted_castle.GUI
+namespace HauntedCastle.GUI
 {
     public class Display
     {
@@ -10,17 +14,11 @@ namespace haunted_castle.GUI
         {
             get
             {
-                if (Program.FIXED_COLOR)
-                    return ConsoleColor.Gray;
-                else
-                    return Console.ForegroundColor;
+                return Program.FIXED_COLOR ? ConsoleColor.Gray : Console.ForegroundColor;
             }
             set
             {
-                if (Program.FIXED_COLOR)
-                    Console.ForegroundColor = value;
-                else
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = Program.FIXED_COLOR ? value : ConsoleColor.Gray;
             }
         }
 
@@ -28,24 +26,16 @@ namespace haunted_castle.GUI
         {
             get
             {
-                if (Program.FIXED_COLOR)
-                    return ConsoleColor.Black;
-                else
-                    return Console.BackgroundColor;
+                return Program.FIXED_COLOR ? ConsoleColor.Black : Console.BackgroundColor;
             }
             set
             {
-                if (Program.FIXED_COLOR)
-                    Console.BackgroundColor = value;
-                else
-                    Console.BackgroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = Program.FIXED_COLOR ? value : ConsoleColor.Black;
             }
         }
 
         public void LoadEnvironment()
         {
-            Native.SetWindowState();
-
             try
             {
                 BackgroundColor = ConsoleColor.Black;
@@ -63,7 +53,9 @@ namespace haunted_castle.GUI
             catch { }
 
             if (!Program.FIXED_CAPS)
+            {
                 Clear();
+            }
         }
 
         public void CloseEnvironment()
@@ -79,8 +71,6 @@ namespace haunted_castle.GUI
 
             Clear();
             Environment.Exit(0);
-            Environment.Exit(0);
-            Environment.Exit(0);
         }
 
         public void DrawScreen()
@@ -91,12 +81,16 @@ namespace haunted_castle.GUI
             Clear(true, ConsoleColor.DarkMagenta);
 
             for (int i = 0; i < 7; i++)
+            {
                 Console.WriteLine();
+            }
 
             Console.WriteLine(" (..............................................................................)".Replace('.', '\u2500').Replace('(', '\u250C').Replace(')', '\u2510'));
 
             for (int i = 0; i < 21; i++)
+            {
                 Console.WriteLine(" \u2502                                                                              \u2502");
+            }
 
             Console.WriteLine(" L............................................................................../".Replace('.', '\u2500').Replace('L', '\u2514').Replace('/', '\u2518'));
         }
@@ -116,27 +110,33 @@ namespace haunted_castle.GUI
         public void Print(string Message, ConsoleColor TextColor = ConsoleColor.Green, ConsoleColor HighlightColor = ConsoleColor.Black)
         {
             // Declarations
-            ConsoleColor OriginalTextColor = ForegroundColor;
-            ConsoleColor OriginalHighlightColor = BackgroundColor;
+            _ = ForegroundColor;
+            _ = BackgroundColor;
 
             if (TextColor == ConsoleColor.Green)
             {
                 TextColor = Program.color;
 
                 if (Program.FIXED_CAPS || Console.CapsLock)
+                {
                     Message = Message.ToUpper();
+                }
             }
 
             BackgroundColor = HighlightColor;
             ForegroundColor = TextColor;
 
             MiniPrint(Message, TextColor == ConsoleColor.Green);
-            
+
             if (Program.ROOM == "T2" && TextColor == ConsoleColor.Green && !string.IsNullOrWhiteSpace(Message.Replace("^", "")))
+            {
                 MiniPrint(Message, TextColor == ConsoleColor.Green);
+            }
 
             if (!Program.FIXED_COLOR && TextColor == ConsoleColor.Green && !string.IsNullOrWhiteSpace(Message))
+            {
                 System.Threading.Thread.Sleep(400);
+            }
         }
         private void MiniPrint(string Message, bool IsPrint)
         {
@@ -148,11 +148,15 @@ namespace haunted_castle.GUI
                     Print("\n");
 
                     if (!Program.FIXED_COLOR && IsPrint && !string.IsNullOrWhiteSpace(Message))
+                    {
                         System.Threading.Thread.Sleep(100);
+                    }
                 }
             }
             else
+            {
                 Console.Write(Message);
+            }
         }
 
         public void Pause()
@@ -168,7 +172,7 @@ namespace haunted_castle.GUI
             {
                 m = char.ToLower(Console.ReadKey(true).KeyChar);
 
-                x = (m == 'x' || m == '8' || m == '5');
+                x = m == 'x' || m == '8' || m == '5';
             }
 
             Print("\n\n");
@@ -188,14 +192,20 @@ namespace haunted_castle.GUI
                 string n = Program.name.ToUpper();
 
                 while (n.Length != 9)
+                {
                     n += " ";
+                }
 
                 Print("Escape from the Haunted Castle | Ishan Pranav | " + n, ConsoleColor.White, BarColor);
 
                 if (Console.CapsLock)
+                {
                     Print(" (A) ", ConsoleColor.Yellow, BarColor);
+                }
                 else
+                {
                     Print("     ", ConsoleColor.White, BarColor);
+                }
 
                 Print("[?] [F11] ", ConsoleColor.White, BarColor);
                 Print("[Ctrl+C]", ConsoleColor.Red, BarColor);
@@ -208,7 +218,9 @@ namespace haunted_castle.GUI
         public void CenterText(string Text)
         {
             for (int i = 0; i < ((83 - Text.Length) / 2); i++)
+            {
                 Console.Write(" ");
+            }
 
             Console.Write(Text);
         }
@@ -218,30 +230,35 @@ namespace haunted_castle.GUI
             if (Program.FIXED_COLOR)
             {
                 if (LengthInCharacters == 83 && 83 != Console.WindowWidth)
+                {
                     LengthInCharacters = Console.WindowWidth;
+                }
 
                 ForegroundColor = LineColor;
 
                 Console.WriteLine();
 
                 for (int i = 0; i < LengthInCharacters; i++)
+                {
                     Console.Write("_");
+                }
             }
             else
+            {
                 Console.WriteLine("\n");
+            }
         }
 
         public void StyleOption(string Label, bool Active = false)
         {
             Print("\n\n\t");
 
-            if (Active)
-                ForegroundColor = ConsoleColor.DarkCyan;
-            else
-                ForegroundColor = ConsoleColor.Cyan;
+            ForegroundColor = Active ? ConsoleColor.DarkCyan : ConsoleColor.Cyan;
 
             foreach (char ch in Label)
+            {
                 Console.Write(ch.ToString());
+            }
         }
 
         public void StyleInput(bool Command = false)
@@ -255,7 +272,9 @@ namespace haunted_castle.GUI
                 Console.Write(string.Format("\n SCORE: {0}/{1} >", FormatScore(Program.score), Program.MAXSCORE));
             }
             else
+            {
                 Console.Write("\n >");
+            }
 
             ForegroundColor = ConsoleColor.White;
         }
@@ -283,22 +302,24 @@ namespace haunted_castle.GUI
             ForegroundColor = ConsoleColor.White;
 
             if (Program.FIXED_COLOR)
+            {
                 for (int i = 0; i < 83; i++)
+                {
                     Console.Write("_");
+                }
+            }
 
             Print("\n " + Message, ConsoleColor.White);
             DrawLine();
             Print("\n");
             Console.CursorLeft = Message.Length + 2;
-            Console.CursorTop = Console.CursorTop - 3;
+            Console.CursorTop -= 3;
         }
 
         public string ReadLine(int MaxChars = 0, bool NoCursor = false, bool Parser = false)
         {
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             string text = string.Empty;
-            char lastkey = ' ';
-            char vk = ' ';
             string cur = "♦";
             ConsoleColor cursorColor = ConsoleColor.White;
 
@@ -307,22 +328,20 @@ namespace haunted_castle.GUI
             ForegroundColor = cursorColor;
 
             if (NoCursor)
+            {
                 Console.CursorLeft++;
+            }
             else
+            {
                 Console.Write(cur);
+            }
 
             ForegroundColor = ConsoleColor.White;
 
             Console.CursorLeft--;
-
-            bool preset = false;
-
             while (key.Key != ConsoleKey.Enter)
             {
-                preset = false;
-
-                vk = new char();
-
+                bool preset = false;
                 key = Console.ReadKey(true);
 
                 if (Console.CursorLeft >= 81 || key.Key == ConsoleKey.Enter || (MaxChars != 0 && text.Length >= MaxChars && key.Key != ConsoleKey.Backspace))
@@ -333,6 +352,7 @@ namespace haunted_castle.GUI
 
                         Console.Write("\b \b");
                     }
+
                     continue;
                 }
 
@@ -383,6 +403,7 @@ namespace haunted_castle.GUI
                                 mask = "custom_key_help";
                                 FileSystem.DELETE(FileSystem.keymapdat);
                             }
+
                             break;
                         case ConsoleKey.NumPad0:
                             mask = "take inventory";
@@ -436,35 +457,52 @@ namespace haunted_castle.GUI
                     if (mask != string.Empty)
                     {
                         if (Console.CapsLock)
+                        {
                             mask = mask.ToUpper();
+                        }
 
                         if (preset)
+                        {
                             Console.Write(mask);
+                        }
                         else
+                        {
                             Console.WriteLine(mask);
+                        }
 
                         text = mask;
                     }
 
                     if (mask != string.Empty && !preset)
+                    {
                         return text;
+                    }
                 }
 
                 if (!preset)
                 {
+                    char vk;
                     if (key.Key == ConsoleKey.Enter)
+                    {
                         vk = '^';
+                    }
                     else if (key.Key == ConsoleKey.Backspace)
+                    {
                         vk = ' ';
+                    }
                     else if (key.Key == ConsoleKey.Escape)
                     {
                         text = "~";
                         break;
                     }
                     else if ((char.IsLetterOrDigit(key.KeyChar) || char.IsPunctuation(key.KeyChar) || char.IsSymbol(key.KeyChar) || char.IsSeparator(key.KeyChar) || char.IsDigit(key.KeyChar)) && key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.UpArrow && key.Key != ConsoleKey.DownArrow && key.Key != ConsoleKey.RightArrow && key.Key != ConsoleKey.LeftArrow && key.Key != ConsoleKey.Escape && key.KeyChar != '~')
+                    {
                         vk = key.KeyChar;
+                    }
                     else
+                    {
                         continue;
+                    }
 
                     if (key.Key == ConsoleKey.Backspace && text.Length > 0)
                     {
@@ -475,9 +513,13 @@ namespace haunted_castle.GUI
                         ForegroundColor = cursorColor;
 
                         if (NoCursor)
+                        {
                             Console.CursorLeft++;
+                        }
                         else
+                        {
                             Console.Write(cur);
+                        }
 
                         ForegroundColor = ConsoleColor.White;
 
@@ -494,9 +536,13 @@ namespace haunted_castle.GUI
                         ForegroundColor = cursorColor;
 
                         if (NoCursor)
+                        {
                             Console.CursorLeft++;
+                        }
                         else
+                        {
                             Console.Write(cur);
+                        }
 
                         ForegroundColor = ConsoleColor.White;
 
@@ -514,8 +560,6 @@ namespace haunted_castle.GUI
                 return "y=mx+b";
             }
 
-            lastkey = vk;
-
             Console.CursorVisible = false;
 
             Print("\n");
@@ -526,11 +570,17 @@ namespace haunted_castle.GUI
         public void StyleHeader(string Message, bool DrawLines = true, bool space = true)
         {
             if (space)
+            {
                 for (int i = 0; i < 5; i++)
+                {
                     Print("\n");
+                }
+            }
 
             if (DrawLines)
+            {
                 DrawLine();
+            }
 
             ForegroundColor = ConsoleColor.Cyan;
 
@@ -540,7 +590,9 @@ namespace haunted_castle.GUI
             ForegroundColor = ConsoleColor.White;
 
             if (DrawLines)
+            {
                 DrawLine();
+            }
         }
     }
 }

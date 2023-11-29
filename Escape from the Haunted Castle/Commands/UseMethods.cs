@@ -1,11 +1,15 @@
-﻿using System;
+﻿// UseMethods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle.Commands.Variables_and_References
+using System;
+
+namespace HauntedCastle.Commands.Variables_and_References
 {
     public class Use_Methods
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void stoveToCook()
         {
@@ -20,10 +24,14 @@ namespace haunted_castle.Commands.Variables_and_References
                     c.Print("\n\n You yawn. You are no longer hungry, but still very tired.^");
                 }
                 else
+                {
                     c.Print("\n You are not hungry.^");
+                }
             }
             else
+            {
                 c.Print("\n There are ingredients here to cook anything,\n but you have no recipe to follow.^");
+            }
         }
 
         public static void sinkToWash()
@@ -34,7 +42,9 @@ namespace haunted_castle.Commands.Variables_and_References
         public static void sinkToWashhands()
         {
             if (!Program.washedHands)
+            {
                 Score.Addition(Score.J); // J.WashHands
+            }
 
             Program.washedHands = true;
 
@@ -45,7 +55,9 @@ namespace haunted_castle.Commands.Variables_and_References
         public static void sinkToWashtomatoes()
         {
             if (!Program.washedTomatoes)
+            {
                 Score.Addition(Score.J); // WashTomatoes
+            }
 
             Program.washedTomatoes = true;
 
@@ -56,31 +68,53 @@ namespace haunted_castle.Commands.Variables_and_References
         public static void nose()
         {
             if ((Program.pyAwake && !Program.ROOM.StartsWith("#")) || Program.ROOM == "R24")
+            {
                 c.Print("\n Sniff.\n\n You can smell the scent of an ancient snake.^");
+            }
             else if (Program.ROOM == "PartXXXI")
+            {
                 c.Print("\n Sniff.\n\n You can smell the lingering scent of horses.^");
+            }
             else if (Program.Inventory[14] > 0)
+            {
                 c.Print("\n Sniff.\n\n You can smell the pungent odor of garlic.^");
+            }
             else if (Program.ateBread)
+            {
                 c.Print("\n Sniff.\n\n You can smell the pungent, garlic-scented odor of your breath.^");
+            }
             else if ((Program.ratsGone && !Program.ogAsleep) || (Program.ogAsleep && Program.ROOM == "DX"))
+            {
                 c.Print("\n Sniff.\n\n You can smell the scent of rats.^");
+            }
             else
+            {
                 c.Print("\n Sniff.\n\n You cannot smell anything out of the ordinary.^");
+            }
         }
 
         public static void ears()
         {
             if ((Program.pyAwake && !Program.ROOM.StartsWith("#")) || Program.ROOM == "R24")
+            {
                 c.Print("\n Listening carefully, you hear the menacing hiss of a snake.^");
+            }
             else if (Program.ROOM == "PartXXIV")
+            {
                 c.Print("\n Listening carefully, you hear footsteps.^");
+            }
             else if (Program.ROOM == "PartXXXI" || Program.ROOM == "PartXXXIII" || Program.ROOM == "PartXXXV" || Program.ROOM.StartsWith("Y"))
+            {
                 c.Print("\n Listening carefully, you hear the chirping of a bird.^");
+            }
             else if (Program.ROOM.StartsWith("D") && Program.ROOM != "D1")
+            {
                 c.Print("\n Listening carefully, you hear the scurrying of rats.^");
+            }
             else
+            {
                 c.Print("\n Silence.^");
+            }
         }
 
         public static void cards()
@@ -93,7 +127,9 @@ namespace haunted_castle.Commands.Variables_and_References
             if (Program.Inventory[15] == 1)
             {
                 if (Program.InventoryCaptions[15] == InventoryItems.MonocleLens)
+                {
                     c.Print("\n Done.^");
+                }
                 else if (Program.ROOM == "D6")
                 {
                     c.Print("\n You place the monocle on the telescope, using it as a lens.^");
@@ -101,10 +137,14 @@ namespace haunted_castle.Commands.Variables_and_References
                     Score.Addition(Score.P6_UseMonocleAsLens);
                 }
                 else
+                {
                     c.Print("\n You wear the monocle.\n\n The cyclops's perscription is far worse than yours.\n Your head begins to ache, so you take it off.^");
+                }
             }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void telescope()
@@ -116,7 +156,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 if (Program.mapRead)
                 {
                     if (Program.useTel)
+                    {
                         c.Print("\n According to the stars, the ship is " + Program.degrees + " degrees of course.^");
+                    }
                     else
                     {
                         Program.useTel = true;
@@ -126,22 +168,30 @@ namespace haunted_castle.Commands.Variables_and_References
                     }
                 }
                 else
+                {
                     c.Print("\n The sky is beautiful, but you do not know what you are looking for.^");
+                }
             }
             else
+            {
                 c.Print("\n The telescope is missing a lens.^");
+            }
         }
 
         public static void computer()
         {
             if (Program.computerBroken || Program.computerDropped)
+            {
                 c.Print("\n You try to turn on the computer but it does not start.^");
+            }
             else
             {
                 if (Minigames.Computer.Start())
                 {
                     if (Program.Inventory[11] == 0)
+                    {
                         Score.Addition(Score.J); // J.EjectFloppy
+                    }
 
                     Program.Inventory[11] = 1;
 
@@ -168,7 +218,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 }
             }
             else
-                Minigames.Television.Start();
+            {
+                _ = Minigames.Television.Start();
+            }
 
             FileSystem.SaveData();
             FileSystem.TRAVELTO();
@@ -222,7 +274,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 MakePermit();
             }
             else
+            {
                 c.Print("\n Done.^");
+            }
         }
 
         public static void blackberryAsInk()
@@ -238,7 +292,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 MakePermit();
             }
             else
+            {
                 c.Print("\n Done.^");
+            }
         }
 
         public static void featherAsPen()
@@ -254,7 +310,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 MakePermit();
             }
             else
+            {
                 c.Print("\n Done.^");
+            }
         }
 
         public static void featherToTickle()
@@ -280,11 +338,17 @@ namespace haunted_castle.Commands.Variables_and_References
                 }
 
                 if (Program.ROOM == "PartXXXV" && Program.Inventory[3] == 0 && Program.InventoryCaptions[3] == InventoryItems.Seeds)
+                {
                     c.Print("\n The bird is enchanted by the sweet-sounding music.^");
+                }
                 else if (Program.ROOM == "PartXXXV")
+                {
                     c.Print("\n The bird is enchanted by the sweet-sounding music.\n It starts to fall asleep, then remembers how hungry it is.^");
+                }
                 else if (Program.ROOM == "D1")
+                {
                     c.Print("\n The music is not loud enough for the captain to hear.^");
+                }
                 else if (Program.ROOM.StartsWith("D") && Program.ROOM != "D1")
                 {
                     c.Print("\n Three rats run towards you, enchanted by the beautiful music.^");
@@ -315,7 +379,9 @@ namespace haunted_castle.Commands.Variables_and_References
                     c.Print("\n\n  Oh, a new master? What do you want?\n\n  Actually, never mind. I don't have time for this.\n  I'll tell you what - why don't you just\n  take this gold coin and leave me alone, okay?");
                 }
                 else if (Program.Inventory[0] == 0)
+                {
                     c.Print("\n\n  Here, just take another coin and get lost.");
+                }
 
                 c.Print("\"^");
 
@@ -327,10 +393,14 @@ namespace haunted_castle.Commands.Variables_and_References
                     c.Print("\n You keep the gold coin and the genie disappears.^");
                 }
                 else
+                {
                     c.Print("\n The genie disappears.^");
+                }
             }
             else
+            {
                 c.Print("\n It is inside of the closed display case.^");
+            }
         }
 
         public static void rug()
@@ -344,7 +414,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 Storyline.C1();
             }
             else
+            {
                 c.Print("\n The rug floats upwards, then floats back down again.^");
+            }
         }
 
         public static void wheel()
@@ -353,12 +425,11 @@ namespace haunted_castle.Commands.Variables_and_References
             {
                 if (Program.minutes == 0)
                 {
-                    int degree = 0;
-
                     c.Print("\n You turn it a specific number of degrees.^");
 
                     c.StyleAlt("Enter a number of degrees:");
 
+                    int degree;
                     try
                     {
                         degree = Convert.ToInt32(c.ReadLine().ToLower().Replace("degrees", "").Replace("degree", ""));
@@ -380,10 +451,14 @@ namespace haunted_castle.Commands.Variables_and_References
                     }
                 }
                 else
+                {
                     c.Print("\n It would be unwise to interfere with the\n ship's course now that you are on your way home.^");
+                }
             }
             else
+            {
                 c.Print("\n It would be unwise to interfere with the\n ship's course without knowing how far to turn the ship.^");
+            }
         }
     }
 }

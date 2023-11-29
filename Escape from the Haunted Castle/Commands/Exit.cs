@@ -1,12 +1,16 @@
-﻿using System;
+﻿// Exit.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.IO;
 
-namespace haunted_castle.Commands
+namespace HauntedCastle.Commands
 {
     public class Exit
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2)
         {
@@ -20,7 +24,7 @@ namespace haunted_castle.Commands
                 // Declarations
                 string YN = string.Empty;
                 string msg = "Are you sure you want to erase your progress?";
-                
+
                 while (!Methods.YesNoCondition(YN))
                 {
                     c.StyleAlt(msg);
@@ -34,16 +38,22 @@ namespace haunted_castle.Commands
                         FileSystem.CheckFolder();
 
                         if (File.Exists(FileSystem.savefile))
+                        {
                             File.Delete(FileSystem.savefile);
+                        }
 
                         c.Print("\n Progress for " + Program.name + " erased.", ConsoleColor.Gray);
                         c.Pause();
                         c.CloseEnvironment();
                     }
                     else if (Methods.NoCondition(YN))
+                    {
                         return;
+                    }
                     else
+                    {
                         msg = "Please answer yes or no:";
+                    }
                 }
             }
 
@@ -75,9 +85,13 @@ namespace haunted_castle.Commands
                             c.CloseEnvironment();
                         }
                         else if (Methods.NoCondition(YN))
+                        {
                             return;
+                        }
                         else
+                        {
                             msg = "Please answer yes or no:";
+                        }
                     }
                 }
             }

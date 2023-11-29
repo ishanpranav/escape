@@ -1,12 +1,16 @@
-﻿using haunted_castle.Commands.Variables_and_References;
-using System.Collections.Generic;
+﻿// Light.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle.Commands
+using System.Collections.Generic;
+using HauntedCastle.Commands.Variables_and_References;
+
+namespace HauntedCastle.Commands
 {
     public class Light
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string opt3, string opt4, string[] objs)
         {
@@ -21,10 +25,14 @@ namespace haunted_castle.Commands
             opt4 = opt4.ToLower().Replace('^', ' ');
 
             for (int i = 0; i < objects.Count; i++)
+            {
                 objects[i] = objects[i].ToLower();
+            }
 
             if ((opt1 == "light" || opt1 == "burn") && (opt2 == "" || opt2 == "fire"))
+            {
                 c.Print("\n You do not know what to " + opt1 + ".^");
+            }
 
             if ((opt1 == "light" || opt1 == "burn") && (opt2 == "me" || opt2 == "myself" || opt2 == "self"))
             {
@@ -38,11 +46,18 @@ namespace haunted_castle.Commands
                         {
                             case "match":
                                 if (Program.InventoryCaptions[1] == InventoryItems.MatchUsed && Program.Inventory[1] > 0)
+                                {
                                     c.Print("\n It has already been used.^");
+                                }
                                 else if (Program.Inventory[1] > 0)
+                                {
                                     c.Print("\n You would rather not waste it.^");
+                                }
                                 else
+                                {
                                     c.Print("\n You do not have that.^");
+                                }
+
                                 break;
 
                             case "":
@@ -55,12 +70,15 @@ namespace haunted_castle.Commands
                                     Methods.GameOver(false);
                                 }
                                 else if (Program.InventoryCaptions[2] != InventoryItems.CandleLit)
+                                {
                                     c.Print("\n You do not have a lit candle.^");
+                                }
+
                                 break;
                         }
+
                         break;
                 }
-
             }
 
             switch (opt1)
@@ -92,8 +110,11 @@ namespace haunted_castle.Commands
 
                         case "rat":
                         case "rats":
-                            if (Program.ROOM != "D1" && (Program.ROOM == "D8" || (Program.ROOM.StartsWith("D") && !Program.ogAsleep && Program.ratsGone)) || (Program.ROOM == "DX" && Program.ogAsleep))
+                            if ((Program.ROOM != "D1" && (Program.ROOM == "D8" || (Program.ROOM.StartsWith("D") && !Program.ogAsleep && Program.ratsGone))) || (Program.ROOM == "DX" && Program.ogAsleep))
+                            {
                                 c.Print("\n The three rats jump away from the flame.^");
+                            }
+
                             break;
 
                         case "snake":
@@ -107,28 +128,40 @@ namespace haunted_castle.Commands
                                     {
                                         case "match":
                                             if (Program.InventoryCaptions[1] == InventoryItems.MatchUsed && Program.Inventory[1] > 0)
+                                            {
                                                 c.Print("\n It has already been used.^");
+                                            }
                                             else if (Program.Inventory[1] > 0)
+                                            {
                                                 c.Print("\n You would rather not waste it.^");
+                                            }
                                             else
+                                            {
                                                 c.Print("\n You do not have that.^");
+                                            }
+
                                             break;
 
                                         case "":
                                         case "candle":
                                         case "fire":
                                             if (Program.pyAwake)
+                                            {
                                                 Storyline.SnakeBite();
+                                            }
                                             else
                                             {
                                                 c.Print("\n You burn the viper using the candle, causing it to awaken.^");
                                                 Storyline.WakeUpSnake();
                                             }
+
                                             c.Print("^");
                                             break;
                                     }
+
                                     break;
                             }
+
                             break;
 
                         case "hair":
@@ -143,11 +176,18 @@ namespace haunted_castle.Commands
                                     {
                                         case "match":
                                             if (Program.InventoryCaptions[1] == InventoryItems.MatchUsed && Program.Inventory[1] > 0)
+                                            {
                                                 c.Print("\n It has already been used.^");
+                                            }
                                             else if (Program.Inventory[1] > 0)
+                                            {
                                                 c.Print("\n You would rather not waste it.^");
+                                            }
                                             else
+                                            {
                                                 c.Print("\n You do not have that.^");
+                                            }
+
                                             break;
 
                                         case "":
@@ -156,8 +196,10 @@ namespace haunted_castle.Commands
                                             Light_Methods.eyebrowsWithCandle();
                                             break;
                                     }
+
                                     break;
                             }
+
                             break;
 
                         case "key":
@@ -171,11 +213,18 @@ namespace haunted_castle.Commands
                                     {
                                         case "match":
                                             if (Program.InventoryCaptions[1] == InventoryItems.MatchUsed && Program.Inventory[1] > 0)
+                                            {
                                                 c.Print("\n It has already been used.^");
+                                            }
                                             else if (Program.Inventory[1] > 0)
+                                            {
                                                 c.Print("\n You would rather not waste it.^");
+                                            }
                                             else
+                                            {
                                                 c.Print("\n You do not have that.^");
+                                            }
+
                                             break;
 
                                         case "":
@@ -184,8 +233,10 @@ namespace haunted_castle.Commands
                                             Light_Methods.keyWithCandle();
                                             break;
                                     }
+
                                     break;
                             }
+
                             break;
 
                         default:
@@ -205,11 +256,18 @@ namespace haunted_castle.Commands
                                                 {
                                                     case "match":
                                                         if (Program.InventoryCaptions[1] == InventoryItems.MatchUsed && Program.Inventory[1] > 0)
+                                                        {
                                                             c.Print("\n It has already been used.^");
+                                                        }
                                                         else if (Program.Inventory[1] > 0)
+                                                        {
                                                             c.Print("\n You would rather not waste it.^");
+                                                        }
                                                         else
+                                                        {
                                                             c.Print("\n You do not have that.^");
+                                                        }
+
                                                         break;
 
                                                     case "":
@@ -218,15 +276,21 @@ namespace haunted_castle.Commands
                                                         Light_Methods.barsWithCandle();
                                                         break;
                                                 }
+
                                                 break;
                                         }
                                     }
                                     else
+                                    {
                                         c.Print("\n They are already burnt.^");
+                                    }
                                 }
                                 else if (obj == "crate2" && opt2 == "crate")
+                                {
                                     c.Print("\n You see no reason to do that.^");
+                                }
                                 else if (obj == "crate3" && opt2 == "crate")
+                                {
                                     switch (opt3)
                                     {
                                         case "":
@@ -237,11 +301,18 @@ namespace haunted_castle.Commands
                                             {
                                                 case "match":
                                                     if (Program.InventoryCaptions[1] == InventoryItems.MatchUsed && Program.Inventory[1] > 0)
+                                                    {
                                                         c.Print("\n It has already been used.^");
+                                                    }
                                                     else if (Program.Inventory[1] > 0)
+                                                    {
                                                         c.Print("\n You would rather not waste it.^");
+                                                    }
                                                     else
+                                                    {
                                                         c.Print("\n You do not have that.^");
+                                                    }
+
                                                     break;
 
                                                 case "":
@@ -250,18 +321,30 @@ namespace haunted_castle.Commands
                                                     Light_Methods.crateWithCandle();
                                                     break;
                                             }
+
                                             break;
                                     }
+                                }
                                 else if (obj == "vampire" && (opt2 == "vampire" || opt2 == "bat") && Program.vampireAwake && !Program.vampireGone)
+                                {
                                     c.Print("\n As you move towards the vampire, it jumps away from the light.^");
+                                }
                                 else if ((obj == "chandelier" || obj == "chandelier2") && opt2 == "chandelier")
+                                {
                                     c.Print("\n The chandelier has no bulbs or candles.^");
+                                }
                                 else if (obj == "lamp" && (opt2 == "lamp" || opt2 == "oil"))
+                                {
                                     Use_Methods.lamp();
+                                }
                                 else if (obj == "bushes" && (opt2 == "bush" || opt2 == "bushes"))
+                                {
                                     c.Print("\n The bushes are too large to burn completely.^");
+                                }
                                 else if (obj == "oak" && (opt2 == "oaks" || opt2 == "oak" || opt2 == "tree" || opt2 == "trees"))
+                                {
                                     c.Print("\n The oak trees are too large to burn completely.^");
+                                }
                                 else if (obj == "troll" && opt2 == "troll")
                                 {
                                     c.Print("\n You burn the troll using the candle.\n\n It strikes quickly, too fast for you to react.");
@@ -274,8 +357,10 @@ namespace haunted_castle.Commands
                                     c.Pause();
                                     Storyline.DestroyDragon();
                                 }
-                                else if ((obj == "sphinx" && opt2 == "sphinx") || (obj == "leprechaun" && (opt2 == "leprechaun" || opt2 == "leper" )))
+                                else if ((obj == "sphinx" && opt2 == "sphinx") || (obj == "leprechaun" && (opt2 == "leprechaun" || opt2 == "leper")))
+                                {
                                     c.Print("\n It screeches with fury.^");
+                                }
                                 else if (obj == "werewolf" && (opt2 == "werewolf" || opt2 == "were" || opt2 == "wolf"))
                                 {
                                     c.Print("\n You burn the werewolf using the candle.\n\n It strikes quickly, too fast for you to react.");
@@ -300,11 +385,18 @@ namespace haunted_castle.Commands
                                             {
                                                 case "match":
                                                     if (Program.InventoryCaptions[1] == InventoryItems.MatchUsed)
+                                                    {
                                                         c.Print("\n It has already been used.^");
+                                                    }
                                                     else if (Program.Inventory[1] > 0)
+                                                    {
                                                         c.Print("\n You would rather not waste it.^");
+                                                    }
                                                     else
+                                                    {
                                                         c.Print("\n You do not have that.^");
+                                                    }
+
                                                     break;
 
                                                 case "":
@@ -313,12 +405,15 @@ namespace haunted_castle.Commands
                                                     Light_Methods.computerWithCandle();
                                                     break;
                                             }
+
                                             break;
                                     }
                                 }
                             }
+
                             break;
                     }
+
                     break;
             }
         }

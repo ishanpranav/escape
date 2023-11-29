@@ -1,12 +1,15 @@
-﻿using haunted_castle.Commands.Variables_and_References;
+﻿// Eat.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
 using System.Collections.Generic;
 
-namespace haunted_castle.Commands
+namespace HauntedCastle.Commands
 {
     public class Eat
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string[] fds)
         {
@@ -19,12 +22,17 @@ namespace haunted_castle.Commands
             opt2 = opt2.ToLower().Replace('^', ' ');
 
             for (int i = 0; i < food.Count; i++)
+            {
                 food[i] = food[i].ToLower();
+            }
 
             if ((opt1 == "eat" || opt1 == "munch" || opt1 == "m" || opt1 == "bite" || opt1 == "peck" || opt1 == "taste") && (opt2 == "seeds" || opt2 == "seed" || opt2 == "appleseed" || opt2 == "appleseeds"))
+            {
                 Eat_Methods.seeds();
+            }
 
             if (opt1 == "eat" || opt1 == "munch" || opt1 == "m" || opt1 == "bite" || opt1 == "taste")
+            {
                 switch (opt2)
                 {
                     case "":
@@ -67,7 +75,10 @@ namespace haunted_castle.Commands
                     case "breadcrumb":
                     case "handful":
                         if (Program.ateBread)
+                        {
                             c.Print("\n They are flavorless, but you eat a few nonetheless.^");
+                        }
+
                         break;
 
                     case "me":
@@ -90,22 +101,33 @@ namespace haunted_castle.Commands
                         foreach (string obj in food)
                         {
                             if ((obj == "tomatoes" && opt2 == "tomatoes") || (obj == "tomatoes" && opt2 == "tomato"))
+                            {
                                 Eat_Methods.tomatoes();
+                            }
                             else if ((obj == "sphinx" && opt2 == "sphinx") || (obj == "leprechaun" && (opt2 == "leprechaun" || opt2 == "leper")))
+                            {
                                 c.Print("\n It screeches with fury.^");
+                            }
                             else if (obj == "cake" && (opt2 == "purple" || opt2 == "cake"))
+                            {
                                 Eat_Methods.cake();
+                            }
                             else if (obj == "stove" && opt2 == "soup")
+                            {
                                 Eat_Methods.soup();
+                            }
                             else if (obj == "snake" && opt2 == "snake")
                             {
                                 if (Program.pyAwake)
+                                {
                                     Storyline.SnakeBite();
+                                }
                                 else
                                 {
                                     c.Print("\n You bite into the flesh of the snake, causing it to awaken.^");
                                     Storyline.WakeUpSnake();
                                 }
+
                                 c.Print("^");
                             }
                             else if (obj == "troll" && opt2 == "troll")
@@ -133,7 +155,9 @@ namespace haunted_castle.Commands
                                 Storyline.DestroyDragon();
                             }
                             else if (obj == "cheese" && (opt2 == "moldy" || opt2 == "cheese"))
+                            {
                                 Eat_Methods.cheese();
+                            }
                             else if (obj == "vampire" && (opt2 == "vampire" || opt2 == "bat") && Program.vampireAwake && !Program.vampireGone)
                             {
                                 Score.Addition(Score.M2_DropBread);
@@ -143,9 +167,10 @@ namespace haunted_castle.Commands
                                 c.Print("\n You bite the vampire before it can bite you.\n\n It realizes your clever trick, transforms into a human, and runs away.^");
                             }
                         }
+
                         break;
                 }
-
+            }
         }
     }
 }

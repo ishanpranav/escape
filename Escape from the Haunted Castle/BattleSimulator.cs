@@ -1,45 +1,48 @@
-﻿using System;
+﻿// BattleSimulator.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle
+using System;
+using HauntedCastle.Commands;
+
+namespace HauntedCastle
 {
-    class BattleSimulator
+    internal class BattleSimulator
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
-        static int lns = 7;
+        private static readonly GUI.Display c = new GUI.Display();
+        private static readonly int lns = 7;
 
         public static bool StartBattle(int index, string[] attacks, string Location, string myEnemy = "")
         {
-            // Declarations
-            double hp = 100;
-            double ehp = 100;
-            int enemyAttack = 0;
-            int hps = 0;
-            int ehps = 0;
             string Enemy = myEnemy.ToUpper();
-            string opt1 = string.Empty;
 
-            hp = Program.PermanentHealth;
+            // Declarations
+            double hp = Program.PermanentHealth;
 
             c.Print("\n");
-
-            if (index == -1)
-                ehp = 100;
-            else
-                ehp = (110 + ((index + 1) * 10));
+            double ehp = index == -1 ? 100 : 110 + ((index + 1) * 10);
 
             if (index == 0)
+            {
                 Enemy = "THE GHOST";
+            }
             else if (index == 1)
+            {
                 Enemy = "THE SUIT OF ARMOR";
+            }
             else if (index == 2)
+            {
                 Enemy = "THE GOBLIN";
+            }
             else if (index == 3)
+            {
                 Enemy = "THE SKELETON KING";
+            }
 
             while (hp > 0 && ehp > 0)
             {
-                Commands.DiagnosticSummary ds = Commands.Diagnose.Run("h", "", false);
+                DiagnosticSummary ds = Diagnose.Run("h", "", false);
                 ds.Health = (int)Math.Round(hp);
 
                 WRITESOME(Enemy, Location, index, hp, ehp);
@@ -58,7 +61,9 @@ namespace haunted_castle
                     if (key.Key == ConsoleKey.UpArrow)
                     {
                         if (idx > 1)
+                        {
                             idx--;
+                        }
 
                         WRITEALL(idx, false, ds);
                     }
@@ -67,16 +72,24 @@ namespace haunted_castle
                         if (Program.Inventory[6] == 1)
                         {
                             if (idx < 7)
+                            {
                                 idx++;
+                            }
                             else if (idx == 7)
+                            {
                                 idx = 1;
+                            }
                         }
                         else
                         {
                             if (idx < 6)
+                            {
                                 idx++;
+                            }
                             else if (idx == 6)
+                            {
                                 idx = 1;
+                            }
                         }
 
                         WRITEALL(idx, false, ds);
@@ -125,26 +138,25 @@ namespace haunted_castle
                     }
                 }
 
-                hps = 0;
-                ehps = 0;
-
-                enemyAttack = Program.rnd.Next(attacks.Length);
+                int hps = 0;
+                int ehps = 0;
+                int enemyAttack = Program.rnd.Next(attacks.Length);
 
                 if (idx == 1)
                 {
-                    ehps = (ds.Health / 5);
+                    ehps = ds.Health / 5;
 
                     c.Print(string.Format("\n USING HEALTH ({0}/100): You punch {1} with your hands.", c.FormatScore(ds.Health), Enemy), ConsoleColor.Red);
                 }
                 else if (idx == 2)
                 {
-                    ehps = (ds.Skill / 5);
+                    ehps = ds.Skill / 5;
 
                     c.Print(string.Format("\n USING SKILL ({0}/100): You kick {1}.", c.FormatScore(ds.Skill), Enemy), ConsoleColor.Yellow);
                 }
                 else if (idx == 3)
                 {
-                    ehps = (ds.Magic / 2);
+                    ehps = ds.Magic / 2;
 
                     c.Print(string.Format("\n USING MAGIC ({0}/100): You zap {1} with your magic staff.", c.FormatScore(ds.Magic), Enemy), ConsoleColor.Magenta);
                 }
@@ -177,27 +189,24 @@ namespace haunted_castle
                 }
                 else if (idx == 6)
                 {
-                    Commands.Diagnose.Run("h", "");
+                    _ = Commands.Diagnose.Run("h", "");
 
                     c.ForegroundColor = ConsoleColor.Cyan;
 
                     Console.Write("\n PRESS [X] TO CONTINUE...");
 
                     bool x = false;
-                    char m = ' ';
-
                     while (!x)
                     {
-                        m = char.ToLower(Console.ReadKey(true).KeyChar);
-
-                        x = (m == 'x' || m == '5' || m == '8');
+                        char m = char.ToLower(Console.ReadKey(true).KeyChar);
+                        x = m == 'x' || m == '5' || m == '8';
                     }
 
                     c.Print("\n\n");
                 }
                 else if (idx == 7 && Program.Inventory[6] == 1)
                 {
-                    ehps = (ds.Protection / 5);
+                    ehps = ds.Protection / 5;
 
                     c.Print(string.Format("\n USING PROTECTION ({0}/100): You use your shield to protect you from harm\n while simultaneously attacking {1}.", c.FormatScore(ds.Protection), Enemy), ConsoleColor.Cyan);
                     ehp -= ehps;
@@ -218,27 +227,43 @@ namespace haunted_castle
                     ehp -= ehps;
 
                     if (index == -1)
+                    {
                         hps = 7;
+                    }
                     else
                     {
                         if (enemyAttack < 2)
+                        {
                             hps = 7;
+                        }
 
                         if (enemyAttack == 0 && Program.rnd.Next(3) == 0)
+                        {
                             Program.State[2] = true;
+                        }
 
                         if (enemyAttack == 2 && Program.rnd.Next(3) == 0)
+                        {
                             Program.State[3] = true;
+                        }
                     }
 
                     if (hps > ehps)
+                    {
                         c.Print("\n\n Your attack is ineffective.", ConsoleColor.White);
+                    }
                     else if (ehps == hps)
+                    {
                         c.Print("\n\n Your attack is moderately effective.", ConsoleColor.White);
+                    }
                     else if (ehps == 1000)
+                    {
                         c.Print("\n\n Your attack is devastatingly effective.", ConsoleColor.White);
+                    }
                     else
+                    {
                         c.Print("\n\n Your attack is very effective.", ConsoleColor.White);
+                    }
 
                     hp -= hps;
 
@@ -266,7 +291,7 @@ namespace haunted_castle
                 {
                     m = char.ToLower(Console.ReadKey(true).KeyChar);
 
-                    x = (m == 'z' || m == '5');
+                    x = m == 'z' || m == '5';
                 }
 
                 c.Print("\n\n");
@@ -276,21 +301,26 @@ namespace haunted_castle
             }
             else
             {
-                int gold = 0;
-
+                int gold;
                 if (index == -1)
+                {
                     gold = 5;
+                }
                 else
                 {
-                    gold = ((index + 1) * 20);
+                    gold = (index + 1) * 20;
                     Score.Addition(Score.Y_Battle);
                     Program.Ghosts[index] = true;
                 }
 
                 if (Convert.ToInt32(Math.Round(50 + (0.1 * hp))) > hp)
+                {
                     Methods.SetPermanentHealth(Convert.ToInt32(Math.Round(70 + (0.1 * hp))));
+                }
                 else
+                {
                     Methods.SetPermanentHealth(Convert.ToInt32(hp));
+                }
 
                 Program.Inventory[0] += gold;
 
@@ -298,7 +328,7 @@ namespace haunted_castle
 
                 c.Print(string.Format("\n You win the battle.\n {0} disappears with a loud bang and leaves\n behind {1} gold coins, which you keep.^", Enemy, gold));
                 c.Print("\n After a short rest, much of your health is replenished.");
-                
+
                 c.ForegroundColor = ConsoleColor.Cyan;
 
                 Console.Write("\n\n PRESS [Z] TO CONTINUE...");
@@ -310,7 +340,7 @@ namespace haunted_castle
                 {
                     m = char.ToLower(Console.ReadKey(true).KeyChar);
 
-                    x = (m == 'z' || m == '5');
+                    x = m == 'z' || m == '5';
                 }
 
                 c.Print("\n\n");
@@ -331,9 +361,13 @@ namespace haunted_castle
             c.Print(string.Format("\n {0}'s HEALTH: {1}/{2}", Program.name, c.FormatScore((int)hp), 100), ConsoleColor.Red);
 
             if (index == -1)
+            {
                 c.Print(string.Format("\n\n {0}'s HEALTH: {1}/{2}", Enemy, c.FormatScore((int)ehp), 100), ConsoleColor.Red);
+            }
             else
-                c.Print(string.Format("\n\n {0}'s HEALTH: {1}/{2}", Enemy, c.FormatScore((int)ehp), (110 + ((index + 1) * 10))), ConsoleColor.Red);
+            {
+                c.Print(string.Format("\n\n {0}'s HEALTH: {1}/{2}", Enemy, c.FormatScore((int)ehp), 110 + ((index + 1) * 10)), ConsoleColor.Red);
+            }
         }
 
         private static void WRITEALL(int ACTIVEINDEX, bool FIRST, Commands.DiagnosticSummary ds)
@@ -344,7 +378,9 @@ namespace haunted_castle
                 Console.CursorTop = lns;
 
                 for (int i = 0; i < lns; i++)
+                {
                     c.Print("\n");
+                }
 
                 Console.CursorLeft = 0;
                 Console.CursorTop = lns;
@@ -355,39 +391,67 @@ namespace haunted_castle
             Console.WriteLine("\n\n\n Please choose an attack.");
 
             if (ACTIVEINDEX == 1)
+            {
                 c.StyleOption(string.Format("> 1. PUNCH\tHEALTH\t\t({0}/100)", c.FormatScore(ds.Health)), true);
+            }
             else
+            {
                 c.StyleOption(string.Format("  1. PUNCH\tHEALTH\t\t({0}/100)", c.FormatScore(ds.Health)));
+            }
 
             if (ACTIVEINDEX == 2)
+            {
                 c.StyleOption(string.Format("> 2. KICK\tSKILL\t\t({0}/100)", c.FormatScore(ds.Skill)), true);
+            }
             else
+            {
                 c.StyleOption(string.Format("  2. KICK\tSKILL\t\t({0}/100)", c.FormatScore(ds.Skill)));
+            }
 
             if (ACTIVEINDEX == 3)
+            {
                 c.StyleOption(string.Format("> 3. ZAP\tMAGIC\t\t({0}/100)", c.FormatScore(ds.Magic)), true);
+            }
             else
+            {
                 c.StyleOption(string.Format("  3. ZAP\tMAGIC\t\t({0}/100)", c.FormatScore(ds.Magic)));
+            }
 
             if (ACTIVEINDEX == 4)
+            {
                 c.StyleOption(string.Format("> 4. BREATHE\tHYGIENE\t\t({0}/100)", c.FormatScore(ds.Hygiene)), true);
+            }
             else
+            {
                 c.StyleOption(string.Format("  4. BREATHE\tHYGIENE\t\t({0}/100)", c.FormatScore(ds.Hygiene)));
+            }
 
             if (ACTIVEINDEX == 5)
+            {
                 c.StyleOption("> 5. BURN", true);
+            }
             else
+            {
                 c.StyleOption("  5. BURN");
+            }
 
             if (ACTIVEINDEX == 6)
+            {
                 c.StyleOption("> 6. DIAGNOSE", true);
+            }
             else
+            {
                 c.StyleOption("  6. DIAGNOSE");
+            }
 
             if (ACTIVEINDEX == 7 && Program.Inventory[6] == 1)
+            {
                 c.StyleOption(string.Format("> 7. SHIELD\tPROTECTION\t({0}/100)", c.FormatScore(ds.Protection)), true);
+            }
             else if (Program.Inventory[6] == 1)
+            {
                 c.StyleOption(string.Format("  7. SHIELD\tPROTECTION\t({0}/100)", c.FormatScore(ds.Protection)));
+            }
 
             c.Print("\n");
             c.DrawLine();

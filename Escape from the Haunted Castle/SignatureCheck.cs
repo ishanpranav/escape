@@ -1,8 +1,12 @@
-﻿using System;
+﻿// SignatureCheck.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle
+using System;
+
+namespace HauntedCastle
 {
-    class SignatureCheck
+    internal class SignatureCheck
     {
         public static void Run()
         {

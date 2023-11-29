@@ -1,12 +1,16 @@
-﻿using System;
+﻿// Computer.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.IO;
 using System.Linq;
 
-namespace haunted_castle.Minigames
+namespace HauntedCastle.Minigames
 {
-    class Computer
+    internal class Computer
     {
-        static GUI.Display gui = new GUI.Display();
+        private static readonly GUI.Display gui = new GUI.Display();
 
         public static bool Start()
         {
@@ -26,6 +30,7 @@ namespace haunted_castle.Minigames
             char c = char.ToLower(Console.ReadKey(true).KeyChar);
 
             if (c == 'x')
+            {
                 while (true)
                 {
                     gui.DrawScreen();
@@ -37,7 +42,9 @@ namespace haunted_castle.Minigames
                     string pass = gui.ReadLine(45);
 
                     if (pass.ToLower() == "invalid")
+                    {
                         return Tabletop();
+                    }
                     else
                     {
                         gui.PrintScreen("Password is invalid.", 6, ConsoleColor.Red);
@@ -51,15 +58,20 @@ namespace haunted_castle.Minigames
                             c = char.ToLower(Console.ReadKey(true).KeyChar);
 
                             if (c == 'z')
+                            {
                                 return false;
+                            }
                         }
                     }
                 }
+            }
             else
+            {
                 return false;
+            }
         }
 
-        static bool Tabletop()
+        private static bool Tabletop()
         {
             while (true)
             {
@@ -71,7 +83,9 @@ namespace haunted_castle.Minigames
                 gui.PrintScreen("PRESS [X] TO CHECK MESSAGES", 17, ConsoleColor.Yellow);
 
                 if (Program.Inventory[11] == 0)
+                {
                     gui.PrintScreen("PRESS [C] TO EJECT DISKETTE", 18, ConsoleColor.Yellow);
+                }
 
                 gui.PrintScreen("PRESS [V] TO LOG OFF", 19, ConsoleColor.Yellow);
 
@@ -93,12 +107,14 @@ namespace haunted_castle.Minigames
 
                         while (line.ToLower() != "" && i < 14)
                         {
-                            gui.PrintScreen(Program.name.ToUpper().Trim() + " (" + (i + 1).ToString() + "): ", (i + 6), ConsoleColor.White);
+                            gui.PrintScreen(Program.name.ToUpper().Trim() + " (" + (i + 1).ToString() + "): ", i + 6, ConsoleColor.White);
 
                             line = gui.ReadLine(60);
 
                             if (line.ToLower() != "")
+                            {
                                 text += Program.name.ToUpper() + ": " + line + Environment.NewLine;
+                            }
 
                             i++;
                         }
@@ -114,7 +130,10 @@ namespace haunted_castle.Minigames
                         c = ' ';
 
                         while (c != 'c')
+                        {
                             c = char.ToLower(Console.ReadKey(true).KeyChar);
+                        }
+
                         break;
 
                     case 'x':
@@ -128,14 +147,19 @@ namespace haunted_castle.Minigames
                         lns = lns.Skip(Math.Max(0, lns.Length - 14)).ToArray();
 
                         for (int j = 0; j < lns.Length; j++)
-                            gui.PrintScreen("  " + lns[j], (j + 5), ConsoleColor.White);
+                        {
+                            gui.PrintScreen("  " + lns[j], j + 5, ConsoleColor.White);
+                        }
 
                         gui.PrintScreen("PRESS [C] TO CLOSE", 19, ConsoleColor.Yellow);
 
                         c = ' ';
 
                         while (c != 'c')
+                        {
                             c = char.ToLower(Console.ReadKey(true).KeyChar);
+                        }
+
                         break;
 
                     case 'c':
@@ -153,9 +177,12 @@ namespace haunted_castle.Minigames
                                 c = char.ToLower(Console.ReadKey(true).KeyChar);
 
                                 if (c == 'c')
+                                {
                                     return true;
+                                }
                             }
                         }
+
                         break;
 
                     case 'v':
@@ -170,7 +197,9 @@ namespace haunted_castle.Minigames
                             c = char.ToLower(Console.ReadKey(true).KeyChar);
 
                             if (c == 'c')
+                            {
                                 return false;
+                            }
                         }
                 }
             }

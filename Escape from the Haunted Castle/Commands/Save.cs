@@ -1,12 +1,16 @@
-﻿using System;
+﻿// Save.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.IO;
 
-namespace haunted_castle.Commands
+namespace HauntedCastle.Commands
 {
     public class Save
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2)
         {
@@ -19,10 +23,12 @@ namespace haunted_castle.Commands
 
                 FileSystem.SaveData();
 
-                c.Print(string.Format("\n Progress saved ({0:n2} kb).^", (double)(new FileInfo(FileSystem.savefile).Length) / 1024), ConsoleColor.Gray);
+                c.Print(string.Format("\n Progress saved ({0:n2} kb).^", (double)new FileInfo(FileSystem.savefile).Length / 1024), ConsoleColor.Gray);
             }
-            else if (opt1 == "restore" || opt1 == "load" && (opt2 == "" || opt2 == "game" || opt2 == "state" || opt2 == "me" || opt2 == "myself" || opt2 == "save"))
+            else if (opt1 == "restore" || (opt1 == "load" && (opt2 == "" || opt2 == "game" || opt2 == "state" || opt2 == "me" || opt2 == "myself" || opt2 == "save")))
+            {
                 c.Print("\n Automatic progress restoration is now on.^", ConsoleColor.Gray);
+            }
         }
-}
+    }
 }

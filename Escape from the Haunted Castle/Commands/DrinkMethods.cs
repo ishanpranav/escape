@@ -1,18 +1,22 @@
-﻿using System;
+﻿// DrinkMethods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle.Commands.Variables_and_References
+namespace HauntedCastle.Commands
 {
     public class Drink_Methods
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void water()
         {
             if (Program.InventoryCaptions[4] == InventoryItems.BagWater || Program.ROOM == "PartXV" || Program.ROOM == "PartXXXI")
             {
                 if (Program.ROOM != "PartXV" && Program.ROOM != "PartXXXI")
+                {
                     Program.InventoryCaptions[4] = InventoryItems.Bag;
+                }
 
                 c.Print("\n You have a drink of water.^");
 
@@ -22,14 +26,18 @@ namespace haunted_castle.Commands.Variables_and_References
                     Methods.SetPermanentHealth(Program.PermanentHealth + 30);
                 }
                 else
+                {
                     Methods.SetPermanentHealth(Program.PermanentHealth + 15);
+                }
 
                 Methods.SetPermanentHealth(Program.PermanentHealth + 30);
 
                 c.Print("\n Ahh.\n\n The water is very refreshing.\n It replenishes some of your health and gives you strength.");
 
                 if (Program.State[2])
+                {
                     c.Print("\n It also cures your injury.");
+                }
 
                 c.Print("^");
 
@@ -37,7 +45,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 Program.IsInvisible = false;
             }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void coffee()
@@ -56,7 +66,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 c.Print("\n You have a spot of tea.^");
 
                 if (Program.ROOM != "R3")
+                {
                     Program.InventoryCaptions[4] = InventoryItems.Bag;
+                }
 
                 if (!Program.drankWater)
                 {
@@ -64,7 +76,9 @@ namespace haunted_castle.Commands.Variables_and_References
                     Methods.SetPermanentHealth(Program.PermanentHealth + 30);
                 }
                 else
+                {
                     Methods.SetPermanentHealth(Program.PermanentHealth + 15);
+                }
 
                 Methods.SetPermanentHealth(Program.PermanentHealth + 30);
 
@@ -77,7 +91,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 }
             }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void spit()
@@ -97,7 +113,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 Score.Addition(Score.E_DrinkWater);
             }
             else
+            {
                 c.Print("\n You spit.\n\n How unhygienic.^");
+            }
         }
     }
 }

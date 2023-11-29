@@ -1,4 +1,8 @@
-﻿namespace haunted_castle
+﻿// Score.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+namespace HauntedCastle
 {
     public static class Score
     {
@@ -66,7 +70,9 @@
             Program.score += Addition;
 
             if (Program.score > Program.MAXSCORE)
+            {
                 Program.score = Program.MAXSCORE;
+            }
         }
     }
 }

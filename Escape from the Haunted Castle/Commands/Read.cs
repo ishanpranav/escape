@@ -1,11 +1,13 @@
-﻿using haunted_castle.Commands.Variables_and_References;
+﻿// Read.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle.Commands
+namespace HauntedCastle.Commands
 {
     public class Read
     {
         // Declarations
-        static readonly GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string[] books)
         {
@@ -13,9 +15,12 @@ namespace haunted_castle.Commands
             opt2 = opt2.ToLower().Replace('^', ' ');
 
             for (int i = 0; i < books.Length; i++)
+            {
                 books[i] = books[i].ToLower();
+            }
 
             if (opt1 == "read" || opt1 == "r")
+            {
                 switch (opt2)
                 {
                     case "":
@@ -34,61 +39,88 @@ namespace haunted_castle.Commands
                     case "magic":
                     case "staff":
                         if (Program.ROOM == "FIN")
-                            Read_Methods.magic_staff();
+                        {
+                            ReadMethods.magic_staff();
+                        }
+
                         break;
 
                     case "newspaper":
                     case "paper":
                     case "news":
-                        Read_Methods.newspaper();
+                        ReadMethods.newspaper();
                         break;
 
                     case "palm":
                     case "palms":
                     case "hand":
                     case "hands":
-                        Read_Methods.palm();
+                        ReadMethods.palm();
                         break;
 
                     case "floppy":
                     case "disk":
                     case "disc":
                     case "diskette":
-                        Read_Methods.floppy();
+                        ReadMethods.floppy();
                         break;
 
                     case "recipe":
-                        Read_Methods.recipe();
+                        ReadMethods.recipe();
                         break;
 
                     default:
                         foreach (string obj in books)
                         {
                             if (obj == "calendar" && opt2 == "calendar")
-                                Read_Methods.calendar();
+                            {
+                                ReadMethods.calendar();
+                            }
                             else if (obj == "cookbook" && (opt2 == "cookbook" || opt2 == "cook"))
-                                Read_Methods.cookbook();
+                            {
+                                ReadMethods.cookbook();
+                            }
                             else if (obj == "coffin" && (opt2 == "coffin" || opt2 == "black"))
-                                Read_Methods.coffin();
+                            {
+                                ReadMethods.coffin();
+                            }
                             else if (obj == "ship" && opt2 == "ship")
-                                Read_Methods.ship();
+                            {
+                                ReadMethods.ship();
+                            }
                             else if (obj == "spellbook" && (opt2 == "spellbook" || opt2 == "spell"))
-                                Read_Methods.spellbook();
+                            {
+                                ReadMethods.spellbook();
+                            }
                             else if ((obj == "purple" && opt2 == "strange") || (obj == "purple" && opt2 == "blue"))
-                                Read_Methods.strange_purple();
+                            {
+                                ReadMethods.strange_purple();
+                            }
                             else if (obj == "fountain" && (opt2 == "fountain" || opt2 == "basin"))
-                                Read_Methods.fountain();
+                            {
+                                ReadMethods.fountain();
+                            }
                             else if (obj == "poetry" && (opt2 == "poetry" || opt2 == "poem"))
-                                Read_Methods.poetry();
+                            {
+                                ReadMethods.poetry();
+                            }
                             else if (obj == "cake" && (opt2 == "cake" || opt2 == "purple"))
-                                Read_Methods.cake();
+                            {
+                                ReadMethods.cake();
+                            }
                             else if (obj == "sign" && opt2 == "sign")
-                                Read_Methods.sign();
+                            {
+                                ReadMethods.sign();
+                            }
                             else if (obj == "map" && opt2 == "map")
-                                Read_Methods.map();
+                            {
+                                ReadMethods.map();
+                            }
                         }
+
                         break;
                 }
+            }
         }
     }
 }

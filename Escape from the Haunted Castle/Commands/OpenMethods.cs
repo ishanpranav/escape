@@ -1,9 +1,13 @@
-﻿namespace haunted_castle.Commands.Variables_and_References
+﻿// OpenMethods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+namespace HauntedCastle.Commands
 {
-    public class Open_Methods
+    public class OpenMethods
     {
         // Declarations
-        static readonly GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void bag(bool ComputerRoom)
         {
@@ -19,19 +23,29 @@
             else if (Program.InventoryCaptions[4] == InventoryItems.BagWater)
             {
                 if (ComputerRoom)
-                    Drop_Methods.water("COMPUTER_ROOM");
+                {
+                    DropMethods.water("COMPUTER_ROOM");
+                }
                 else
-                    Drop_Methods.water("0");
+                {
+                    DropMethods.water("0");
+                }
             }
             else if (Program.InventoryCaptions[4] == InventoryItems.BagTea)
             {
                 if (Program.ROOM == "R8")
-                    Drop_Methods.tea("PY");
+                {
+                    DropMethods.tea("PY");
+                }
                 else
-                    Drop_Methods.tea("");
+                {
+                    DropMethods.tea("");
+                }
             }
             else if (Program.InventoryCaptions[4] == InventoryItems.Bag)
+            {
                 c.Print("\n Empty.^");
+            }
         }
 
         public static void door()
@@ -49,9 +63,13 @@
                 c.Print("\n The door does not budge.^");
 
                 if (Program.Inventory[5] == 1 && Program.InventoryCaptions[5] == InventoryItems.Key)
+                {
                     c.Print("\n You try to use the key but it does not fit.^");
+                }
                 else if (Program.Inventory[5] == 1 && Program.InventoryCaptions[5] == InventoryItems.Silver)
+                {
                     c.Print("\n You try to use the key but it has been melted out of shape.^");
+                }
             }
         }
 
@@ -104,7 +122,9 @@
                 c.Print("\n The library door is locked.^");
 
                 if (Program.Inventory[5] > 0 && Program.InventoryCaptions[5] != InventoryItems.Key)
+                {
                     c.Print("\n The key has been melted out of shape.^");
+                }
 
                 if (Program.Inventory[5] > 0 && Program.InventoryCaptions[5] == InventoryItems.Key)
                 {
@@ -121,22 +141,28 @@
                     c.Print("\n You turn back towards the corridor.\n\n An angry ghost is blocking your path!^");
                     c.Print("\n \"You dare to enter this castle without permission?\n  For this you shall have a taste of my extraordinary magic!\"");
                     c.Pause();
-                    BattleSimulator.StartBattle(0, Program.GhostAttacks, "Haunted Castle: Corridor");
+                    _ = BattleSimulator.StartBattle(0, Program.GhostAttacks, "Haunted Castle: Corridor");
 
                     FileSystem.SaveData();
                     FileSystem.TRAVELTO();
                 }
             }
             else
+            {
                 Storyline.PartIII();
+            }
         }
 
         public static void coffin()
         {
             if (Program.vampireGone && Program.vampireAwake)
-                Read_Methods.coffin();
+            {
+                ReadMethods.coffin();
+            }
             else if (Program.vampireAwake)
+            {
                 c.Print("\n Inside is a huge vampire.\n\n He stares at you furiously.\n Take caution: a single bite can kill you.^");
+            }
             else
             {
                 Score.Addition(Score.M1_OpenCoffin);
@@ -150,7 +176,9 @@
         public static void chest()
         {
             if (Program.Ghosts[1])
+            {
                 c.Print("\n Empty.^");
+            }
             else
             {
                 if (Program.Inventory[6] == 0)
@@ -159,10 +187,12 @@
                     Program.Inventory[6] = 1;
                 }
                 else
+                {
                     c.Print("\n A suit of armor rises from\n the depths of the chest.\n\n He draws his sword and attacks.");
+                }
 
                 c.Pause();
-                BattleSimulator.StartBattle(1, Program.SwordAttacks, "Haunted Castle: Armory");
+                _ = BattleSimulator.StartBattle(1, Program.SwordAttacks, "Haunted Castle: Armory");
                 FileSystem.SaveData();
                 FileSystem.TRAVELTO();
             }
@@ -177,7 +207,9 @@
                 Storyline.PartXII(true);
             }
             else
+            {
                 c.Print("\n You cannot find the secret door that leads south.^");
+            }
         }
 
         public static void doors()
@@ -190,43 +222,65 @@
         public static void box()
         {
             if (Program.Inventory[9] == 1 || Program.ROOM == "PartXXII")
+            {
                 c.Print("\n It is already open.^");
+            }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void crate()
         {
             if (Program.Inventory[10] == 1 || Program.ROOM == "PartXXII")
+            {
                 c.Print("\n It is already open.^");
+            }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void drawbridge()
         {
             if (Program.InventoryCaptions[7] == InventoryItems.RecipePaperApproved)
+            {
                 c.Print("\n The drawbridge is already open.^");
+            }
             else
+            {
                 c.Print("\n It does not budge.^");
+            }
         }
 
         public static void y()
         {
             if (Program.ROOM == "J2")
+            {
                 Storyline.E6();
+            }
             else if (Program.ROOM == "E6")
+            {
                 Storyline.J2();
+            }
         }
 
         public static void x()
         {
             if (Program.ROOM == "E5")
+            {
                 Storyline.J1();
+            }
             else if (Program.ROOM == "J1")
+            {
                 Storyline.E5();
+            }
             else if (Program.ROOM == "U1")
+            {
                 c.Print("\n It would be unwise to explore further while there is still a werewolf in your house.^");
+            }
         }
     }
 }

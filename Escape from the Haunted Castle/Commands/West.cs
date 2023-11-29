@@ -1,11 +1,13 @@
-﻿using haunted_castle.Commands.Variables_and_References;
+﻿// West.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle.Commands
+namespace HauntedCastle.Commands
 {
     public class West
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string MazeRoom = "0", string block = "")
         {
@@ -13,36 +15,50 @@ namespace haunted_castle.Commands
             opt2 = opt2.ToLower().Replace('^', ' ');
 
             if (opt1 == "w" || opt1 == "west" || opt1 == "left" || opt1 == "port" || opt1 == "p" || ((opt1 == "go" || opt1 == "walk" || opt1 == "run") && (opt2 == "w" || opt2 == "west" || opt2 == "left" || opt2 == "port" || opt2 == "p")))
-                switch (MazeRoom) {
+            {
+                switch (MazeRoom)
+                {
                     case "PC":
                         Storyline.D7();
                         return;
                     default:
-                        if ((opt1 == "p" || opt1 == "port" || ((opt1 == "go") || opt1 == "run" || opt1 == "walk") && (opt1 == "p" || opt1 == "port")) && block != string.Empty && Program.ROOM.StartsWith("D") && Program.ROOM != "D1")
+                        if ((opt1 == "p" || opt1 == "port" || (((opt1 == "go") || opt1 == "run" || opt1 == "walk") && (opt1 == "p" || opt1 == "port"))) && block != string.Empty && Program.ROOM.StartsWith("D") && Program.ROOM != "D1")
                         {
                             c.Print("\n " + block + "^");
                             return;
                         }
-                        else break;
+                        else
+                        {
+                            break;
+                        }
                 }
+            }
 
             if (opt1 == "w" || opt1 == "west" || opt1 == "left" || ((opt1 == "go" || opt1 == "walk" || opt1 == "run") && (opt2 == "w" || opt2 == "west" || opt2 == "left")))
             {
                 switch (MazeRoom)
                 {
                     case "U1":
-                        Open_Methods.x();
+                        OpenMethods.x();
                         break;
                     case "Z":
                         if (Program.mazes[Program.mazeIdx] == 'w')
+                        {
                             Program.mazeIdx++;
+                        }
+
                         FileSystem.TRAVELTO();
                         break;
                     case "Q1":
                         if (Program.mazes[0] == 'w')
+                        {
                             Storyline.Z();
+                        }
                         else
+                        {
                             FileSystem.TRAVELTO();
+                        }
+
                         break;
                     case "E2":
                     case "E3":
@@ -98,7 +114,7 @@ namespace haunted_castle.Commands
                         Storyline.PartXXVIII();
                         break;
                     case "J1":
-                        Open_Methods.x();
+                        OpenMethods.x();
                         break;
                     case "M1":
                     case "M2":
@@ -109,7 +125,7 @@ namespace haunted_castle.Commands
                         FileSystem.TRAVELTO();
                         break;
                     case "SR":
-                        Open_Methods.SouthNorthWest("west");
+                        OpenMethods.SouthNorthWest("west");
                         break;
                     case "SOP3":
                         Score.Addition(Score.O_Passages);
@@ -129,10 +145,10 @@ namespace haunted_castle.Commands
                         break;
                     case "THRONE":
                     case "PLATFORM":
-                        Open_Methods.doors();
+                        OpenMethods.doors();
                         break;
                     case "D":
-                        Open_Methods.door2();
+                        OpenMethods.door2();
                         break;
                     case "IS":
                         c.Print("\n At the north pole the only direction is south.^");
@@ -148,9 +164,14 @@ namespace haunted_castle.Commands
                         break;
                     default:
                         if (block != string.Empty)
+                        {
                             c.Print(string.Format("\n {0}^", block));
+                        }
                         else
+                        {
                             c.Print("\n You cannot go west from here.^");
+                        }
+
                         break;
                 }
             }

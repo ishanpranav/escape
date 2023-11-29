@@ -1,13 +1,17 @@
-﻿using haunted_castle.Properties;
+﻿// TitleScreen.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
 using System;
 using System.Reflection;
+using HauntedCastle.Properties;
 
-namespace haunted_castle.GUI
+namespace HauntedCastle.GUI
 {
-    class TitleScreen
+    internal class TitleScreen
     {
         // Declarations
-        static Display c = new Display();
+        private static readonly Display c = new Display();
 
         public static void Show(bool Standard, bool Win, bool Lose, bool H = true)
         {
@@ -40,65 +44,36 @@ namespace haunted_castle.GUI
                         case ' ':
                             break;
                         case 'Z':
-                            if (Lose)
-                                c.ForegroundColor = ConsoleColor.White;
-                            else if (Win)
-                                c.ForegroundColor = ConsoleColor.DarkRed;
-                            else
-                                c.ForegroundColor = ConsoleColor.Red;
+                            c.ForegroundColor = Lose ? ConsoleColor.White : Win ? ConsoleColor.DarkRed : ConsoleColor.Red;
+
                             break;
                         case 'z':
-                            if (Lose)
-                                c.ForegroundColor = ConsoleColor.White;
-                            else if (Win)
-                                c.ForegroundColor = ConsoleColor.DarkRed;
-                            else
-                                c.ForegroundColor = ConsoleColor.Red;
+                            c.ForegroundColor = Lose ? ConsoleColor.White : Win ? ConsoleColor.DarkRed : ConsoleColor.Red;
+
                             break;
                         case '(':
                         case 'C':
-                            if (Lose)
-                                c.ForegroundColor = ConsoleColor.Gray;
-                            else
-                                c.ForegroundColor = ConsoleColor.Yellow;
+                            c.ForegroundColor = Lose ? ConsoleColor.Gray : ConsoleColor.Yellow;
                             break;
                         case '~':
-                            if (Lose)
-                                c.ForegroundColor = ConsoleColor.Red;
-                            else
-                                c.ForegroundColor = ConsoleColor.Cyan;
+                            c.ForegroundColor = Lose ? ConsoleColor.Red : ConsoleColor.Cyan;
                             break;
                         case ',':
                         case '\'':
-                            if (Lose)
-                                c.ForegroundColor = ConsoleColor.DarkGray;
-                            else
-                                c.ForegroundColor = ConsoleColor.Green;
+                            c.ForegroundColor = Lose ? ConsoleColor.DarkGray : ConsoleColor.Green;
                             break;
                         case '*':
-                            if (Lose)
-                                c.ForegroundColor = ConsoleColor.Gray;
-                            else
-                                c.ForegroundColor = ConsoleColor.White;
+                            c.ForegroundColor = Lose ? ConsoleColor.Gray : ConsoleColor.White;
                             break;
                         case 'U':
-                            if (Win)
-                                c.ForegroundColor = ConsoleColor.DarkRed;
-                            else
-                                c.ForegroundColor = ConsoleColor.DarkYellow;
+                            c.ForegroundColor = Win ? ConsoleColor.DarkRed : ConsoleColor.DarkYellow;
                             break;
                         case '1':
                         case '2':
-                            if (Win)
-                                c.ForegroundColor = ConsoleColor.DarkRed;
-                            else
-                                c.ForegroundColor = ConsoleColor.DarkYellow;
+                            c.ForegroundColor = Win ? ConsoleColor.DarkRed : ConsoleColor.DarkYellow;
                             break;
                         case 'T':
-                            if (Lose)
-                                c.ForegroundColor = ConsoleColor.DarkRed;
-                            else
-                                c.ForegroundColor = ConsoleColor.DarkCyan;
+                            c.ForegroundColor = Lose ? ConsoleColor.DarkRed : ConsoleColor.DarkCyan;
                             break;
                         case '`':
                             break;
@@ -108,19 +83,33 @@ namespace haunted_castle.GUI
                     }
 
                     if (ch == '`')
+                    {
                         Console.Write(" ");
+                    }
                     else if (ch == '\'' || ch == ',')
+                    {
                         Console.Write("^");
+                    }
                     else if (ch == 'S' || ch == '2')
+                    {
                         Console.Write("/");
+                    }
                     else if (ch == 'U')
+                    {
                         Console.Write("_");
+                    }
                     else if (ch == '1')
+                    {
                         Console.Write("\\");
+                    }
                     else if (ch == 'T')
+                    {
                         Console.Write("~");
+                    }
                     else
+                    {
                         Console.Write(ch.ToString());
+                    }
 
                     c.BackgroundColor = ConsoleColor.Black;
                     c.ForegroundColor = ConsoleColor.White;
@@ -131,7 +120,9 @@ namespace haunted_castle.GUI
             int j = 2;
 
             if (!Standard && (Win || Lose))
+            {
                 Console.Write("\n");
+            }
 
             if (Standard)
             {
@@ -147,6 +138,7 @@ namespace haunted_castle.GUI
             Console.WriteLine();
 
             if (Standard)
+            {
                 for (int i = 0; i < Resources.TitleText.Length; i++)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -172,8 +164,11 @@ namespace haunted_castle.GUI
                             break;
                     }
                 }
+            }
             else if (Win)
+            {
                 for (int i = 0; i < Program.EndWinScreenLines.Length; i++)
+                {
                     if (Program.EndWinScreenLines[i] != ' ' && Program.EndWinScreenLines[i] != '\n')
                     {
                         c.ForegroundColor = ConsoleColor.Cyan;
@@ -181,11 +176,19 @@ namespace haunted_castle.GUI
                         Console.Write("!");
                     }
                     else if (Program.EndWinScreenLines[i] == '\n' || Program.EndWinScreenLines[i] == 'r')
+                    {
                         Console.Write("\n");
+                    }
                     else
+                    {
                         Console.Write(" ");
+                    }
+                }
+            }
             else if (Lose)
+            {
                 for (int i = 0; i < Program.EndScreenLines.Length; i++)
+                {
                     if (Program.EndScreenLines[i] != ' ' && Program.EndScreenLines[i] != '\n')
                     {
                         c.ForegroundColor = ConsoleColor.Red;
@@ -193,14 +196,17 @@ namespace haunted_castle.GUI
                         Console.Write("!");
                     }
                     else if (Program.EndScreenLines[i] == '\n' || Program.EndScreenLines[i] == 'r')
+                    {
                         Console.Write("\n");
+                    }
                     else
+                    {
                         Console.Write(" ");
+                    }
+                }
+            }
 
-            if (Win)
-                c.ForegroundColor = ConsoleColor.Gray;
-            else
-                c.ForegroundColor = ConsoleColor.Red;
+            c.ForegroundColor = Win ? ConsoleColor.Gray : ConsoleColor.Red;
 
             if (Win && H)
             {
@@ -223,11 +229,11 @@ namespace haunted_castle.GUI
 
             if (Standard)
             {
-                 c.StyleHeader("Press any key to begin", true, false);
-            //    c.DrawLine(83, ConsoleColor.DarkCyan);
-            //    Console.WriteLine();
-            //    Console.ForegroundColor = ConsoleColor.Cyan;
-            //    c.CenterText("PRESS ANY KEY TO BEGIN");
+                c.StyleHeader("Press any key to begin", true, false);
+                //    c.DrawLine(83, ConsoleColor.DarkCyan);
+                //    Console.WriteLine();
+                //    Console.ForegroundColor = ConsoleColor.Cyan;
+                //    c.CenterText("PRESS ANY KEY TO BEGIN");
             }
             else
             {
@@ -237,16 +243,20 @@ namespace haunted_castle.GUI
 
             if (Standard)
             {
-                Console.ReadKey(true);
+                _ = Console.ReadKey(true);
 
                 c.Clear();
 
                 for (int i = 0; i < Resources.Razorteeth.Length; i++)
+                {
                     switch (Resources.Razorteeth[i])
                     {
                         case 'a':
                             for (int k = 0; k < 24; k++)
+                            {
                                 Console.Write(" ");
+                            }
+
                             break;
                         case 'r':
                             Console.Write("\n");
@@ -266,6 +276,7 @@ namespace haunted_castle.GUI
                             c.ForegroundColor = ConsoleColor.White;
                             break;
                     }
+                }
 
                 Console.WriteLine();
 
@@ -277,14 +288,18 @@ namespace haunted_castle.GUI
                 Console.WriteLine();
 
                 if (Program.FIXED_COLOR)
+                {
                     c.CenterText("Deluxe Edition - Version " + Convert.ToString(Assembly.GetEntryAssembly().GetName().Version));
+                }
                 else
+                {
                     c.CenterText("Standard Edition - Version " + Convert.ToString(Assembly.GetEntryAssembly().GetName().Version));
+                }
 
                 Console.WriteLine();
                 Console.WriteLine();
                 c.CenterText("Copyright (c) 2016-" + Program.Year + " Ishan Pranav");
-                Console.ReadKey(true);
+                _ = Console.ReadKey(true);
 
                 c.ForegroundColor = ConsoleColor.White;
             }

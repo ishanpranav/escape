@@ -1,11 +1,13 @@
-﻿using haunted_castle.Commands.Variables_and_References;
+﻿// East.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle.Commands
+namespace HauntedCastle.Commands
 {
     public class East
     {
         // Declarations
-        static readonly GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string MazeRoom = "0", string block = "")
         {
@@ -13,19 +15,24 @@ namespace haunted_castle.Commands
             opt2 = opt2.ToLower().Replace('^', ' ');
 
             if (opt1 == "e" || opt1 == "east" || opt1 == "right" || opt1 == "starboard" || opt1 == "sb" || opt1 == "b" || ((opt1 == "go" || opt1 == "walk" || opt1 == "run") && (opt2 == "e" || opt2 == "east" || opt2 == "right" || opt2 == "starboard" || opt2 == "sb" || opt2 == "b")))
+            {
                 switch (MazeRoom)
                 {
                     case "D7":
                         Storyline.PC();
                         return;
                     default:
-                        if ((opt1 == "sb" || opt1 == "b" || opt1 == "starboard" || ((opt1 == "go") || opt1 == "run" || opt1 == "walk") && (opt1 == "sb" || opt1 == "sb" || opt1 == "starboard")) && block != string.Empty && Program.ROOM.StartsWith("D") && Program.ROOM != "D1")
+                        if ((opt1 == "sb" || opt1 == "b" || opt1 == "starboard" || (((opt1 == "go") || opt1 == "run" || opt1 == "walk") && (opt1 == "sb" || opt1 == "sb" || opt1 == "starboard"))) && block != string.Empty && Program.ROOM.StartsWith("D") && Program.ROOM != "D1")
                         {
                             c.Print("\n " + block + "^");
                             return;
                         }
-                        else break;
+                        else
+                        {
+                            break;
+                        }
                 }
+            }
 
             if (opt1 == "e" || opt1 == "east" || opt1 == "right" || ((opt1 == "go" || opt1 == "walk" || opt1 == "run") && (opt2 == "e" || opt2 == "east" || opt2 == "right")))
             {
@@ -33,14 +40,22 @@ namespace haunted_castle.Commands
                 {
                     case "Z":
                         if (Program.mazes[Program.mazeIdx] == 'e')
+                        {
                             Program.mazeIdx++;
+                        }
+
                         FileSystem.TRAVELTO();
                         break;
                     case "Q1":
                         if (Program.mazes[0] == 'e')
+                        {
                             Storyline.Z();
+                        }
                         else
+                        {
                             FileSystem.TRAVELTO();
+                        }
+
                         break;
                     case "J2":
                         Storyline.E6();
@@ -91,6 +106,7 @@ namespace haunted_castle.Commands
                             Storyline.WakeUpSnake();
                             c.Print("^");
                         }
+
                         break;
                     case "R3":
                         Storyline.R8();
@@ -102,7 +118,7 @@ namespace haunted_castle.Commands
                         Storyline.R7();
                         break;
                     case "SR":
-                        Open_Methods.e();
+                        OpenMethods.e();
                         break;
                     case "SOP3":
                         Storyline.PartXXXIII();
@@ -150,9 +166,14 @@ namespace haunted_castle.Commands
                         break;
                     default:
                         if (block != string.Empty)
+                        {
                             c.Print(string.Format("\n {0}^", block));
+                        }
                         else
+                        {
                             c.Print("\n You cannot go east from here.^");
+                        }
+
                         break;
                 }
             }

@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿// Television.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.Linq;
 
-namespace haunted_castle.Minigames
+namespace HauntedCastle.Minigames
 {
-    class Television
+    internal class Television
     {
-        static GUI.Display gui = new GUI.Display();
-        static ChannelInfo[] Channels = new ChannelInfo[]
+        private static readonly GUI.Display gui = new GUI.Display();
+        private static readonly ChannelInfo[] Channels = new ChannelInfo[]
         {
             new ChannelInfo(1, "News", "Breaking News", "Breaking News: Kingdom's Precious Magic Staff Stolen"),
             new ChannelInfo(2, "Public Broadcasting", "Nature Documentary", "The annual vampire migration is such a majestic sight"),
@@ -26,7 +28,7 @@ namespace haunted_castle.Minigames
             new ChannelInfo(610, "News", "Weather", "The weather will continue to be sunny all week"),
            new ChannelInfo(987, "Paid Programming", "Paid Programming", "Now you can get TWO of these amazing blenders for just"),
         };
-        static string[] Products = new string[] { "a toaster oven", "dish-washing powder", "laundry detergent", "headache tablets", "a soft drink", "a Razorteeth Studios Smartphone", "a Razorteeth Studios Personal Computer", "Escape from the Haunted Castle", "a Razorteeth Studios Television", "a word-processor program", "a cleaning product", "soap", "a sugary breakfast cereal", "a fast food chain", "pet food", "flowers", "medicine", "vitamins", "a Razorteeth Studios entertainment system", "a Razorteeth Studios Camera", "a washing machine", "a dishwasher", "sports equipment", "a clothing brand", "kitchen utensils", "a kitchen gadget", "a new restaurant", "an upscale restaurant", "a hotel", "an airline company", "a luggage brand", "a gym membership", "a hairdresser", "a beauty salon", "an automobile repair service", "an automobile", "a mechanic", "a perfume brand", "running shoes", "jewelry", "a bicycle", "a floppy disk", "an internet provider", "a home mortgage bank", "a bank", "a credit card provider", "a home repair service", "health insurance", "a luxury automobile", "a new form of medicine", "a microwave", "a refrigerator", "a bed" };
+        private static readonly string[] Products = new string[] { "a toaster oven", "dish-washing powder", "laundry detergent", "headache tablets", "a soft drink", "a Razorteeth Studios Smartphone", "a Razorteeth Studios Personal Computer", "Escape from the Haunted Castle", "a Razorteeth Studios Television", "a word-processor program", "a cleaning product", "soap", "a sugary breakfast cereal", "a fast food chain", "pet food", "flowers", "medicine", "vitamins", "a Razorteeth Studios entertainment system", "a Razorteeth Studios Camera", "a washing machine", "a dishwasher", "sports equipment", "a clothing brand", "kitchen utensils", "a kitchen gadget", "a new restaurant", "an upscale restaurant", "a hotel", "an airline company", "a luggage brand", "a gym membership", "a hairdresser", "a beauty salon", "an automobile repair service", "an automobile", "a mechanic", "a perfume brand", "running shoes", "jewelry", "a bicycle", "a floppy disk", "an internet provider", "a home mortgage bank", "a bank", "a credit card provider", "a home repair service", "health insurance", "a luxury automobile", "a new form of medicine", "a microwave", "a refrigerator", "a bed" };
 
         public static bool Start()
         {
@@ -43,32 +45,26 @@ namespace haunted_castle.Minigames
 
             char c = char.ToLower(Console.ReadKey(true).KeyChar);
 
-            if (c == 'x')
-                return SelectChannel();
-            else
-                return false;
+            return c == 'x' && SelectChannel();
         }
 
-        static ChannelInfo GetChannelInfo(int Number)
+        private static ChannelInfo GetChannelInfo(int Number)
         {
             if (Channels.Any(x => x.Number == Number))
             {
                 ChannelInfo info = Channels.FirstOrDefault(x => x.Number == Number);
 
-                if (info != null)
-                    return info;
-                else
-                    return new ChannelInfo(Number, "", "", "");
+                return info ?? new ChannelInfo(Number, "", "", "");
             }
             else
+            {
                 return new ChannelInfo(Number, "", "", "");
+            }
         }
 
-        static bool SelectChannel()
+        private static bool SelectChannel()
         {
             int idx = 1;
-            int pIdx = 1;
-
             while (true)
             {
                 ChannelInfo info = GetChannelInfo(idx);
@@ -95,14 +91,15 @@ namespace haunted_castle.Minigames
                         char c = char.ToLower(Console.ReadKey(true).KeyChar);
 
                         if (c == 'x')
+                        {
                             return true;
+                        }
                     }
                 }
 
                 gui.PrintScreen("Enter a channel (001-999) or 000 to exit: ", 19, ConsoleColor.White);
 
-                pIdx = idx;
-
+                int pIdx = idx;
                 try
                 {
                     idx = int.Parse(gui.ReadLine(3));
@@ -113,14 +110,18 @@ namespace haunted_castle.Minigames
                 }
 
                 if (idx == 0)
+                {
                     return false;
+                }
                 else if (idx > 999 && idx < 1)
+                {
                     idx = pIdx;
+                }
             }
         }
     }
 
-    class ChannelInfo
+    internal class ChannelInfo
     {
         public int Number { get; }
         public string Channel { get; }
@@ -129,10 +130,10 @@ namespace haunted_castle.Minigames
 
         public ChannelInfo(int ChannelNumber, string ChannelName, string ChannelShow, string ChannelDescription)
         {
-            this.Number = ChannelNumber;
-            this.Channel = ChannelName;
-            this.Show = ChannelShow;
-            this.Description = ChannelDescription;
+            Number = ChannelNumber;
+            Channel = ChannelName;
+            Show = ChannelShow;
+            Description = ChannelDescription;
         }
     }
 }

@@ -1,10 +1,13 @@
-﻿
-namespace haunted_castle.Commands
+﻿// Down.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+namespace HauntedCastle.Commands
 {
     public class Down
     {
         // Declarations
-        static readonly GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string MazeRoom = "0", string block = "")
         {
@@ -67,9 +70,14 @@ namespace haunted_castle.Commands
                         break;
                     case "A":
                         if (Program.State[0])
+                        {
                             c.Print("\n You are too tired to climb all the way down there.^");
+                        }
                         else
+                        {
                             Storyline.PartVII(Program.firsttreasureroom);
+                        }
+
                         break;
                     case "P":
                         Storyline.PartV(false);
@@ -98,6 +106,7 @@ namespace haunted_castle.Commands
                             Methods.SetPermanentHealth(Program.PermanentHealth - 10);
                             Program.State[2] = true;
                         }
+
                         break;
                     case "DROWN":
                         c.Print("\n You submerge yourself in the water.\n You frantically try to reach the surface, but you have already gone too deep.");
@@ -122,12 +131,16 @@ namespace haunted_castle.Commands
                         break;
                     default:
                         if (block != string.Empty)
+                        {
                             c.Print(string.Format("\n {0}^", block));
+                        }
                         else
+                        {
                             c.Print("\n You cannot go down from here.^");
+                        }
+
                         break;
                 }
-
             }
         }
     }

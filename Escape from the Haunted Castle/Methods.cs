@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.IO;
-using haunted_castle.Properties;
+﻿// Methods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using HauntedCastle.Properties;
+
+namespace HauntedCastle
 {
-    class Methods
+    internal class Methods
     {
         // Declarations
-        static readonly GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void WhatDoYouDo(bool space = false)
         {
@@ -31,10 +35,7 @@ namespace haunted_castle
                 Health += 5;
             }
 
-            if (Health <= 100)
-                Program.PermanentHealth = Health;
-            else
-                Program.PermanentHealth = 100;
+            Program.PermanentHealth = Health <= 100 ? Health : 100;
 
             if (Program.PermanentHealth <= 0)
             {
@@ -49,7 +50,9 @@ namespace haunted_castle
             c.Clear(true);
 
             for (int i = 0; i < Console.WindowHeight / 4; i++)
+            {
                 c.Print("\n");
+            }
 
             c.ForegroundColor = ConsoleColor.Gray;
             c.CenterText("Loading... Please wait.");
@@ -63,20 +66,26 @@ namespace haunted_castle
             c.DrawLine(83, ConsoleColor.Gray);
 
             if (ShowPlayers && (Program.GhostPlayers.Count - 1) > 0)
+            {
                 foreach (string player in Program.GhostPlayers.Keys)
+                {
                     if (Program.GhostPlayers[player].ToLower() == Program.ROOM.ToLower() && player.ToLower() != Program.name.ToLower())
                     {
                         c.Print(string.Format("\n Player {0} {1}.\n", player.ToUpper(), Program.SleepingStatements[Program.rnd.Next(Program.SleepingStatements.Length)]));
                         break;
                     }
+                }
+            }
 
             if (ShowPlayers)
+            {
                 if (Program.State[3] && Program.PermanentHealth > 30 && !Program.Revive)
                 {
                     c.Print("\n You are slowly dying of poisoning.");
 
                     SetPermanentHealth(Program.PermanentHealth - 2);
                 }
+            }
         }
 
         public static void GenMazes()
@@ -90,16 +99,26 @@ namespace haunted_castle
             for (int i = 0; i < Program.mazes.Length; i++)
             {
                 while (Program.mazes[i] == prev || Program.mazes[i] == '*')
+                {
                     Program.mazes[i] = (new char[] { 'n', 's', 'e', 'w' })[Program.rnd.Next(4)];
+                }
 
                 if (Program.mazes[i] == 'n')
+                {
                     prev = 's';
+                }
                 else if (Program.mazes[i] == 's')
+                {
                     prev = 'n';
+                }
                 else if (Program.mazes[i] == 'e')
+                {
                     prev = 'w';
+                }
                 else if (Program.mazes[i] == 'w')
+                {
                     prev = 'e';
+                }
 
                 Program.breadcrumbs[i] = false;
             }
@@ -123,7 +142,9 @@ namespace haunted_castle
                 Console.CursorTop = 6;
 
                 for (int i = 0; i < 6; i++)
+                {
                     c.Print("\n");
+                }
 
                 Console.CursorLeft = 0;
                 Console.CursorTop = 6;
@@ -132,8 +153,12 @@ namespace haunted_castle
             List<string> lines = new List<string>();
 
             foreach (string line in File.ReadAllLines(FileSystem.playersdat))
+            {
                 if (line != "" && File.Exists(FileSystem.root + line.ToUpper() + ".hcx") && !lines.Contains(line))
+                {
                     lines.Add(line);
+                }
+            }
 
             c.ForegroundColor = ConsoleColor.Gray;
 
@@ -142,15 +167,25 @@ namespace haunted_castle
             c.ForegroundColor = ConsoleColor.White;
 
             if (ACTIVEINDEX == 1)
+            {
                 c.Print("\n\n\t>> NEW PLAYER", ConsoleColor.White);
+            }
             else
+            {
                 c.Print("\n\n\t > NEW PLAYER", ConsoleColor.Gray);
+            }
 
             for (int i = 0; i < lines.Count; i++)
+            {
                 if (ACTIVEINDEX == (i + 2))
+                {
                     c.StyleOption(">> " + lines[i].ToUpper(), true);
+                }
                 else
+                {
                     c.StyleOption(" > " + lines[i].ToUpper());
+                }
+            }
 
             c.ForegroundColor = ConsoleColor.White;
 
@@ -168,8 +203,12 @@ namespace haunted_castle
             List<string> lines = new List<string>();
 
             foreach (string line in File.ReadAllLines(FileSystem.playersdat))
+            {
                 if (line != "" && File.Exists(FileSystem.root + line.ToUpper() + ".hcx") && !lines.Contains(line))
+                {
                     lines.Add(line);
+                }
+            }
 
             while (true)
             {
@@ -184,27 +223,39 @@ namespace haunted_castle
                     if (key.Key == ConsoleKey.UpArrow || key.Key == ConsoleKey.NumPad8 || key.Key == ConsoleKey.NumPad9)
                     {
                         if (index > 1)
+                        {
                             index--;
+                        }
 
                         WRITEALL(index);
                     }
                     else if (key.Key == ConsoleKey.DownArrow || key.Key == ConsoleKey.NumPad2 || key.Key == ConsoleKey.NumPad3)
                     {
                         if (index < (lines.Count + 1))
+                        {
                             index++;
+                        }
                         else if (index == (lines.Count + 1))
+                        {
                             index = 1;
+                        }
 
                         WRITEALL(index);
                     }
                 }
 
                 for (int i = 0; i < (lines.Count + 2); i++)
+                {
                     if (index == (i + 2))
+                    {
                         return lines[i];
+                    }
+                }
 
                 if (index == 1)
+                {
                     return null;
+                }
             }
         }
 
@@ -216,48 +267,79 @@ namespace haunted_castle
             int minVal = 6;
 
             foreach (string word in input_start)
+            {
                 input.Add(word.ToLower());
+            }
 
             while (input.Count < minVal)
+            {
                 input.Add(string.Empty);
+            }
 
             foreach (string word in input)
+            {
                 if (word != string.Empty)
+                {
                     notEmpty = true;
+                }
+            }
 
             if (notEmpty)
+            {
                 while (input[0] == string.Empty)
+                {
                     input.RemoveAt(0);
+                }
+            }
 
             while (input.Count < minVal)
+            {
                 input.Add(string.Empty);
+            }
 
             for (int i = 0; i < input.Count; i++)
+            {
                 input[i] = input[i].Replace(".", "").Replace(",", "").Replace("!", "").Replace("?", "").Replace(":", "");
+            }
 
             if (input[0] == "you" || (input[0] == "i" && input[1] != string.Empty))
+            {
                 input.RemoveAt(0);
+            }
 
             for (int i = 1; i < input.Count - 1; i++)
+            {
                 try
                 {
                     if (input[i] == "an" || input[i] == "a" || input[i] == "the" || input[i] == "my" || input[i] == "those" || input[i] == "that" || input[i] == "these" || input[i] == "this" || input[i] == "all" || input[i] == "every" || input[i] == "each" || input[i] == "some")
+                    {
                         input.RemoveAt(i);
+                    }
 
                     if (input[0] == "munch" && input[i] == "on")
+                    {
                         input[0] = "eat";
+                    }
 
                     if (input[0] == "look" && input[i] == "at")
+                    {
                         input[0] = "examine";
+                    }
 
                     if (input[0] == "look" && input[i] == "in")
+                    {
                         input[0] = "inspect";
+                    }
 
                     if (input[0] == "turn" && input[i] == "on")
+                    {
                         input[0] = "use";
+                    }
 
                     if (input[0] == "put" && input[i] == "on")
+                    {
                         input[0] = "use";
+                    }
 
                     if (input[0] == "put" && (input[i] == "down" || input[i] == "d"))
                     {
@@ -266,7 +348,9 @@ namespace haunted_castle
                     }
 
                     if (input[0] == "take" && input[i] == "off")
+                    {
                         input[0] = "remove";
+                    }
 
                     if (input[0] == "pick" && (input[i] == "up" || input[i] == "u"))
                     {
@@ -275,22 +359,31 @@ namespace haunted_castle
                     }
 
                     if (input[0] == "take" && input[i] == "out")
+                    {
                         input[0] = "remove";
+                    }
                 }
                 catch { }
+            }
 
             for (int i = 1; i < input.Count - 1; i++)
+            {
                 try
                 {
                     if (input[i] == "on" || input[i] == "at" || input[i] == "in" || input[i] == "off" || input[i] == "out" || input[i] == "it" || input[i] == "" || input[i] == "them" || input[i] == "that" || input[i] == "this" || input[i] == "everything" || input[i] == "thing" || input[i] == "item" || input[i] == "object" || input[i] == "stuff")
+                    {
                         input.RemoveAt(i);
+                    }
                 }
                 catch { }
+            }
 
             while (input.Count < minVal)
+            {
                 input.Add(string.Empty);
+            }
 
-            if ((input.Contains("and") || input.Contains("then")))
+            if (input.Contains("and") || input.Contains("then"))
             {
                 c.Print("\n Multiple actions cannot be performed at the same time.^", ConsoleColor.Gray);
 
@@ -305,7 +398,9 @@ namespace haunted_castle
             SimpleEncryption se = new SimpleEncryption();
 
             if (Program.score > Program.MAXSCORE)
+            {
                 Program.score = Program.MAXSCORE;
+            }
 
             if (Program.score != 0 && Program.name != "" && !Program.name.ToLower().Contains("ishan") && !Program.name.ToLower().Contains("admin"))
             {
@@ -330,7 +425,9 @@ namespace haunted_castle
                 FileSystem.CheckFolder();
 
                 if (File.Exists(FileSystem.savefile))
+                {
                     File.Delete(FileSystem.savefile);
+                }
 
                 GUI.TitleScreen.Show(false, true, false, H);
 
@@ -342,9 +439,9 @@ namespace haunted_castle
 
                 Console.WriteLine("\n\n");
 
-                Console.ReadKey(true);
+                _ = Console.ReadKey(true);
 
-                Options.HiScores(true);
+                _ = Options.HiScores(true);
 
                 Credits();
             }
@@ -368,7 +465,7 @@ namespace haunted_castle
 
                 Console.WriteLine("\n\n");
 
-                Console.ReadKey(true);
+                _ = Console.ReadKey(true);
 
                 // Revival Point
                 c.Clear(true);
@@ -393,7 +490,9 @@ namespace haunted_castle
             Console.Clear();
 
             for (int i = 0; i < Console.WindowHeight; i++)
+            {
                 Console.WriteLine();
+            }
 
             string[] names = new string[]
             {
@@ -452,11 +551,15 @@ namespace haunted_castle
             Console.WriteLine();
 
             for (int i = 0; i < Resources.Razorteeth.Length; i++)
+            {
                 switch (Resources.Razorteeth[i])
                 {
                     case 'a':
                         for (int k = 0; k < 24; k++)
+                        {
                             Console.Write(" ");
+                        }
+
                         break;
                     case 'r':
                         Console.Write("\n");
@@ -477,6 +580,7 @@ namespace haunted_castle
                         Console.ForegroundColor = ConsoleColor.White;
                         break;
                 }
+            }
 
             Console.WriteLine();
             Thread.Sleep(1000);
@@ -498,23 +602,32 @@ namespace haunted_castle
                 Thread.Sleep(1000);
             }
 
-            Console.ReadKey(true);
+            _ = Console.ReadKey(true);
             Environment.Exit(0);
         }
 
         public static string GrammarCaps(string s)
         {
             // Declarations
-            string str = (((s + " ")[0].ToString().ToUpper() + s.Remove(0, 1)).ToString());
+            string str = ((s + " ")[0].ToString().ToUpper() + s.Remove(0, 1)).ToString();
 
             if (str == "Op" || str == "O")
+            {
                 str = "Open";
+            }
             else if (str == "X")
+            {
                 str = "Examine";
+            }
             else if (str == "L")
+            {
                 str = "Look";
+            }
             else if (str == "\'")
+            {
                 str = "Say";
+            }
+
             return str;
         }
 

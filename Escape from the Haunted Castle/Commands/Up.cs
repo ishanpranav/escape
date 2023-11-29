@@ -1,9 +1,13 @@
-﻿namespace haunted_castle.Commands
+﻿// Up.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+namespace HauntedCastle.Commands
 {
     public class Up
     {
         // Declarations
-        static readonly GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string MazeRoom = "0", string block = "")
         {
@@ -25,9 +29,14 @@
                         break;
                     case "OAKFOREST":
                         if (Program.beans)
+                        {
                             Storyline.Y1();
+                        }
                         else
+                        {
                             c.Print("\n The oak tree branches are too high for you to climb.^");
+                        }
+
                         break;
                     case "DX":
                         Storyline.D4();
@@ -88,12 +97,16 @@
                         break;
                     default:
                         if (block == string.Empty)
+                        {
                             c.Print("\n You cannot go up from here.^");
+                        }
                         else
+                        {
                             c.Print(string.Format("\n {0}^", block));
+                        }
+
                         break;
                 }
-
             }
         }
     }

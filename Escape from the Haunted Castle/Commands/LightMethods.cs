@@ -1,14 +1,20 @@
-﻿namespace haunted_castle.Commands.Variables_and_References
+﻿// LightMethods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+namespace HauntedCastle.Commands
 {
     public class Light_Methods
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void match()
         {
             if (Program.InventoryCaptions[1] == InventoryItems.MatchUsed)
+            {
                 c.Print("\n It has already been used.^");
+            }
             else if (Program.InventoryCaptions[1] != InventoryItems.MatchLit && (Program.Inventory[1] == 1 || Program.ROOM == "PartI"))
             {
                 Score.Addition(Score.A1_LightMatch);
@@ -16,14 +22,22 @@
                 Program.InventoryCaptions[1] = InventoryItems.MatchLit;
 
                 if (Program.InventoryCaptions[2] == InventoryItems.Candle)
+                {
                     c.Print("\n The match is now lit, although its light is too feeble\n to disperse the suffocating darkness around you.\n It will go out soon.^");
+                }
                 else
+                {
                     c.Print("\n The match is now lit.\n It will go out soon.^");
+                }
             }
             else if (Program.InventoryCaptions[1] == InventoryItems.MatchLit)
+            {
                 c.Print("\n It is already lit.^");
+            }
             else if (Program.Inventory[1] == 0 && Program.ROOM != "PartI")
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void candleWithMatch()
@@ -41,11 +55,17 @@
                 Storyline.PartI();
             }
             else if (Program.Inventory[2] == 0 && Program.ROOM != "PartI")
+            {
                 c.Print("\n You do not have that.^");
+            }
             else if (Program.InventoryCaptions[2] == InventoryItems.CandleLit)
+            {
                 c.Print("\n It is already lit.^");
+            }
             else if (Program.InventoryCaptions[1] != InventoryItems.MatchLit)
+            {
                 c.Print("\n The match is not lit.^");
+            }
         }
 
         public static void newspaperWithCandle()
@@ -59,7 +79,9 @@
                 c.Print("\n You light the newspaper on fire using the candle.\n\n It burns completely, disappearing into ash.^");
             }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void eyebrowsWithCandle()
@@ -76,9 +98,13 @@
                 c.Print("\n You light your hair on fire using the candle.^");
             }
             else if (!Program.hasEyebrows)
+            {
                 c.Print("\n Your hair is already burnt.^");
+            }
             else if (Program.InventoryCaptions[2] != InventoryItems.CandleLit)
+            {
                 c.Print("\n You do not have a lit candle.^");
+            }
         }
 
         public static void barsWithCandle()
@@ -93,7 +119,9 @@
                 Storyline.PartVI(false);
             }
             else if (Program.InventoryCaptions[2] != InventoryItems.CandleLit)
+            {
                 c.Print("\n You do not have a lit candle.^");
+            }
         }
 
         public static void keyWithCandle()
@@ -108,14 +136,22 @@
                 c.Print("\n You light the key on fire using the candle.\n\n It melts completely, making it unusable.^");
 
                 if (Program.ROOM == "PartXV")
+                {
                     c.Print("\n You keep the remaining silver.^");
+                }
             }
             else if (Program.Inventory[5] == 0 && Program.ROOM != "PartXV")
+            {
                 c.Print("\n You do not have that.^");
+            }
             else if (Program.InventoryCaptions[5] == InventoryItems.Silver)
+            {
                 c.Print("\n The key has already been melted completeley.^");
+            }
             else if (Program.InventoryCaptions[1] != InventoryItems.CandleLit)
+            {
                 c.Print("\n You do not have a lit candle.^");
+            }
         }
 
         public static void computerWithCandle()
@@ -127,7 +163,9 @@
                 Methods.GameOver(false);
             }
             else if (Program.InventoryCaptions[2] != InventoryItems.CandleLit)
+            {
                 c.Print("\n You do not have a lit candle.^");
+            }
         }
 
         public static void crateWithCandle()
@@ -142,7 +180,9 @@
                 Storyline.D1();
             }
             else if (Program.InventoryCaptions[2] != InventoryItems.CandleLit)
+            {
                 c.Print("\n You do not have a lit candle.^");
+            }
         }
     }
 }

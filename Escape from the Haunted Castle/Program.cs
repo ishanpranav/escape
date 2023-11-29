@@ -1,14 +1,18 @@
-﻿using System;
+﻿// Program.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace haunted_castle
+namespace HauntedCastle
 {
     public class Program
     {
         // Declarations
         public const int MAXSCORE = 500;
-        const int NumItems = 17;
+        private const int NumItems = 17;
         public static string x = string.Empty;
         public static string Year = "2020";
         public static bool FIXED_COLOR = true;
@@ -53,7 +57,7 @@ namespace haunted_castle
         public static bool[] State = new bool[4] { true, true, false, false };
         public static bool[] Ghosts = new bool[4] { false, false, false, false };
         public static ConsoleColor color = ConsoleColor.Green;
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
         public static int PermanentHealth = 100;
         public static int pregunta = 0;
         public static int degrees = 45;
@@ -81,27 +85,29 @@ namespace haunted_castle
         public static string[] InventoryCaptions = new string[NumItems] { "", InventoryItems.Match, InventoryItems.Candle, InventoryItems.Apple, InventoryItems.BagGold, InventoryItems.Key, InventoryItems.Shield, InventoryItems.Recipe, InventoryItems.Flute, InventoryItems.Box, InventoryItems.Crate, InventoryItems.FloppyDisk, InventoryItems.Blackberry, InventoryItems.Feather, "", InventoryItems.Monocle, InventoryItems.Newspaper };
         public static Dictionary<string, string> GhostPlayers = new Dictionary<string, string>();
         public static string EndScreenLines =
-            (
+
                 "   ##    ##    ########    ##    ##        #######    ########    ########    ##\n" +
                 "    ##  ##     ##    ##    ##    ##        ##    ##      ##       ##          ##\n" +
                 "      ##       ##    ##    ##    ##        ##    ##      ##       ########    ##\n" +
                 "      ##       ##    ##    ##    ##        ##    ##      ##       ##            \n" +
                 "      ##       ########    ########        #######    ########    ########    ##\n\n"
-            );
+            ;
         public static string EndWinScreenLines =
-            (
+
                 "   ##    ##    ########    ##    ##        ##    ##    ########    ###   ##    ##\n" +
                 "    ##  ##     ##    ##    ##    ##        ##    ##       ##       ####  ##    ##\n" +
                 "      ##       ##    ##    ##    ##        ## ## ##       ##       ## ## ##    ##\n" +
                 "      ##       ##    ##    ##    ##        ## ## ##       ##       ##  ####      \n" +
                 "      ##       ########    ########        ###  ###    ########    ##   ###    ##\n\n"
-           );
+           ;
         private static int lns = 10;
 
         public static void Main(string[] args)
         {
             if (File.Exists(FileSystem.ishandll))
+            {
                 SignatureCheck.Run();
+            }
             else
             {
                 c.Clear();
@@ -139,14 +145,18 @@ namespace haunted_castle
             c.LoadEnvironment();
 
             if (FIXED_CAPS)
+            {
                 fn();
+            }
             else
+            {
                 Welcome();
+            }
 
             // END Important Code
         }
 
-        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             c.Clear();
             c.Print("\n\n Saving game...", ConsoleColor.Gray);
@@ -155,22 +165,23 @@ namespace haunted_castle
             c.CloseEnvironment();
         }
 
-        static void Welcome(bool skipTitle = false)
+        private static void Welcome(bool skipTitle = false)
         {
-            // Declarations
-            bool opt1LOOP = false;
-            ConsoleKeyInfo key = new ConsoleKeyInfo();
+            _ = new ConsoleKeyInfo();
             int index = 1;
 
             if (!skipTitle)
+            {
                 GUI.TitleScreen.Show(true, false, false);
+            }
 
-            opt1LOOP = false;
+            // Declarations
+            bool opt1LOOP = false;
 
             string scores = Options.HiScores(false);
 
             c.ForegroundColor = ConsoleColor.White;
-            
+
             c.Clear();
             Console.WriteLine();
             PROCESSLINE("+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~");
@@ -204,7 +215,7 @@ namespace haunted_castle
             {
                 WRITEALL(index, true);
 
-                key = new ConsoleKeyInfo();
+                ConsoleKeyInfo key = new ConsoleKeyInfo();
 
                 while (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Spacebar && key.Key != ConsoleKey.X)
                 {
@@ -213,16 +224,22 @@ namespace haunted_castle
                     if (key.Key == ConsoleKey.UpArrow)
                     {
                         if (index > 1)
+                        {
                             index--;
+                        }
 
                         WRITEALL(index);
                     }
                     else if (key.Key == ConsoleKey.DownArrow)
                     {
                         if (index < 4)
+                        {
                             index++;
+                        }
                         else if (index == 4)
+                        {
                             index = 1;
+                        }
 
                         WRITEALL(index);
                     }
@@ -253,7 +270,9 @@ namespace haunted_castle
                 }
 
                 if (index == 1)
+                {
                     opt1LOOP = true;
+                }
                 else if (index == 2)
                 {
                     Options.About();
@@ -261,7 +280,7 @@ namespace haunted_castle
                 }
                 else if (index == 3)
                 {
-                    Options.HiScores(true);
+                    _ = Options.HiScores(true);
                     Welcome(true);
                 }
                 else if (index == 4)
@@ -277,12 +296,14 @@ namespace haunted_castle
         private static void fn()
         {
             if (!FIXED_CAPS)
+            {
                 c.Clear();
+            }
 
             try
             {
                 FileSystem.savefile = FileSystem.root + Methods.PlayerSelect().ToLower() + ".hcx";
-            
+
                 FileSystem.LoadData();
                 FileSystem.TRAVELTO();
                 return;
@@ -291,11 +312,9 @@ namespace haunted_castle
             {
                 FileSystem.savefile = FileSystem.root + "SAVEFILE.HCX";
             }
-            
+
             if (!setup)
             {
-                string opt1 = string.Empty;
-                string opt2 = string.Empty;
                 string yn = string.Empty;
                 bool err1 = false;
                 bool err2 = false;
@@ -323,14 +342,22 @@ namespace haunted_castle
                         name = c.ReadLine(8).Trim();
 
                         foreach (char x in name)
+                        {
                             if (!char.IsLetter(x) && x != ' ')
+                            {
                                 err1 = true;
+                            }
+                        }
 
                         if (err1)
+                        {
                             c.Print("\n\n Nickname may only contain letters.^", ConsoleColor.Red);
+                        }
 
                         if (name.Length == 0)
+                        {
                             err2 = true;
+                        }
 
                         if (File.Exists(FileSystem.root + name + ".hcx"))
                         {
@@ -344,9 +371,6 @@ namespace haunted_castle
                             c.Print("\n\n Nickname is reserved.^", ConsoleColor.Cyan);
 
                             c.StyleAlt("Enter Security Key:");
-
-                            string k = string.Empty;
-
                             if (c.ReadLine().ToLower() != "012004")
                             {
                                 name = string.Empty;
@@ -366,25 +390,35 @@ namespace haunted_castle
                         name = name.ToUpper().Trim();
 
                         if (Methods.YesCondition(yn) || yn.Trim() == name.ToLower())
+                        {
                             namesure = true;
+                        }
                         else if (Methods.NoCondition(yn))
+                        {
                             name = string.Empty;
+                        }
                         else
+                        {
                             msg = "Please answer yes or no:";
+                        }
                     }
                 }
 
                 File.AppendAllText(FileSystem.playersdat, name.ToLower() + "\r\n");
 
                 if (!FIXED_CAPS)
+                {
                     c.Clear();
+                }
 
                 c.ForegroundColor = ConsoleColor.White;
 
                 setup = true;
 
                 if (!FIXED_CAPS)
+                {
                     c.Clear();
+                }
             }
 
             c.Print("\n");
@@ -402,19 +436,33 @@ namespace haunted_castle
             foreach (char ch in LINE)
             {
                 if (ch == '@')
+                {
                     Console.Write("\u2550");
+                }
                 else if (ch == '+')
+                {
                     Console.Write("\u2554");
+                }
                 else if (ch == '~')
+                {
                     Console.Write("\u2557");
+                }
                 else if (ch == '*')
+                {
                     Console.Write("\u255a");
+                }
                 else if (ch == '/')
+                {
                     Console.Write("\u255d");
+                }
                 else if (ch == '/')
+                {
                     Console.Write("\u255d");
+                }
                 else if (ch == '|')
+                {
                     Console.Write("\u2551");
+                }
                 else
                 {
                     c.ForegroundColor = ConsoleColor.Gray;
@@ -439,7 +487,9 @@ namespace haunted_castle
                 Console.CursorTop = lns;
 
                 for (int i = 0; i < lns; i++)
+                {
                     c.Print("\n");
+                }
 
                 Console.CursorLeft = 0;
                 Console.CursorTop = lns;
@@ -452,24 +502,40 @@ namespace haunted_castle
             c.ForegroundColor = ConsoleColor.White;
 
             if (ACTIVEINDEX == 1)
+            {
                 c.StyleOption("> 1. START", true);
+            }
             else
+            {
                 c.StyleOption("  1. START");
+            }
 
             if (ACTIVEINDEX == 2)
+            {
                 c.StyleOption("> 2. ABOUT", true);
+            }
             else
+            {
                 c.StyleOption("  2. ABOUT");
+            }
 
             if (ACTIVEINDEX == 3)
+            {
                 c.StyleOption("> 3. HI-SCORES", true);
+            }
             else
+            {
                 c.StyleOption("  3. HI-SCORES");
+            }
 
             if (ACTIVEINDEX == 4)
+            {
                 c.StyleOption("> 4. QUIT", true);
+            }
             else
+            {
                 c.StyleOption("  4. QUIT");
+            }
 
             c.ForegroundColor = ConsoleColor.White;
 
@@ -482,7 +548,9 @@ namespace haunted_castle
             int minIndex = 1;
 
             if (IsClickOnce)
+            {
                 minIndex = 0;
+            }
 
             if (Arguments.Length > minIndex)
             {

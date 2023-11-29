@@ -1,4 +1,8 @@
-﻿using System;
+﻿// FileSystem.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,14 +10,14 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 
-namespace haunted_castle
+namespace HauntedCastle
 {
-    class FileSystem
+    internal class FileSystem
     {
         private const string alpha = "3479ACEGHJKMNPQRATWY34793479TGKM";
 
         // Declarations
-        static readonly GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static string root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Escape from the Haunted Castle\";
         public static string savefile = root + "SAVEFILE.HCX";
@@ -32,30 +36,51 @@ namespace haunted_castle
                 DELETE(savefilexml);
 
                 if (!Directory.Exists(root))
-                    Directory.CreateDirectory(root);
+                {
+                    _ = Directory.CreateDirectory(root);
+                }
 
                 if (!File.Exists(scoresdat))
+                {
                     File.WriteAllText(scoresdat, string.Empty);
+                }
 
                 if (!File.Exists(keymapdat))
+                {
                     File.WriteAllText(keymapdat, "# Escape from the Haunted Castle Custom Key Mapping File" + Environment.NewLine + "NumPad7=custom_key_help" + Environment.NewLine + "CommandRequiresObject=False");
+                }
 
                 if (!File.Exists(playersdat))
+                {
                     File.WriteAllText(playersdat, string.Empty);
+                }
 
                 if (!File.Exists(root + "CASTLE.DAT"))
+                {
                     File.WriteAllText(root + "CASTLE.DAT", Properties.Resources.ASCII_Art);
+                }
+
                 if (!File.Exists(root + "RTLOGO.DAT"))
+                {
                     File.WriteAllText(root + "RTLOGO.DAT", Properties.Resources.Razorteeth);
+                }
+
                 if (!File.Exists(root + "TITLE.DAT"))
+                {
                     File.WriteAllText(root + "TITLE.DAT", Properties.Resources.TitleText);
+                }
+
                 if (!File.Exists(root + "README.TXT"))
+                {
                     File.WriteAllText(root + "README.TXT", Properties.Resources.README);
+                }
 
                 if (File.Exists(ishandll))
                 {
                     if (!File.Exists(root + ishandll))
+                    {
                         File.Copy(ishandll, root + ishandll);
+                    }
                 }
                 else
                 {
@@ -73,10 +98,14 @@ namespace haunted_castle
                 File.WriteAllLines(playersdat, lines);
 
                 if (!File.Exists(textfiletxt))
+                {
                     File.WriteAllText(textfiletxt, string.Empty);
+                }
 
                 if (File.Exists(root + ".HCX"))
+                {
                     File.Delete(root + ".HCX");
+                }
             }
             catch
             {
@@ -93,9 +122,13 @@ namespace haunted_castle
             try
             {
                 if (File.Exists(path))
+                {
                     File.Delete(path);
+                }
                 else if (Directory.Exists(path))
+                {
                     Directory.Delete(path);
+                }
             }
             catch { }
         }
@@ -110,8 +143,12 @@ namespace haunted_castle
             DELETE(ishandll);
 
             foreach (FileInfo f in new DirectoryInfo(root).GetFiles())
+            {
                 if (f.Extension.ToLower() == ".hcx" || f.Extension.ToLower() == ".log")
+                {
                     DELETE(f.FullName);
+                }
+            }
         }
 
         public static void SaveData()
@@ -174,13 +211,13 @@ namespace haunted_castle
             WriteVariable(w, "DED", Program.died);
             WriteVariable(w, "GSN", Program.gsn);
 
-            WriteGroup(w, "INI", Array.ConvertAll<int, object>(Program.Inventory, x => (object)x));
-            WriteGroup(w, "INC", Array.ConvertAll<string, object>(Program.InventoryCaptions, x => (object)x));
-            WriteGroup(w, "STX", Array.ConvertAll<bool, object>(Program.State, x => (object)x));
-            WriteGroup(w, "GPX", Array.ConvertAll<bool, object>(Program.Ghosts, x => (object)x));
-            WriteGroup(w, "MAZ", Array.ConvertAll<char, object>(Program.mazes, x => (object)x));
-            WriteGroup(w, "MZ2", Array.ConvertAll<bool, object>(Program.breadcrumbs, x => (object)x));
-            WriteGroup(w, "CBX", Array.ConvertAll<int, object>(Program.comboAnswer, x => (object)x));
+            WriteGroup(w, "INI", Array.ConvertAll<int, object>(Program.Inventory, x => x));
+            WriteGroup(w, "INC", Array.ConvertAll<string, object>(Program.InventoryCaptions, x => x));
+            WriteGroup(w, "STX", Array.ConvertAll<bool, object>(Program.State, x => x));
+            WriteGroup(w, "GPX", Array.ConvertAll<bool, object>(Program.Ghosts, x => x));
+            WriteGroup(w, "MAZ", Array.ConvertAll<char, object>(Program.mazes, x => x));
+            WriteGroup(w, "MZ2", Array.ConvertAll<bool, object>(Program.breadcrumbs, x => x));
+            WriteGroup(w, "CBX", Array.ConvertAll<int, object>(Program.comboAnswer, x => x));
 
             WriteVariable(w, "XXR", Program.ROOM.ToString());
             WriteVariable(w, "XXS", Program.score.ToString());
@@ -191,7 +228,9 @@ namespace haunted_castle
             string full = string.Empty;
 
             foreach (string line in File.ReadAllLines(savefilexml))
+            {
                 full += line;
+            }
 
             File.WriteAllText(savefile, Encryption.EncryptString(full));
             DELETE(savefilexml);
@@ -213,7 +252,9 @@ namespace haunted_castle
                     string full = string.Empty;
 
                     foreach (string line in File.ReadAllLines(savefile))
+                    {
                         full += line;
+                    }
 
                     File.WriteAllText(savefilexml, Encryption.DecryptString(full));
 
@@ -287,10 +328,14 @@ namespace haunted_castle
                     }
 
                     if (string.IsNullOrWhiteSpace(Program.word))
+                    {
                         Methods.GenWord();
+                    }
 
                     if (!Parser.verbs.Contains(Program.word))
+                    {
                         Parser.verbs.Add(Program.word);
+                    }
 
                     Program.lockspeed = Convert.ToInt32(ReadVariable(reader, "LCK").ToString().ToLower());
                     Program.PannedForGoldTimes = Convert.ToInt32(ReadVariable(reader, "PAN").ToString().ToLower());
@@ -305,7 +350,9 @@ namespace haunted_castle
                     Program.comboAnswer = Array.ConvertAll(ReadGroup(reader, "CBX"), x => Convert.ToInt32(x));
 
                     if (Program.mazes.Length != 17 || Program.breadcrumbs.Length != 17 || Program.mazes.Contains('*') || Program.mazes == null || Program.breadcrumbs == null)
+                    {
                         Methods.GenMazes();
+                    }
 
                     if (Program.comboAnswer.Length != 3)
                     {
@@ -366,27 +413,22 @@ namespace haunted_castle
                         Program.Inventory = ini.ToArray();
                     }
 
-                    if (Program.mapRead)
-                        Storyline.sky2 = "You look at the dark sky above you.\n Staring up at the heavens, you become aware of your terrible vision.\n You will not be able to use your naked eye to study the stars.";
-                    else
-                        Storyline.sky2 = Storyline.sky;
+                    Storyline.sky2 = Program.mapRead
+                        ? "You look at the dark sky above you.\n Staring up at the heavens, you become aware of your terrible vision.\n You will not be able to use your naked eye to study the stars."
+                        : Storyline.sky;
 
-                    if (Program.beans)
-                        Storyline.sky3 = Storyline.sky + "\n A tall beanstalk leads up.";
-                    else
-                        Storyline.sky3 = Storyline.sky;
+                    Storyline.sky3 = Program.beans ? Storyline.sky + "\n A tall beanstalk leads up." : Storyline.sky;
 
-                    if (Program.Inventory[5] == 0 && Program.Inventory[15] == 0 && Program.degrees == 180)
-                        Storyline.sky4 = Storyline.sky + "\n A rainbow glistens above the clouds,\n its wide arc ending somewhere in the rainforest.";
-                    else
-                        Storyline.sky4 = Storyline.sky;
+                    Storyline.sky4 = Program.Inventory[5] == 0 && Program.Inventory[15] == 0 && Program.degrees == 180
+                        ? Storyline.sky + "\n A rainbow glistens above the clouds,\n its wide arc ending somewhere in the rainforest."
+                        : Storyline.sky;
                 }
                 catch
                 {
                     c.Clear();
                     c.StyleHeader("Error", true, false);
                     c.Print("\n The save file is incompatible with the current version.\n\n Please see the game manual for details on troubleshooting errors.", ConsoleColor.Red);
-                    Console.ReadKey(false);
+                    _ = Console.ReadKey(false);
                     c.CloseEnvironment();
                 }
 
@@ -403,7 +445,9 @@ namespace haunted_castle
                 try
                 {
                     if (File.Exists(FileSystem.playersdat))
+                    {
                         foreach (string line in File.ReadAllLines(FileSystem.playersdat))
+                        {
                             if (line != "" && File.Exists(FileSystem.root + line.ToUpper() + ".hcx") && !Program.GhostPlayers.Keys.Contains(line))
                             {
                                 XmlDocument rdr = new XmlDocument();
@@ -411,7 +455,9 @@ namespace haunted_castle
                                 string f = string.Empty;
 
                                 foreach (string ln in File.ReadAllLines(FileSystem.root + line.ToUpper() + ".hcx"))
+                                {
                                     f += ln;
+                                }
 
                                 File.WriteAllText(FileSystem.root + line.ToUpper() + ".xml", Encryption.DecryptString(f));
 
@@ -421,17 +467,23 @@ namespace haunted_castle
                                 string r = ReadVariable(rdr, "XXR").ToString();
 
                                 if (!string.IsNullOrWhiteSpace(n) && !string.IsNullOrWhiteSpace(r))
+                                {
                                     Program.GhostPlayers.Add(n, r);
+                                }
 
                                 DELETE(FileSystem.root + line.ToUpper() + ".xml");
                             }
+                        }
+                    }
                 }
                 catch { }
 
                 Program.setup = true;
             }
             else
+            {
                 SaveData();
+            }
 
             Methods.SetPermanentHealth(ph);
             DELETE(savefilexml);
@@ -444,8 +496,11 @@ namespace haunted_castle
             c.Clear();
 
             if (Program.ROOM.StartsWith("#"))
+            {
                 Storyline.Rev();
+            }
             else
+            {
                 switch (Program.ROOM.ToLower())
                 {
                     case "gen":
@@ -721,12 +776,15 @@ namespace haunted_castle
                         Storyline.ZT();
                         break;
                 }
+            }
         }
 
-        static void WriteVariable(XmlTextWriter writer, string name, object value)
+        private static void WriteVariable(XmlTextWriter writer, string name, object value)
         {
             if (value == null)
+            {
                 value = string.Empty;
+            }
 
             writer.WriteStartElement("A"); // c- // var
             writer.WriteStartElement("B"); // d- // nam
@@ -738,7 +796,7 @@ namespace haunted_castle
             writer.WriteEndElement(); // -c
         }
 
-        static void WriteGroup(XmlTextWriter writer, string name, object[] values)
+        private static void WriteGroup(XmlTextWriter writer, string name, object[] values)
         {
             writer.WriteStartElement("D"); // grp
             writer.WriteStartElement("B"); // nam
@@ -755,7 +813,7 @@ namespace haunted_castle
             writer.WriteEndElement();
         }
 
-        static object ReadVariable(XmlDocument reader, string name)
+        private static object ReadVariable(XmlDocument reader, string name)
         {
             try
             {
@@ -767,14 +825,16 @@ namespace haunted_castle
             }
         }
 
-        static object[] ReadGroup(XmlDocument reader, string name)
+        private static object[] ReadGroup(XmlDocument reader, string name)
         {
             List<object> temp = new List<object>();
 
             try
             {
                 foreach (XmlNode x in reader.SelectNodes("HCX/D/C[../B='" + name + "']"))
+                {
                     temp.Add(x.InnerText);
+                }
 
                 return temp.ToArray();
             }

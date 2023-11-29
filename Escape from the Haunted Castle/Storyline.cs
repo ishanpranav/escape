@@ -1,19 +1,22 @@
-﻿using System;
+﻿// Storyline.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle
+using System;
+
+namespace HauntedCastle
 {
-    class Storyline
+    internal class Storyline
     {
         // Declarations
         public static ConsoleColor inputColor = ConsoleColor.Gray;
-        static readonly GUI.Display c = new GUI.Display();
-
-        static readonly string stone = "A stone wall blocks your path.";
-        static readonly string ladderUp = "A ladder leads up through an opening in the white stone ceiling.";
-        static readonly string ladderDown = "A ladder leads down through a hole in the concrete floor.";
-        static readonly string lost = "You are lost.";
-        static readonly string open = "Open water.";
-        public readonly static string sky = "You look up at the blue sky above you.";
+        private static readonly GUI.Display c = new GUI.Display();
+        private static readonly string stone = "A stone wall blocks your path.";
+        private static readonly string ladderUp = "A ladder leads up through an opening in the white stone ceiling.";
+        private static readonly string ladderDown = "A ladder leads down through a hole in the concrete floor.";
+        private static readonly string lost = "You are lost.";
+        private static readonly string open = "Open water.";
+        public static readonly string sky = "You look up at the blue sky above you.";
         public static string sky2 = null;
         public static string sky3 = null;
         public static string sky4 = null;
@@ -47,7 +50,9 @@ namespace haunted_castle
             Program.comboAnswer[2] = 0;
 
             while (Program.comboAnswer[2] == Program.comboAnswer[0] || Program.comboAnswer[2] == Program.comboAnswer[1] || Program.comboAnswer[2] == 0)
+            {
                 Program.comboAnswer[2] = Program.rnd.Next(10, 36); // Z = ? 10 to 35 excluding X and Y
+            }
 
             Methods.GenMazes();
             Methods.GenWord();
@@ -63,7 +68,7 @@ namespace haunted_castle
             {
                 m = char.ToLower(Console.ReadKey(true).KeyChar);
 
-                x = (m == 'z' || m == '5');
+                x = m == 'z' || m == '5';
             }
 
             c.Print("\n\n");
@@ -167,9 +172,13 @@ namespace haunted_castle
             c.Print("\n You have fallen down a hole and have tumbled into an underground cave.^");
 
             if (Program.ateCake)
+            {
                 c.Print("\n There is an empty table in the center of the room.^");
+            }
             else
+            {
                 c.Print("\n There is a purple cake on a table in the center of the room.^");
+            }
 
             c.Print("\n A tiny doorway leads south.^");
 
@@ -238,7 +247,9 @@ namespace haunted_castle
         public static void DestroyDragon()
         {
             if (!Program.died)
+            {
                 Score.Addition(Score.Z_Undying);
+            }
 
             c.Print("\n Realizing that it has been defeated,\n the dragon cowers in fear before flying away.");
             c.Pause();
@@ -261,7 +272,9 @@ namespace haunted_castle
         public static void CheckRainbow()
         {
             if (Storyline.sky4 != Storyline.sky && Storyline.sky4 != null)
+            {
                 c.Print("\n A rainbow glistens above the clouds,\n its wide arc ending somewhere in the rainforest.");
+            }
         }
 
         /// <summary>
@@ -384,7 +397,7 @@ namespace haunted_castle
 
             c.Print("\n This is the main observation area.\n Although the building functions as an observatory,\n there is no astronomical equipment of any kind here.\n\n The spiral staircase leads down.^");
 
-            CheckLight(true);
+            _ = CheckLight(true);
             CheckRainbow();
 
             string d = "You will fall off of the deck.";
@@ -396,23 +409,35 @@ namespace haunted_castle
             if (Program.Inventory[15] == 1 && Program.Inventory[5] == 1)
             {
                 if (ShowRay)
+                {
                     c.Print("\n A thin ray of sunlight shines onto the floor.");
+                }
             }
             else if (Program.Inventory[15] == 1 && Program.Inventory[5] == 0)
             {
                 if (Program.InventoryCaptions[5] == InventoryItems.Key)
+                {
                     c.Print("\n A thin ray of sunlight hits a silver key and reflects off it.^");
+                }
                 else if (Program.InventoryCaptions[5] == InventoryItems.Silver)
+                {
                     c.Print("\n A thin ray of sunlight hits a lump of silver and reflects off it.^");
+                }
             }
             else if (Program.Inventory[15] == 0 && Program.Inventory[5] == 1)
+            {
                 c.Print("\n Without a shiny material to reflect off of,\n the thin ray of sunlight passes directly through the monocle.^");
+            }
             else if (Program.Inventory[15] == 0 && Program.Inventory[5] == 0)
             {
                 if (Program.InventoryCaptions[5] == InventoryItems.Key)
+                {
                     c.Print("\n A thin ray of sunlight passes through a monocle\n and is reflected off of a silver key.^");
+                }
                 else if (Program.InventoryCaptions[5] == InventoryItems.Silver)
+                {
                     c.Print("\n A thin ray of sunlight passes through a monocle\n and is reflected off of a lump of silver.^");
+                }
 
                 sky4 = sky + "\n A rainbow glistens above the clouds,\n its wide arc ending somewhere in the rainforest.";
 
@@ -464,7 +489,9 @@ namespace haunted_castle
                     Parser.Run("", "0", "", "", "A narrow passage leads east.", "", "", "", stone, stone, "It would be unsafe to explore without taking the candle with you.", stone, new string[] { "window", "match", "candle" });
                 }
                 else
+                {
                     Parser.Run("", "STOR", "", "", "A narrow passage leads east.", "", "", "", stone, stone, "", stone, new string[] { "window", "match", "candle" });
+                }
             }
             else
             {
@@ -555,9 +582,13 @@ namespace haunted_castle
             Methods.Checkpoint("Armory", "Haunted Castle: East Tower");
 
             if (firstEntry)
+            {
                 c.Print("\n This is a small armory.\n The door through which you entered has disappeared.\n You take a break to rest, since you have walked a long way.^");
+            }
             else
+            {
                 c.Print("\n This is a small armory.^");
+            }
 
             c.Print("\n A large wooden chest rests against the south wall.\n Across from the chest is a small sign on the north wall next to a wooden ladder.^");
 
@@ -631,7 +662,7 @@ namespace haunted_castle
                 c.Print("\n He draws his sword and jumps towards you.^");
                 c.Print("\n \"Fool!\n\n  Did you really think that nobody was watching when you stole the king's gold?\"");
                 c.Pause();
-                BattleSimulator.StartBattle(2, Program.SwordAttacks, "Haunted Castle: Treasure Room");
+                _ = BattleSimulator.StartBattle(2, Program.SwordAttacks, "Haunted Castle: Treasure Room");
                 c.Print("\n You search around and find a dorway leading west.");
                 c.Pause();
 
@@ -642,7 +673,9 @@ namespace haunted_castle
             c.Print("\n There is a small wall-mounted sign next to a wooden ladder.^");
 
             if (!firstEntry)
+            {
                 c.Print("\n A doorway leads west.^");
+            }
 
             Parser.Run("", "TR", "The north wall is made of solid stone.\n There is a small sign on it.", "", "", "A doorway leads west.", ladderUp, "You look down at the concrete floor covered in mounds of treasure.", stone, stone, stone, stone, new string[] { "ladder", "sign", "doorway" }, "You have already reached the bottom of the east tower.");
         }
@@ -673,7 +706,9 @@ namespace haunted_castle
             c.Print("\n A computer sits on top of a desk.^");
 
             if (Program.Inventory[11] == 0)
+            {
                 c.Print("\n Inside of the computer's disk drive is a floppy disk.^");
+            }
 
             c.Print("\n There is also small wall-mounted sign next to a wooden ladder.^");
 
@@ -720,9 +755,13 @@ namespace haunted_castle
             Methods.Checkpoint("Freezing Waters", "North Pole: Arctic Ocean");
 
             if (firstEntry)
+            {
                 c.Print("\n The castle library disappears and a vast, cold ocean materializes around you.\n You are treading in the freezing Arctic Ocean,\n at 0 degrees north and 0 degrees east.\n\n A wooden ladder leads up onto shore.\n\n Your compass needle begins to spin.^");
+            }
             else
+            {
                 c.Print("\n A wooden ladder leads up onto shore.^");
+            }
 
             string d = "At the north pole the only direction is south.";
 
@@ -755,9 +794,13 @@ namespace haunted_castle
             c.Print("\n You are in the castle's recently remodeled kitchen.\n\n A calendar is tacked to the north wall.\n Fresh tomatoes are on the counter, next to the stove.\n On the other side of the room is a sink filled with water.^");
 
             if (Program.Inventory[5] == 0 && Program.InventoryCaptions[5] == InventoryItems.Key)
+            {
                 c.Print("\n You glimpse a shiny key hanging from a hook next to a large door.^");
+            }
             else
+            {
                 c.Print("\n You see an empty hook next to a large door.^");
+            }
 
             c.Print("\n A doorway leads south to the corridor.^");
 
@@ -787,7 +830,9 @@ namespace haunted_castle
             Program.ROOM = "PartXVII";
 
             if (Program.belowsealevel)
+            {
                 c.Print("\n You would rather not be submerged in freezing water again.^");
+            }
             else
             {
                 Score.Addition(Score.J); // J_GoDown
@@ -848,7 +893,7 @@ namespace haunted_castle
                 c.Print("\n You quickly hide behind a pillar.\n You are lucky that he does not see you as he sits down on his throne.^");
                 c.Print("\n You try to sneak past the king while he looks down, but he catches you easily.\n\n \"Intruder!\"\n\n He draws his sword and attacks as you cower in fear.");
                 c.Pause();
-                BattleSimulator.StartBattle(3, Program.SwordAttacks, "Haunted Castle: Throne Room");
+                _ = BattleSimulator.StartBattle(3, Program.SwordAttacks, "Haunted Castle: Throne Room");
 
                 FileSystem.SaveData();
                 FileSystem.TRAVELTO();
@@ -926,7 +971,9 @@ namespace haunted_castle
             int prev = Program.lockspeed;
 
             while (prev == Program.lockspeed)
+            {
                 Program.lockspeed = Program.rnd.Next(3);
+            }
 
             switch (Program.lockspeed)
             {
@@ -975,7 +1022,9 @@ namespace haunted_castle
             c.Print("\n This is a small tomb containing a black coffin.^");
 
             if (!Program.vampireGone && Program.vampireAwake)
+            {
                 c.Print("\n The vampire stares at you with a furious expression.\n Take caution: a single bite can kill you.^");
+            }
 
             c.Print("\n To the east is the delta room.^");
 
@@ -1106,9 +1155,13 @@ namespace haunted_castle
             c.Print("\n You are inside of the building where the drawbridge is stored.\n\n To the north is the courtyard.^");
 
             if (Program.InventoryCaptions[7] == InventoryItems.RecipePaperApproved)
+            {
                 c.Print("\n The drawbridge leads south over the moat.^");
+            }
             else
+            {
                 c.Print("\n The drawbridge, once dropped, leads south.^");
+            }
 
             c.Print("\n A tunnel leads west.^");
 
@@ -1137,7 +1190,9 @@ namespace haunted_castle
         public static void TalkToTroll()
         {
             if (Program.InventoryCaptions[7] == InventoryItems.RecipePaperApproved)
+            {
                 c.Print("\n \"I already open drawbridge.\n  What you want?\"^");
+            }
             else if (Program.InventoryCaptions[7] == InventoryItems.RecipePaperUsed)
             {
                 c.Print("\n \"Permit good.\n  I open drawbridge.\"\n\n The troll takes your permit,\n then exits east through the tunnel and returns promptly.\n\n \"Here, have newspaper. Good reading on journey.\"\n\n He hands you a newspaper, which you keep.^");
@@ -1148,7 +1203,9 @@ namespace haunted_castle
                 Program.InventoryCaptions[7] = InventoryItems.RecipePaperApproved;
             }
             else
+            {
                 c.Print("\n \"You want cross drawbridge?\n  I need valid permit.\n\n  What you mean don't have permit?\n  Can't cross without permit!\n  Must pay troll with permit!\"\n\n You realize that you can forge a permit if you can use an item as paper,\n use another item as a pen, and use a third item as ink.^");
+            }
         }
 
         /// <summary>
@@ -1307,13 +1364,21 @@ namespace haunted_castle
             c.Print("\n This is the captain's personal cabin.^");
 
             if (Program.Inventory[15] == 1 || Program.InventoryCaptions[15] == InventoryItems.MonocleLens)
+            {
                 c.Print("\n A huge, green cyclops sleeps soundly on the bed,\n now undisturbed by the rats.^");
+            }
             else if (Program.ogAsleep)
+            {
                 c.Print("\n A huge, green cyclops wearing a monocle sleeps soundly on the bed,\n now undisturbed by the rats.^");
+            }
             else if (!Program.ratsGone)
+            {
                 c.Print("\n A huge, green, monocle-wearing cyclops is trying to chase away three rats.\n\n \"Arr!\n\n  These confounded rats!\n\n  Will they ever let me sleep in peace?\"\n\n Take caution: a single strike can kill you.^");
+            }
             else
+            {
                 c.Print("\n A huge, green, monocle-wearing cyclops stands before you.\n\n To your dismay, the three rats follow you back into the room.\n\n \"Arr!\n\n  Get those nasty creatures away from me, ye rascal!\n  And shouldn't you be swabbing the deck?\"\n\n Take caution: a single strike can kill you.^");
+            }
 
             c.Print("\n A doorway leads forward to another cabin.\n A hole leads up to the deck.^");
 
@@ -1344,7 +1409,9 @@ namespace haunted_castle
             c.Print("\n This is the galley, the ship's kitchen.^");
 
             if (Program.ogAsleep)
+            {
                 c.Print("\n Three rats are eating some moldy cheese on the counter.^");
+            }
             else if (Program.ratsGone)
             {
                 c.Print("\n Three rats follow you into the room.\n They begin to nibble on some moldy cheese on the counter.^");
@@ -1352,7 +1419,9 @@ namespace haunted_castle
                 Score.Addition(Score.P4_RatsEatCheese);
             }
             else
+            {
                 c.Print("\n There is moldy cheese on the counter.^");
+            }
 
             c.Print("\n A doorway leads aft to a cabin and a hole leads up to the deck.^");
 
@@ -1368,7 +1437,9 @@ namespace haunted_castle
             c.Print("\n You are in the navigation room.\n\n There is a computer on a desk made of oak wood.");
 
             if (Program.Inventory[11] == 0)
+            {
                 c.Print("\n Inside of the computer's disk drive is a floppy disk.^");
+            }
 
             Rats();
 
@@ -1406,7 +1477,9 @@ namespace haunted_castle
         public static void Rats()
         {
             if (!Program.ogAsleep && Program.ratsGone)
+            {
                 c.Print("\n Three rats follow you here.^");
+            }
         }
 
         /// <summary>
@@ -1420,9 +1493,13 @@ namespace haunted_castle
             c.Print("\n You hear chirping in the distance.\n\n This is a dusty stables building.\n The smell of horses still lingers, despite their absence.^");
 
             if (Program.Inventory[3] == 0 && Program.InventoryCaptions[3] == InventoryItems.Apple)
+            {
                 c.Print("\n An uneaten apple lies on the ground next to a feeding trough filled with water.^");
+            }
             else
+            {
                 c.Print("\n There is a feeding trough filled with water here.^");
+            }
 
             c.Print("\n To the north is a small oak forest.\n To the south is a blackberry grove.^");
 
@@ -1469,7 +1546,9 @@ namespace haunted_castle
             c.Print("\n You are in a grove of leafy blackberry bushes.^");
 
             if (Program.Inventory[12] == 0)
+            {
                 c.Print("\n A single blackberry hangs from a bush.^");
+            }
 
             c.Print("\n To the west is the courtyard and to the north is the stables building.^");
 
@@ -1489,14 +1568,22 @@ namespace haunted_castle
             c.Print("\n You hear a loud chirping sound.\n\n This is a small forest of oak trees.^");
 
             if (Program.Inventory[13] == 0 && Program.Inventory[3] == 0 && Program.InventoryCaptions[3] == InventoryItems.Seeds)
+            {
                 c.Print("\n Sitting on the ground is a feathery bird.^");
+            }
             else if (Program.Inventory[13] == 0)
+            {
                 c.Print("\n Sitting in a tree is a feathery bird.^");
+            }
             else if (Program.Inventory[13] == 1)
+            {
                 c.Print("\n Sitting on the ground is a bird.^");
+            }
 
             if (Program.beans)
+            {
                 c.Print("\n There is a tall beanstalk here.^");
+            }
 
             c.Print("\n The forest continues in a circular path to the north and to the west.\n To the east is the courtyard and to the south is the stables building.^");
 
@@ -1555,7 +1642,9 @@ namespace haunted_castle
             Methods.Checkpoint("Ancient Chamber", "Haunted Castle");
 
             if (Program.pyAwake)
+            {
                 c.Print("\n You hear a faint hissing sound that is barely audible.^");
+            }
 
             c.Print("\n You are at the entrance to a massive chamber at the heart of the castle.\n\n A doorway leads south.^");
 
@@ -1570,7 +1659,9 @@ namespace haunted_castle
             Methods.Checkpoint("West of Theater", "Ancient Chamber: Theater");
 
             if (Program.pyAwake)
+            {
                 c.Print("\n You hear a soft hiss in the distance.^");
+            }
 
             c.Print("\n You are standing in a wide theater.^");
             c.Print("\n There is an elevated stage with steps on one side.\n Tomatoes are littered all over the stage and floor,\n evidence of the theater's low-quality performances during the time of its use.\n\n To north is the chamber entrance and to the south is a living room.\n The theater continues to the east.\n The steps lead up onto the stage.^");
@@ -1586,7 +1677,9 @@ namespace haunted_castle
             Methods.Checkpoint("Stage", "Ancient Chamber: West of Theater");
 
             if (Program.pyAwake)
+            {
                 c.Print("\n You hear a faint hissing sound that is barely audible.^");
+            }
 
             c.Print("\n You are standing on the elevated stage of the theater.^");
             c.Print("\n Tomatoes are littered all over the floor.\n\n The steps lead down off of the stage.^");
@@ -1604,7 +1697,9 @@ namespace haunted_castle
             Methods.Checkpoint("Living Room", "Haunted Castle: Ancient Chamber");
 
             if (Program.pyAwake)
+            {
                 c.Print("\n You hear a loud hissing sound.^");
+            }
 
             c.Print("\n This is a small living room.\n\n A porcelain tea kettle sits on a small table surrounded by two armchairs.^");
             c.Print("\n To north is the theater.\n A tunnel leads east.^");
@@ -1620,16 +1715,24 @@ namespace haunted_castle
             Methods.Checkpoint("Lobby", "Ancient Chamber: Theater");
 
             if (Program.pyAwake)
+            {
                 c.Print("\n You hear a faint hissing sound that is barely audible.^");
+            }
 
             c.Print("\n This is a small waiting room, a lobby for the theater.\n\n There are two armchairs here next to a small table.");
 
             if (Program.Inventory[14] > 2)
+            {
                 c.Print("^");
+            }
             else if (Program.Inventory[14] == 0)
+            {
                 c.Print("\n On the table is a loaf of garlic bread.^");
+            }
             else
+            {
                 c.Print("\n On the table is a slice of garlic bread.^");
+            }
 
             c.Print("\n A doorway leads south to the inside of the theater.^");
 
@@ -1644,7 +1747,9 @@ namespace haunted_castle
             Methods.Checkpoint("Theater", "Haunted Castle: Ancient Chamber");
 
             if (Program.pyAwake)
+            {
                 c.Print("\n You hear a loud hissing sound.^");
+            }
 
             c.Print("\n You are standing at the front of the wide theater.^");
             c.Print("\n Tomatoes are littered all over the stage and floor.\n\n The theater continues to the north and to the west.\n A tunnel leads south.\n Steps lead down to an orchestra pit.^");
@@ -1660,12 +1765,16 @@ namespace haunted_castle
             Methods.Checkpoint("Orchestra Pit", "Ancient Chamber: Theater");
 
             if (Program.pyAwake)
+            {
                 c.Print("\n You hear a soft hiss in the distance.^");
+            }
 
             c.Print("\n This is a recessed pit where a classical orchestra would have performed long ago.^");
 
             if (Program.Inventory[8] == 0)
+            {
                 c.Print("\n A long-forgotten flute rests upon the ground.^");
+            }
 
             c.Print("\n Steps lead up and out of the pit.^");
 
@@ -1681,9 +1790,13 @@ namespace haunted_castle
             c.Print("\n This is a dark, damp pit.^");
 
             if (Program.pyAwake)
+            {
                 c.Print("\n A menacing snake glares at you.\n\n \"It is excellent to sssee you again.\n  Finally, I can have sssome lunch.\n\n  Wait, where was I? Oh, yesss - lunch.\n\n  Hmm... do I even like humans?\"^");
+            }
             else
+            {
                 c.Print("\n A long snake covered in menacing patterns\n is coiled up on the ground, fast asleep.^");
+            }
 
             c.Print("\n Tunnels lead north, east, and west.");
 
@@ -1730,9 +1843,13 @@ namespace haunted_castle
             c.Print("\n As you move towards the snake, its jaws snap forward and bite you.\n\n The bite is extremely harmful,\n both poisoning you with its venom and giving you a minor injury.");
 
             if (Program.Revive)
+            {
                 c.Print("\n\n The spell of reviving takes effect.");
+            }
             else
+            {
                 Methods.SetPermanentHealth(Program.PermanentHealth - 15);
+            }
 
             Program.State[2] = true;
             Program.State[3] = true;

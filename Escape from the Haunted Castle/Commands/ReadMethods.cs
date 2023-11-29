@@ -1,11 +1,15 @@
-﻿using System;
+﻿// ReadMethods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle.Commands.Variables_and_References
+using System;
+
+namespace HauntedCastle.Commands
 {
-    public class Read_Methods
+    public class ReadMethods
     {
         // Declarations
-        static readonly GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void magic_staff()
         {
@@ -17,8 +21,8 @@ namespace haunted_castle.Commands.Variables_and_References
                 c.Pause();
                 Commands.Inventory.Run("i", "");
                 c.Pause();
-                Commands.Diagnose.Run("h", "");
-                
+                _ = Commands.Diagnose.Run("h", "");
+
                 c.ForegroundColor = ConsoleColor.Cyan;
 
                 Console.Write("\n\n PRESS [Z] TO FINISH...");
@@ -30,7 +34,7 @@ namespace haunted_castle.Commands.Variables_and_References
                 {
                     m = char.ToLower(Console.ReadKey(true).KeyChar);
 
-                    x = (m == 'z' || m == '5');
+                    x = m == 'z' || m == '5';
                 }
 
                 c.Print("\n\n");
@@ -42,7 +46,9 @@ namespace haunted_castle.Commands.Variables_and_References
         public static void cookbook()
         {
             if (Program.Inventory[7] == 1)
+            {
                 c.Print("\n You do not need to look through the cookbook again\n since you already have a recipe.^");
+            }
             else
             {
                 Program.Inventory[7] = 1;
@@ -71,33 +77,61 @@ namespace haunted_castle.Commands.Variables_and_References
             c.Print("\n");
 
             if ((spell.Contains("invisibility") || spell.Contains("invisible") || spell.Contains("alakazam")) && Program.bookUNLOCKED)
+            {
                 c.Print("\n The page reads:\n\n \"Chapter I. SPELL of INVISIBILITY\n\n  Invisibility is the power to make oneself unable to be seen.\n  To invoke it, chant \'alakazam\'\n\n  This spell transports its caster to the unseen world.\"^");
+            }
             else if (spell.Contains("hurt") || spell.Contains("injury"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter II. ELIXIR of INJURY\n\n  The cure for injury is water.\"^");
+            }
             else if (spell.Contains("poison") || spell.Contains("cure") || spell.Contains("antidote") || spell.Contains("snake"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter III. ELIXIR of ANTIDOTE\n\n  The antidote for poisoning is tea.\"^");
+            }
             else if (spell.Contains("spider") || spell.Contains("repel") || spell.Contains("presto"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter IV. SPELL of SPIDER REPELLING\n\n  This spell repels all spiders.\n  To invoke it, chant \'presto\'\"^");
+            }
             else if (spell.Contains("open") || spell.Contains("sesame") || spell.Contains("opening"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter V. SPELL of OPENING\n\n  This spell can open some locks.\n  To invoke it, chant \'open sesame\'\"^");
+            }
             else if (spell.Contains("revive") || spell.Contains("reviving") || spell.Contains("heal") || spell.Contains("life") || spell.Contains("invincibility") || spell.Contains("immortality") || spell.Contains("invincible") || spell.Contains("immortal") || spell.Contains("abra"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter VI. SPELL of REVIVING\n\n  The revive spell maintains maxium health.\n  To invoke it, chant \'abracadabra\'\"^");
+            }
             else if (spell.Contains("fly") || spell.Contains("flight") || spell.Contains("teleport") || spell.Contains("travel") || spell.Contains("xyzzy"))
+            {
                 c.Print("\n The page has been torn out.^");
+            }
             else if (spell.Contains("ulysseys") || spell.Contains("odysseus") || spell.Contains("odyssey") || spell.Contains("cyclops"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter VII. PHRASE of CYCLOPS REPELLING\n\n  This phrase can make a cyclops cower in fear.\n  To invoke it, shout \'Odysseus\'\"^");
+            }
             else if (spell.Contains("mirror") || spell.Contains("fairest") || spell.Contains("beautiful") || spell.Contains("prettiest") || spell.Contains("pretty"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter X. PHRASE of MIRRORS\n\n  This phrase can be used to ask a talking magic mirror\n who the fairest of them all is.\n  To invoke it, begin your conversation by saying \'Mirror, mirror...\'\"^");
+            }
             else if (spell.Contains("hello"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter XI. PHRASE of GREETING\n\n  This phrase can be used to greet someone.\n  To invoke it, begin your conversation by saying \'Hello...\'\"^");
+            }
             else if (spell.Contains("nothing") || spell.Contains("silence"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter XII. SILENCE\n\n  Silence is best used in libraries.\n  To invoke it, say nothing.\"^");
+            }
             else if (spell.Contains("bless") || spell.Contains("gesundheit"))
+            {
                 c.Print("\n The page reads:\n\n \"Chapter XII. SPELL of GOOD HEALTH\n\n  A wish for another's good health must be expressed after a sneeze.\n  To invoke it, say \'gesundheit\' or \'bless you\'\"^");
+            }
             else if (spell == "")
+            {
                 c.Print("\n You did not specify which spell to look for.^");
+            }
             else
+            {
                 c.Print("\n There is no such spell in the book.^");
+            }
         }
 
         public static void ship()
@@ -115,14 +149,18 @@ namespace haunted_castle.Commands.Variables_and_References
             else
             {
                 if (Program.lockspeed == 3)
+                {
                     c.Print("\n A small combination lock keeps the book shut.\n It is permanently stuck.^");
+                }
                 else
                 {
                     // Declarations
                     bool invalidFormat = false;
 
                     if (Program.combo.Length != 3)
+                    {
                         Program.combo = new string[] { "00", "00", "00" };
+                    }
 
                     c.Print("\n A small combination lock keeps the book shut.\n It requires three 2-digit numbers to unlock.^");
 
@@ -141,15 +179,17 @@ namespace haunted_castle.Commands.Variables_and_References
                     c.Print("\n");
 
                     if (Program.combo.Length != 3)
+                    {
                         invalidFormat = true;
+                    }
 
                     foreach (string num in Program.combo)
                     {
-                        invalidFormat = (num.Length != 2);
+                        invalidFormat = num.Length != 2;
 
                         try
                         {
-                            Convert.ToInt32(num);
+                            _ = Convert.ToInt32(num);
                         }
                         catch
                         {
@@ -158,7 +198,9 @@ namespace haunted_castle.Commands.Variables_and_References
                     }
 
                     if (invalidFormat)
+                    {
                         c.Print("\n Hmm... That will not work!\n\n The lock requires three 2-digit numbers to unlock.^");
+                    }
                     else
                     {
                         if (Program.combo[0] == Program.comboAnswer[0].ToString() && Program.combo[1] == Program.comboAnswer[1].ToString() && Program.combo[2] == Program.comboAnswer[2].ToString())
@@ -199,11 +241,17 @@ namespace haunted_castle.Commands.Variables_and_References
             c.Print("\n A black, hexagonal coffin.^");
 
             if (Program.vampireAwake && Program.vampireGone)
+            {
                 c.Print("\n There is an engraving on the bottom of the coffin.\n\n It reads:\n\n \"OPEN SESAME\"^");
+            }
             else if (Program.vampireAwake)
+            {
                 c.Print("\n There is writing inside, but the vampire is standing on top of it.^");
+            }
             else
+            {
                 c.Print("\n It is closed.^");
+            }
         }
 
         public static void fountain()
@@ -214,9 +262,13 @@ namespace haunted_castle.Commands.Variables_and_References
         public static void cake()
         {
             if (Program.ateCake)
+            {
                 c.Print("\n The cake is already finished.^");
+            }
             else
+            {
                 c.Print("\n A mysterious purple cake with writing on it.\n\n It reads:\n\n \"Happy Birthday!\"^");
+            }
         }
 
         public static void sign()
@@ -234,19 +286,29 @@ namespace haunted_castle.Commands.Variables_and_References
         public static void floppy()
         {
             if (Program.Inventory[11] == 1)
+            {
                 c.Print("\n Scribbled in black ink is a single word:\n\n \"USELESS\"^");
+            }
             else if (Program.ROOM == "PC" || Program.ROOM == "PartIX")
+            {
                 c.Print("\n It is inside of the computer's floppy disk drive.^");
+            }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void recipe()
         {
             if (Program.Inventory[7] == 1 || Program.ROOM == "PartIII")
+            {
                 c.Print("\n It reads:\n\n \"Ingredients: Tomatoes.\n\n  Directions: Cook.\"^");
+            }
             else if (Program.ROOM == "PartIII")
+            {
                 cookbook();
+            }
         }
 
         public static void poetry()
@@ -290,7 +352,9 @@ namespace haunted_castle.Commands.Variables_and_References
                 FileSystem.TRAVELTO();
             }
             else
+            {
                 c.Print("\n Nothing happens.^");
+            }
         }
 
         public static void newspaper()
@@ -310,13 +374,17 @@ namespace haunted_castle.Commands.Variables_and_References
                 c.Print("\n One of the advertisements on the back cover catches your eye.\n\n The page reads:\n\n \"Dr. LEPER O'CON's PEST CONTROL\n\n  Need help expelling an annoying magical creature?\n  Look no further than Dr. Leper O'Con, certified Magical Creatures Expert.\n  Find me at the end of any rainbow!\"^");
             }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void map()
         {
             if (!Program.mapRead)
+            {
                 Score.Addition(Score.P3_ReadMap);
+            }
 
             Program.mapRead = true;
 

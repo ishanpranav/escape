@@ -7,7 +7,7 @@
     <ProjectGuid>{C70EA837-425F-4B35-A5A2-01FD649306C7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>haunted_castle</RootNamespace>
+    <RootNamespace>HauntedCastle</RootNamespace>
     <AssemblyName>ESCAPEHC</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -75,7 +75,7 @@
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>haunted_castle.Program</StartupObject>
+    <StartupObject>HauntedCastle.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <Win32Resource>
@@ -146,48 +146,42 @@
     <Compile Include="Commands\Diagnose.cs" />
     <Compile Include="Commands\Down.cs" />
     <Compile Include="Commands\Drink.cs" />
+    <Compile Include="Commands\DrinkMethods.cs" />
     <Compile Include="Commands\Drop.cs" />
+    <Compile Include="Commands\DropMethods.cs" />
     <Compile Include="Commands\East.cs" />
-    <Compile Include="Commands\Info.cs" />
-    <Compile Include="Commands\North.cs" />
-    <Compile Include="Commands\South.cs" />
-    <Compile Include="Commands\Up.cs" />
-    <Compile Include="Commands\Variables_and_References\Drink_Methods.cs" />
     <Compile Include="Commands\Eat.cs" />
-    <Compile Include="Commands\Variables_and_References\Drop_Methods.cs" />
-    <Compile Include="Commands\Variables_and_References\Eat_Methods.cs" />
+    <Compile Include="Commands\EatMethods.cs" />
     <Compile Include="Commands\Examine.cs" />
     <Compile Include="Commands\Exit.cs" />
-    <Compile Include="Commands\Light.cs" />
-    <Compile Include="Commands\Variables_and_References\Light_Methods.cs" />
-    <Compile Include="Commands\Open.cs" />
-    <Compile Include="Commands\Variables_and_References\Open_Methods.cs" />
-    <Compile Include="Commands\Read.cs" />
-    <Compile Include="Commands\Variables_and_References\Read_Methods.cs" />
-    <Compile Include="Commands\Say.cs" />
-    <Compile Include="Commands\Variables_and_References\Say_Methods.cs" />
-    <Compile Include="Commands\Take.cs" />
-    <Compile Include="Commands\Variables_and_References\Take_Methods.cs" />
-    <Compile Include="Commands\Use.cs" />
-    <Compile Include="Commands\Variables_and_References\Use_Methods.cs" />
+    <Compile Include="Commands\Info.cs" />
     <Compile Include="Commands\Inventory.cs" />
+    <Compile Include="Commands\Light.cs" />
+    <Compile Include="Commands\LightMethods.cs" />
+    <Compile Include="Commands\North.cs" />
+    <Compile Include="Commands\Open.cs" />
+    <Compile Include="Commands\OpenMethods.cs" />
+    <Compile Include="Commands\Read.cs" />
+    <Compile Include="Commands\ReadMethods.cs" />
+    <Compile Include="Commands\Save.cs" />
+    <Compile Include="Commands\Say.cs" />
+    <Compile Include="Commands\SayMethods.cs" />
+    <Compile Include="Commands\South.cs" />
+    <Compile Include="Commands\Take.cs" />
+    <Compile Include="Commands\TakeMethods.cs" />
+    <Compile Include="Commands\Up.cs" />
+    <Compile Include="Commands\Use.cs" />
+    <Compile Include="Commands\UseMethods.cs" />
     <Compile Include="Commands\West.cs" />
     <Compile Include="FileSystem.cs" />
-    <Compile Include="Commands\Save.cs" />
     <Compile Include="Minigames\Television.cs" />
     <Compile Include="Minigames\Computer.cs" />
     <Compile Include="Music.cs" />
-    <Compile Include="Native.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Score.cs" />
     <Compile Include="SignatureCheck.cs" />
@@ -209,10 +203,6 @@
     <None Include="App.config" />
     <None Include="Properties\app.manifest">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

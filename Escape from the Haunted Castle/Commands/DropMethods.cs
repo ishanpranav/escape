@@ -1,22 +1,32 @@
-﻿namespace haunted_castle.Commands.Variables_and_References
+﻿// DropMethods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+namespace HauntedCastle.Commands
 {
-    public class Drop_Methods
+    public class DropMethods
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void ITEM(int InventoryIndex)
         {
             if (Program.Inventory[InventoryIndex] == 0)
+            {
                 c.Print("\n You do not have that.^");
+            }
             else
+            {
                 c.Print("\n It would be wise to keep that.^");
+            }
         }
 
         public static void match()
         {
             if (Program.Inventory[1] == 0)
+            {
                 c.Print("\n You do not have that.^");
+            }
             else if (Program.ROOM == "T1" && !Program.ateCake)
             {
                 Program.Inventory[1] = 0;
@@ -25,20 +35,26 @@
                 c.Print("\n You insert the match into the cake.\n\n Happy birthday!^");
             }
             else
+            {
                 c.Print("\n It would be wise to keep that.^");
+            }
         }
 
         public static void gold()
         {
             if (Program.Inventory[0] == 0)
+            {
                 c.Print("\n You do not have that.^");
+            }
             else
             {
                 Score.Addition(Score.N_DropGold);
                 Program.Inventory[0] -= 2;
 
                 if (Program.Inventory[0] < 0)
+                {
                     Program.Inventory[0] = 0;
+                }
 
                 c.Print("\n You throw a gold coin into the fountain,\n hoping that by some miracle the gate will open.\n\n Your wish comes true: the huge limestone doors begin to slowly\n turn inwards, and a brilliant light shines through the gap.");
                 c.Pause();
@@ -51,7 +67,9 @@
         public static void computer()
         {
             if (Program.computerDropped)
+            {
                 c.Print("\n It has already been dropped.^");
+            }
             else
             {
                 Program.computerDropped = true;
@@ -67,7 +85,9 @@
             if (Program.Inventory[14] > 0 && Program.ROOM == "PartXXXV")
             {
                 if (Program.Inventory[3] == 0 && Program.InventoryCaptions[3] == InventoryItems.Seeds)
+                {
                     c.Print("\n It would be wise to keep that.^");
+                }
                 else
                 {
                     Program.Inventory[14]--;
@@ -92,7 +112,9 @@
                 c.Print("\n You place the garlic bread in front of the snake.\n\n It stares at it intently, carefully examining it.\n\n \"Hmm... I have never ssseen that before...\n\n  What is it?\n\n  Could it be... no... but it is...\n  How did the human get it?\n\n  Garlic bread!\"\n\n The snake slowly devours the slice.\n\n Now if only it would go back to sleep...^");
             }
             else if (Program.Inventory[14] > 0 && room == "V" && Program.vampireGone)
+            {
                 c.Print("\n The vampire is already gone.^");
+            }
             else if (Program.Inventory[14] > 0 && room == "V" && Program.vampireAwake)
             {
                 Program.vampireGone = true;
@@ -108,14 +130,22 @@
                 Program.ratsGone = true;
 
                 if (Program.ogAsleep)
+                {
                     c.Print("\n The rats quickly snatch up the bread.^");
+                }
                 else
+                {
                     c.Print("\n The rats quickly snatch up the bread,\n then continue to disturb the cyclops.^");
+                }
             }
             else if (Program.Inventory[14] > 0)
+            {
                 c.Print("\n It would be wise to keep that.^");
+            }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void water(string room)
@@ -129,7 +159,9 @@
                 if (Program.Inventory[3] == 0 && Program.InventoryCaptions[3] == InventoryItems.Seeds && Program.ROOM == "PartXXXV")
                 {
                     if (Program.beans)
+                    {
                         c.Print("\n The beanstalk does not need any more water.^");
+                    }
                     else
                     {
                         Program.beans = true;
@@ -168,17 +200,21 @@
                 c.Print("\n The water evaporates.^");
             }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void tea(string room)
         {
             if (room == "T" && Program.InventoryCaptions[4] != InventoryItems.BagTea)
+            {
                 Drop.Run("drop", "kettle", "", new string[] { "kettle" });
+            }
             else if (Program.ROOM == "U2" && Program.InventoryCaptions[4] == InventoryItems.BagTea)
             {
                 Program.InventoryCaptions[4] = InventoryItems.Bag;
-                
+
                 c.Print("\n It hits the dragon and extinguishes its flaming breath.");
                 c.Pause();
                 Storyline.DestroyDragon();
@@ -196,7 +232,9 @@
                 c.Print("\n Oops.\n\n You spill the tea.\n It splashes everywhere, then evaporates.^");
             }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void coffee()
@@ -221,11 +259,17 @@
                 c.Print("\n It swoops down from its oak tree and pecks at them.^");
             }
             else if (Program.Inventory[3] == 1 && Program.InventoryCaptions[3] == InventoryItems.Seeds)
+            {
                 c.Print("\n The soil here is not optimal for planting seeds.^");
+            }
             else if (Program.Inventory[3] == 1)
+            {
                 c.Print("\n They are still inside of the uneaten apple.^");
+            }
             else
+            {
                 c.Print("\n You do not have that.^");
+            }
         }
 
         public static void monocle()
@@ -237,7 +281,9 @@
             Score.Addition(Score.V1_DropMonocle);
 
             if (Storyline.CheckLight(false))
+            {
                 Score.Addition(Score.V_Rainbow);
+            }
         }
 
         public static void silver_key()
@@ -245,14 +291,20 @@
             Program.Inventory[5] = 0;
 
             if (Program.InventoryCaptions[5] == InventoryItems.Silver)
+            {
                 c.Print("\n You place the lump of silver onto the sunny area of the floor.^");
+            }
             else if (Program.InventoryCaptions[5] == InventoryItems.Key)
+            {
                 c.Print("\n You place the silver key onto the sunny area of the floor.^");
+            }
 
             Score.Addition(Score.V2_DropSilver);
 
             if (Storyline.CheckLight(false))
+            {
                 Score.Addition(Score.V_Rainbow);
+            }
         }
     }
 }

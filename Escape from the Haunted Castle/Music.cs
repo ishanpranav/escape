@@ -1,9 +1,6 @@
-﻿//using haunted_castle.Properties;
-//using System;
-//using System.Diagnostics;
-//using System.IO;
-//using System.Media;
-//using System.Threading;
+﻿// Music.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
 //namespace haunted_castle
 //{

@@ -1,4 +1,8 @@
-﻿using System.Reflection;
+﻿// AssemblyInfo.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 

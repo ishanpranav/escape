@@ -1,12 +1,15 @@
-﻿using haunted_castle.Commands.Variables_and_References;
+﻿// Drink.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
 using System.Collections.Generic;
 
-namespace haunted_castle.Commands
+namespace HauntedCastle.Commands
 {
     public class Drink
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string[] liqs)
         {
@@ -19,7 +22,9 @@ namespace haunted_castle.Commands
             opt2 = opt2.ToLower().Replace('^', ' ');
 
             for (int i = 0; i < liquids.Count; i++)
+            {
                 liquids[i] = liquids[i].ToLower();
+            }
 
             switch (opt1)
             {
@@ -57,12 +62,18 @@ namespace haunted_castle.Commands
                             foreach (string obj in liquids)
                             {
                                 if (obj == "coffee" && opt2 == "coffee")
+                                {
                                     Drink_Methods.coffee();
+                                }
                                 else if (obj == "stove" && opt2 == "soup")
+                                {
                                     Eat_Methods.soup();
+                                }
                             }
+
                             break;
                     }
+
                     break;
             }
         }

@@ -1,14 +1,18 @@
-﻿using System;
+﻿// Options.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace haunted_castle
+namespace HauntedCastle
 {
-    class Options
+    internal class Options
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void About()
         {
@@ -28,7 +32,7 @@ namespace haunted_castle
             {
                 m = char.ToLower(Console.ReadKey(true).KeyChar);
 
-                x = (m == 'x' || m == '8' || m == '5');
+                x = m == 'x' || m == '8' || m == '5';
             }
 
             c.ForegroundColor = ConsoleColor.White;
@@ -39,9 +43,11 @@ namespace haunted_castle
             if (ret)
             {
                 c.Print(msg, fg, bg);
-                
+
                 if (lines)
+                {
                     c.DrawLine(83, ConsoleColor.Gray);
+                }
             }
         }
 
@@ -50,7 +56,9 @@ namespace haunted_castle
             int limit = 10;
 
             if (summary)
+            {
                 limit = 30;
+            }
 
             if (ret)
             {
@@ -66,17 +74,25 @@ namespace haunted_castle
                 try
                 {
                     foreach (string line in se.DecryptString(File.ReadAllText(FileSystem.scoresdat)).Split('~'))
+                    {
                         lst.Add(line);
+                    }
 
                     if (lst.Count == 0)
+                    {
                         writeScreen(ret, "\n There are no Hi-Scores to display.", ConsoleColor.Gray);
+                    }
 
                     for (int i = 0; i < lst.Count; i++)
                     {
                         if (lst[i].Trim() == string.Empty)
+                        {
                             lst.RemoveAt(i);
+                        }
                         else if (lst[i].Split(',')[0].Trim() == string.Empty)
+                        {
                             lst.RemoveAt(i);
+                        }
                     }
 
                     List<string> lstOrd = lst.OrderByDescending(s => int.Parse(s.Split(',')[1])).ToList();
@@ -86,7 +102,9 @@ namespace haunted_castle
                     string rank = string.Empty;
 
                     if (lst.Count != 0)
+                    {
                         writeScreen(ret, "\n  #1\tSCORE: 500     ISHAN P      RANK: EMPEROR", ConsoleColor.Cyan, ConsoleColor.Black, !summary);
+                    }
 
                     List<string> names = new List<string>();
                     ConsoleColor cc = ConsoleColor.Gray;
@@ -99,10 +117,14 @@ namespace haunted_castle
                         try
                         {
                             for (int j = 0; j < 3 - lstOrd[i].Split(',')[1].Length; j++)
+                            {
                                 spacing += " ";
+                            }
 
                             for (int j = 0; j < 8 - lstOrd[i].Split(',')[0].Length; j++)
+                            {
                                 spacing2 += " ";
+                            }
                         }
                         catch { }
 
@@ -114,28 +136,40 @@ namespace haunted_castle
                         string[] ranks = new string[] { "EMPEROR......", "KING.........", "SENIOR MASTER", "MASTER.......", "JUNIOR MASTER", "PRINCE.......", "GRAND DUKE...", "DUKE.........", "EARL.........", "BARON........", "LORD.........", "KNIGHT.......", "ADVENTURER...", "MERCHANT.....", "NOVICE......." };
 
                         if (nRanks.Length == ranks.Length)
+                        {
                             for (int j = 0; j < nRanks.Length; j++)
+                            {
                                 if (tscore >= nRanks[j])
                                 {
                                     rank = ranks[j];
 
                                     if (j > 1)
-                                        nextRank = (nRanks[j - 1] - tscore);
+                                    {
+                                        nextRank = nRanks[j - 1] - tscore;
+                                    }
                                     else
+                                    {
                                         sNextRank = string.Empty;
+                                    }
 
                                     break;
                                 }
+                            }
+                        }
 
                         rank = rank.Replace('.', ' ');
 
                         if (sNextRank != string.Empty)
+                        {
                             sNextRank = "NEXT RANK: " + c.FormatScore(nextRank);
+                        }
 
                         if (!names.Contains(lstOrd[i].Split(',')[0].ToUpper()))
                         {
                             if (lstOrd[i].Split(',')[0].ToUpper().Contains("ISHAN") || lstOrd[i].Split(',')[0].ToUpper().Contains("ADMIN"))
+                            {
                                 tscore = Program.MAXSCORE + 1;
+                            }
 
                             cc = ConsoleColor.Gray;
 
@@ -146,23 +180,33 @@ namespace haunted_castle
                                     string scorer = lstOrd[i].Split(',')[0].ToUpper();
 
                                     while (scorer.Length < 8)
+                                    {
                                         scorer += " ";
+                                    }
 
                                     cc = ConsoleColor.Yellow;
 
                                     if (!ret)
+                                    {
                                         return string.Format("CONGRATULATIONS {0}{2}  SCORE: {1}", scorer, lstOrd[i].Split(',')[1], spacing);
+                                    }
                                 }
                                 else if (num < 5)
+                                {
                                     cc = ConsoleColor.White;
+                                }
 
                                 writeScreen(ret, string.Format("\n  #{0}\tSCORE: {2}{3}     {1}{6}     RANK: {4}   {5}", (num + 1).ToString(), lstOrd[i].Split(',')[0].ToUpper(), lstOrd[i].Split(',')[1], spacing, rank, sNextRank, spacing2), cc, ConsoleColor.Black, !summary);
                             }
                             else if (num < limit && tscore > Program.MAXSCORE)
+                            {
                                 num--;
+                            }
                         }
                         else
+                        {
                             num--;
+                        }
 
                         names.Add(lstOrd[i].Split(',')[0].ToUpper());
 
@@ -187,20 +231,26 @@ namespace haunted_castle
                     {
                         m = char.ToLower(Console.ReadKey(true).KeyChar);
 
-                        x = (m == 'x' || m == '8' || m == '5' || m == 'z');
+                        x = m == 'x' || m == '8' || m == '5' || m == 'z';
                     }
 
                     if (m == 'z')
-                        HiScores(true, true);
+                    {
+                        _ = HiScores(true, true);
+                    }
 
                     c.Print("\n\n");
                 }
             }
             else
+            {
                 writeScreen(ret, "\n There are no scores to display.", ConsoleColor.Gray);
+            }
 
             if (ret && summary)
+            {
                 c.Pause();
+            }
 
             return string.Empty;
         }

@@ -1,9 +1,13 @@
-﻿namespace haunted_castle.Commands.Variables_and_References
+﻿// SayMethods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+namespace HauntedCastle.Commands
 {
-    public class Say_Methods
+    public class SayMethods
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void FinalSpell()
         {
@@ -17,7 +21,7 @@
             Storyline.U2();
         }
 
-        public static void SpellOfInvisibility(string Message)
+        public static void SpellOfInvisibility()
         {
             if (!Program.IsInvisible)
             {
@@ -26,7 +30,9 @@
                 c.Print("\n You invoke the spell of invisibility!^");
             }
             else
+            {
                 c.Print("\n Nothing happens.^");
+            }
         }
 
         public static void SpellOfSpiderRepelling()
@@ -76,12 +82,14 @@
             SpellOfReviving();
         }
 
-        public static void OpenGlassCase(string Message)
+        public static void OpenGlassCase()
         {
             if (Program.ROOM == "B4")
             {
                 if (Program.caseOpen)
+                {
                     c.Print("\n The display case is already open.^");
+                }
                 else if (Program.vampireAwake && Program.vampireGone)
                 {
                     Program.caseOpen = true;
@@ -91,10 +99,14 @@
                     c.Print("\n The display case opens with a click.^");
                 }
                 else
+                {
                     c.Print("\n Nothing happens.^");
+                }
             }
             else
+            {
                 c.Print("\n Nothing happens.^");
+            }
         }
     }
 }

@@ -1,26 +1,40 @@
-﻿namespace haunted_castle.Commands.Variables_and_References
+﻿// TakeMethods.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+namespace HauntedCastle.Commands
 {
-    public class Take_Methods
+    public class TakeMethods
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void ITEM(int InventoryIndex)
         {
             if (Program.Inventory[InventoryIndex] > 0)
+            {
                 c.Print("\n You already have that.^");
+            }
             else
             {
                 Program.Inventory[InventoryIndex] = 1;
 
                 if (InventoryIndex == 5)
+                {
                     Score.Addition(Score.B1_ObtainKey);
+                }
                 else if (InventoryIndex == 10)
+                {
                     Score.Addition(Score.G1_ObtainCrate);
+                }
                 else if (InventoryIndex == 12)
+                {
                     Score.Addition(Score.H4_ObtainBlackberry);
+                }
                 else if (InventoryIndex == 8)
+                {
                     Score.Addition(Score.L1_ObtainFlute);
+                }
 
                 c.Print("\n Taken.^");
             }
@@ -39,13 +53,17 @@
                 Program.Inventory[14]++;
             }
             else
+            {
                 c.Print("\n You already have that.^");
+            }
         }
 
         public static void water()
         {
             if (Program.InventoryCaptions[4] != InventoryItems.Bag)
+            {
                 c.Print("\n The leather bag is full and you have no other container for the water.^");
+            }
             else
             {
                 Program.InventoryCaptions[4] = InventoryItems.BagWater;
@@ -57,7 +75,9 @@
         public static void tea()
         {
             if (Program.InventoryCaptions[4] != InventoryItems.Bag)
+            {
                 c.Print("\n The leather bag is full and you have no other container for the tea.^");
+            }
             else
             {
                 Program.InventoryCaptions[4] = InventoryItems.BagTea;
@@ -86,9 +106,13 @@
         public static void floppy()
         {
             if (Program.Inventory[11] == 0)
+            {
                 c.Print("\n The floppy disk is inside of the closed disk drive.^");
+            }
             else
+            {
                 c.Print("\n You already have that.^");
+            }
         }
 
         public static void feather()
@@ -100,9 +124,13 @@
                 c.Print("\n Taken.^");
             }
             else if (Program.Inventory[13] == 0)
+            {
                 c.Print("\n It is too high for you to reach.^");
+            }
             else if (Program.Inventory[13] == 1)
+            {
                 c.Print("\n You already have that.^");
+            }
         }
 
         public static void chandelier()

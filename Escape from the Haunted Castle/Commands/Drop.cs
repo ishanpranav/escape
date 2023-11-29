@@ -1,12 +1,16 @@
-﻿using haunted_castle.Commands.Variables_and_References;
-using System.Collections.Generic;
+﻿// Drop.cs
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
-namespace haunted_castle.Commands
+using System.Collections.Generic;
+using HauntedCastle.Commands.Variables_and_References;
+
+namespace HauntedCastle.Commands
 {
     public class Drop
     {
         // Declarations
-        static GUI.Display c = new GUI.Display();
+        private static readonly GUI.Display c = new GUI.Display();
 
         public static void Run(string opt1, string opt2, string room, string[] objs)
         {
@@ -18,10 +22,14 @@ namespace haunted_castle.Commands
             opt2 = opt2.ToLower().Replace('^', ' ');
 
             for (int i = 0; i < objects.Count; i++)
+            {
                 objects[i] = objects[i].ToLower();
+            }
 
             if ((opt1 == "drop" && opt2 == "roll") || (opt1 == "stop" && opt2 == "drop") || opt1 == "roll")
+            {
                 c.Print("\n It is always good to be prepared in case of a fire.^");
+            }
 
             if (opt1 == "drop" || opt1 == "spill" || opt1 == "pour" || opt1 == "throw" || opt1 == "toss" || opt1 == "j")
             {
@@ -30,25 +38,34 @@ namespace haunted_castle.Commands
                     string text = opt1;
 
                     if (opt1 == "j")
+                    {
                         text = "drop";
+                    }
 
                     c.Print("\n You do not know what to " + text + ".^");
                 }
 
                 if (opt2 == "water")
-                    Drop_Methods.water(room);
+                {
+                    DropMethods.water(room);
+                }
 
                 if (opt2 == "tea")
-                    Drop_Methods.tea(room);
+                {
+                    DropMethods.tea(room);
+                }
 
                 foreach (string obj in objects)
                 {
                     if (obj == "coffee" && opt2 == "coffee")
-                        Drop_Methods.coffee();
+                    {
+                        DropMethods.coffee();
+                    }
                 }
             }
 
             if (opt1 == "drop" || opt1 == "throw" || opt1 == "toss" || opt1 == "j")
+            {
                 switch (opt2)
                 {
                     case "magic":
@@ -69,7 +86,9 @@ namespace haunted_castle.Commands
                             if (Program.ROOM == "Z")
                             {
                                 if (Program.breadcrumbs[Program.mazeIdx])
+                                {
                                     c.Print("\n You have already dropped breadcrumbs here.^");
+                                }
                                 else
                                 {
                                     c.Print("\n You drop some breadcrumbs on the ground to form a trail.^");
@@ -79,8 +98,11 @@ namespace haunted_castle.Commands
                                 }
                             }
                             else
+                            {
                                 c.Print("\n That would be littering!^");
+                            }
                         }
+
                         break;
 
                     case "gold":
@@ -100,33 +122,48 @@ namespace haunted_castle.Commands
                     case "spoon":
                     case "ingot":
                         if (Program.ROOM == "C5")
-                            Drop_Methods.gold();
+                        {
+                            DropMethods.gold();
+                        }
                         else
-                            Drop_Methods.ITEM(0);
+                        {
+                            DropMethods.ITEM(0);
+                        }
+
                         break;
 
                     case "silver":
                     case "key":
                         if (Program.ROOM == "J3" && Program.Inventory[5] == 1)
-                            Drop_Methods.silver_key();
+                        {
+                            DropMethods.silver_key();
+                        }
                         else
-                            Drop_Methods.ITEM(5);
+                        {
+                            DropMethods.ITEM(5);
+                        }
+
                         break;
 
                     case "monocle":
                     case "lens":
                         if (Program.ROOM == "J3" && Program.Inventory[15] == 1)
-                            Drop_Methods.monocle();
+                        {
+                            DropMethods.monocle();
+                        }
                         else
-                            Drop_Methods.ITEM(15);
+                        {
+                            DropMethods.ITEM(15);
+                        }
+
                         break;
 
                     case "candle":
-                        Drop_Methods.ITEM(2);
+                        DropMethods.ITEM(2);
                         break;
 
                     case "apple":
-                        Drop_Methods.ITEM(3);
+                        DropMethods.ITEM(3);
                         break;
 
                     case "shirt":
@@ -146,37 +183,37 @@ namespace haunted_castle.Commands
                     case "seeds":
                     case "appleseed":
                     case "appleseeds":
-                        Drop_Methods.seeds();
+                        DropMethods.seeds();
                         break;
 
                     case "shield":
-                        Drop_Methods.ITEM(6);
+                        DropMethods.ITEM(6);
                         break;
 
                     case "recipe":
-                        Drop_Methods.ITEM(7);
+                        DropMethods.ITEM(7);
                         break;
 
                     case "box":
-                        Drop_Methods.ITEM(9);
+                        DropMethods.ITEM(9);
                         break;
 
                     case "crate":
-                        Drop_Methods.ITEM(10);
+                        DropMethods.ITEM(10);
                         break;
 
                     case "flute":
-                        Drop_Methods.ITEM(8);
+                        DropMethods.ITEM(8);
                         break;
 
                     case "match":
-                        Drop_Methods.match();
+                        DropMethods.match();
                         break;
 
                     case "newspaper":
                     case "news":
                     case "paper":
-                        Drop_Methods.ITEM(16);
+                        DropMethods.ITEM(16);
                         break;
 
                     case "garlic":
@@ -184,18 +221,18 @@ namespace haunted_castle.Commands
                     case "loaf":
                     case "slice":
                     case "slices":
-                        Drop_Methods.bread(room);
+                        DropMethods.bread(room);
                         break;
 
                     case "floppy":
                     case "disk":
                     case "disc":
                     case "diskette":
-                        Drop_Methods.ITEM(11);
+                        DropMethods.ITEM(11);
                         break;
 
                     case "feather":
-                        Drop_Methods.ITEM(13);
+                        DropMethods.ITEM(13);
                         break;
 
                     case "blackberry":
@@ -219,29 +256,45 @@ namespace haunted_castle.Commands
                                 c.Print("\n The rats nibble on the blackberry and are immediately poisoned.\n\n They faint.\n\n With the rat problem handled, the cyclops is able to rest.^");
                             }
                         }
+
                         break;
 
                     default:
                         foreach (string obj in objects)
                         {
                             if (obj == "cards" && (opt2 == "cards" || opt2 == "card" || opt2 == "deck"))
-                                Drop_Methods.cards();
+                            {
+                                DropMethods.cards();
+                            }
                             else if (obj == "computer" && (opt2 == "computer" || opt2 == "pc" || opt2 == "cpu"))
-                                Drop_Methods.computer();
+                            {
+                                DropMethods.computer();
+                            }
                             else if (obj == "drawbridge" && (opt2 == "drawbridge" || opt2 == "bridge"))
-                                Open_Methods.drawbridge();
+                            {
+                                OpenMethods.drawbridge();
+                            }
                             else if (obj == "cheese" && (opt2 == "moldy" || opt2 == "cheese"))
+                            {
                                 c.Print("\n You would rather not touch the moldy cheese.^");
+                            }
                             else if (obj == "kettle" && opt2 == "kettle")
+                            {
                                 c.Print("\n The kettle slips from your hands,\n but you catch it just before the fine porcelain shatters.^");
+                            }
                             else if (obj == "coffee" && (opt2 == "cup" || opt2 == "mug"))
+                            {
                                 c.Print("\n The cup slips from your hands, but you catch it before it shatters.^");
+                            }
                             else if (obj == "lamp" && (opt2 == "lamp" || opt2 == "oil"))
+                            {
                                 Use_Methods.lamp();
+                            }
                         }
+
                         break;
                 }
-
+            }
         }
     }
 }
