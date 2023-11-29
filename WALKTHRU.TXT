@@ -1,0 +1,194 @@
+000	I read my palm.
+	I chant, "Ishan Pranav"
+	I chant, "presto"
+	I chant 
+	I open my leather bag. (4)
+004	I spit. (11)
+015	I pick up the match.
+	I light the match. (2)
+017	I pick up the candle. (2)
+019	I light the candle. (5)
+024	I burn my hair using the candle. (4)
+028	I walk east.
+	I open the K door.
+	I take the key. (4)
+032	I look at the calendar.
+	I walk south.
+	I unlock the L door. (4)
+036	I burn the key using the candle. (4)
+040	I climb up. (8)
+048	I open the secret door.
+	I go down. (4)
+052	I go south.
+	I climb down.
+	I open the cookbook. (9)
+061	I unlock the strange blue book. (13)
+074	I walk north. (20)
+094	I chant "alakazam"
+	I walk north.
+	I turn on the sink to get water.
+	I spill the water. (4)
+098	I turn on the sink to get water.
+	I spill the water. (4)
+102	I turn on the sink to get water.
+	I turn on the sink to wash my hands. (4)
+106	I turn on the sink to wash the tomatoes. (4)
+110	I turn on the stove to cook.
+	I walk south.
+	I open the east door.
+117	I open the chest. (20)
+137	I climb up.
+	I burn the bars using the candle. (7)
+144	I climb up.
+	I turn on the computer. (4)
+148	I spill the water. (8)
+156	I drop the computer. (4)
+160	I climb down.
+	I climb down.
+	I climb down. (20)
+180	I walk west.
+	I walk down.
+	I walk east.
+	I walk south.
+	I walk south.
+	I walk east.
+	I walk down.
+	I pick up the flute. (2)
+182	I walk up.
+	I walk north.
+	I eat a slice of garlic bread. (2)
+184	I take the loaf of garlic bread.
+	I walk south.
+	I walk south.
+	I zap the snake using my magic staff.
+	I drop a slice of garlic bread. (9)
+193	I play the flute.
+	I walk east.
+	I walk east.
+	I walk south.
+	I walk north. [=Tomb]
+	I open the black coffin. (2)
+195	I bite the vampire. (2)
+197	I walk east.
+	I walk north. [=Gallery]
+	I chant "open sesame" (4)
+201	I rub the oil lamp. (2)
+203	I walk west.
+	I walk north. [=Bottom of Tower]
+	I grab the oriental rug. (15)
+218	I go up.
+	I go south.
+	I go south.
+	I jump down.
+	I throw a gold coin. (29)
+247	I walk west.
+	I walk west.
+	I take the crate. (2)
+249	I walk north.
+	I walk north.
+	I walk north. (12)
+261	I walk east.
+	I pick the blackberry. (2)
+263	I walk north.
+	I bite the apple. (2)
+265	I collect water.
+	I walk north.
+	I drop the seeds. (2)
+267	I pour the water. (8)
+275	I climb up.
+	I climb up.
+	I climb up. (8)
+283	I climb down.
+	I climb down.
+	I climb down.
+	I pluck a feather.
+	I walk east.
+	I walk south.
+	I walk west.
+	I use the feather as a pen. (2)
+285	I use the blackberry as ink. (2)
+287	I use the recipe as paper. (2)
+289	I talk to the troll. (17)
+306	I walk east.
+	I walk south.
+	I use the crate as a raft. (7)
+313	I go east.
+	I go north.
+	I go north.
+	I go north. (24)
+337	I burn the crate using the candle. (6)
+343	I grab the rope. (2)
+345	I walk aft.
+	I walk starboard.
+	I examine the map. (2)
+347	I walk port.
+	I jump down.
+	I drop the blackberry. (6)
+355	I take the monocole. (2)
+357	I jump up.
+	I walk forward.
+	I climb up.
+	I climb up.
+	I use the monocle as a lens. (2)
+359	I use the telescope. (2)
+361	I climb down.
+	I climb down.
+	I walk aft.
+	I turn the wheel. (21)
+382	I wait.
+	I wait.
+	I wait.
+	I walk north.
+	I walk north.
+	I walk west.
+	I open the Y door.
+	I walk up.
+	I put down the silver. (2)
+384	I put down the monocle. (7)
+391	I walk down.
+	I open the Y door.
+	I walk north.
+	I walk west. [=Inside of Rainforest, 1]
+	I drop some breadcrumbs. (2)
+393	I walk east. [=Inside of Rainforest, 2]
+	I drop some breadcrumbs. (2)
+395	I walk north. [=Inside of Rainforest, 3]
+	I drop some breadcrumbs. (2)
+397	I walk north. [=Inside of Rainforest, 4]
+	I drop some breadcrumbs. (2)
+399	I walk east. [=Inside of Rainforest, 5]
+	I drop some breadcrumbs. (2)
+401	I walk east. [=Inside of Rainforest, 6]
+	I drop some breadcrumbs. (2)
+403	I walk north. [=Inside of Rainforest, 7]
+	I drop some breadcrumbs. (2)
+405	I walk north. [=Inside of Rainforest, 8]
+	I drop some breadcrumbs. (2)
+407	I walk east. [=Inside of Rainforest, 9]
+	I drop some breadcrumbs. (2)
+409	I walk north. [=Inside of Rainforest, 10]
+	I drop some breadcrumbs. (2)
+411	I walk north. [=Inside of Rainforest, 11]
+	I drop some breadcrumbs. (2)
+413	I walk east. [=Inside of Rainforest, 12]
+	I drop some breadcrumbs. (2)
+415	I walk east. [=Inside of Rainforest, 13]
+	I drop some bradcrumbs. (2)
+417	I walk east. [=Inside of Rainforest, 14]
+	I drop some bradcrumbs. (2)
+419	I walk east. [=Inside of Rainforest, 15] (40)
+459	I jump down.
+	I put the match down. (4)
+463	I eat the purple cake. (2)
+465	I walk south. (2)
+467	I echo. (4)
+471	I walk south. (2)
+473	I find myself. (1)
+474	I help myself. (1)
+475	I walk south. (2)
+	I climb up.
+	I burn the newspaper using the candle. (4)
+479	I chant "please" (4)
+483	I use the feather to tickle the dragon. (13)
+496	I say "bless you" (4)
+500	I look at the magic staff.
