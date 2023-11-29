@@ -1,5 +1,5 @@
 ﻿// Program.cs
-// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Copyright (c) 2016-2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -14,7 +14,7 @@ namespace HauntedCastle
         public const int MAXSCORE = 500;
         private const int NumItems = 17;
         public static string x = string.Empty;
-        public static string Year = "2020";
+        public static string Year = "2023";
         public static bool FIXED_COLOR = true;
         public static bool FIXED_CAPS = false;
         public static bool washedTomatoes = false;
@@ -371,7 +371,7 @@ namespace HauntedCastle
                             c.Print("\n\n Nickname is reserved.^", ConsoleColor.Cyan);
 
                             c.StyleAlt("Enter Security Key:");
-                            if (c.ReadLine().ToLower() != "012004")
+                            if (c.ReadLine() != "012004")
                             {
                                 name = string.Empty;
                                 c.Print("\n\n Security Key is invalid.^", ConsoleColor.Cyan);

@@ -1,7 +1,16 @@
+# Copyright (c) 2021-2023 Ishan Pranav. All rights reserved.
+# Licensed under the MIT License.
+
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
+
 * text=auto
+*.manifest binary
+*.application binary
+*.deploy binary
+docs/*.css linguist-detectable
+tools/*.xsl linguist-detectable
 
 ###############################################################################
 # Set default behavior for command prompt diff.

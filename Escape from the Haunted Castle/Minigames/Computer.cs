@@ -1,5 +1,5 @@
 ﻿// Computer.cs
-// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Copyright (c) 2016-2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
