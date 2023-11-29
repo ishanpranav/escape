@@ -1,0 +1,43 @@
+HAUNTED CASTLE HELP
+  
+  Below is a list of step-by-step, easy-to-follow tutorials to help you if you are having trouble using Haunted Castle, or have a question. 
+
+HOW TO MAKE AN EXTERNAL PROGRAM
+  Haunted Castle (v15.1.12.0+)
+
+  This tutorial will help you with Haunted Castle External Programs.
+
+INTRODUCTION
+
+  External programs are small programs that make Haunted Castle run a function that isn't really in the code. They are used to personalize the application and change the overall look, feel, and style of the game.
+
+HOW DO I GET ONE?
+
+  External Programs can be downloaded from the internet pre-made, or you can code your own. 
+
+CODING YOUR OWN
+
+  1) To program your own, you must first start out by opening Notepad.
+
+  2) Learn the CMD/Batch programming language.
+
+  3) Create a simple program that you would like to run withing Haunted Castle. Use Notepad or Notepad++ as your code/text editor.
+
+  4) Save your code with one of the following names:
+      
+      - theme.cmd
+  
+  If you save the file as theme.exe, the external program will run on the Haunted Castle start screen, win screen, and die screen.
+
+DEPLOYMENT
+
+  When you are finished downloading or coding your external program, move the application to the 'Program_Files\external\' folder. Then, run Haunted Castle and enjoy!
+
+HOW TO PLAY MUSIC WITHIN HAUNTED CASTLE
+  Haunted Castle (v14.12.24.0+)
+
+  This tutorial will help you with playing music within the Haunted Castle game.
+
+INTRODUCTION
+
+  To play music within the Haunted Castle game, you must first download a music (*.mp3) file on your PC. Next, 

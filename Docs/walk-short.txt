@@ -1,0 +1,143 @@
+o bag
+xyzzy
+spit
+r palm
+t match
+light match
+light candle
+light hair
+n
+t key
+l calendar
+s
+s
+light key
+u
+s
+d
+u
+s
+d
+r cook
+o purple
+o spell
+n
+alakazam
+n
+t water
+j water
+t water
+j water
+t water
+wash hand
+wash tomato
+cook
+s
+e
+o chest
+u
+light bar
+u
+use pc
+j water
+j pc
+d
+d
+d
+w
+d
+e
+s
+s
+e
+d
+t flute
+u
+n
+m loaf
+t loaf
+s
+s
+e
+j loaf
+whistle
+e
+e
+s
+n
+o black
+j loaf
+e
+n
+open sesame
+t lamp
+w
+n
+t rug
+u
+s
+s
+d
+j gold
+w
+w
+t crate
+n
+n
+n
+e
+t berry
+n
+m apple
+t water
+n
+j seeds
+j water
+u
+u
+u
+d
+d
+d
+t feather
+e
+s
+use feather as pen
+use berry as ink
+use recipe as paper
+o bridge
+d
+use crate
+e
+n
+n
+n
+light crate
+u
+a
+b
+r map
+p
+d
+f
+f
+whistle
+a
+a
+t monocle
+u
+f
+u
+u
+use monocle
+l telescope
+d
+d
+a
+t wheel
+wait
+wait
+wait
+wait
+wait
+l staff

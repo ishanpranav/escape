@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="apple" xml:space="preserve">
+    <value>A crisp, juicy, red apple.@ There are seeds inside.</value>
+  </data>
+  <data name="armchairs" xml:space="preserve">
+    <value>Two soft leather armchairs.</value>
+  </data>
+  <data name="atlas" xml:space="preserve">
+    <value>A green leather-bound atlas with yellowed pages and maps.@ There is writing inside.@ This atlas seems strange.</value>
+  </data>
+  <data name="bars" xml:space="preserve">
+    <value>Sturdy wooden bars.</value>
+  </data>
+  <data name="bed" xml:space="preserve">
+    <value>A flat bed.</value>
+  </data>
+  <data name="bird" xml:space="preserve">
+    <value>A large bird with a@ particularly long feather portruding from its back.</value>
+  </data>
+  <data name="blackberry" xml:space="preserve">
+    <value>A juicy wild blackberry that is probably not safe to eat.</value>
+  </data>
+  <data name="box" xml:space="preserve">
+    <value>A large carboard box.@ It is empty.</value>
+  </data>
+  <data name="bread" xml:space="preserve">
+    <value>Slices of white bread covered with garlic.</value>
+  </data>
+  <data name="bushes" xml:space="preserve">
+    <value>Twisting rows of tall bushes covered in leaves.</value>
+  </data>
+  <data name="candle" xml:space="preserve">
+    <value>An old wax candle.</value>
+  </data>
+  <data name="cards" xml:space="preserve">
+    <value>A standard 52-card deck of playing cards without jokers.</value>
+  </data>
+  <data name="castle" xml:space="preserve">
+    <value>A dimly lit castle mostly made of stone.@ Its walls are solid and cannot be burned or broken.@ The castle is haunted by ghosts, goblins, and other foul creatures.</value>
+  </data>
+  <data name="chairs" xml:space="preserve">
+    <value>Fifty cherry wood chairs.</value>
+  </data>
+  <data name="chandelier" xml:space="preserve">
+    <value>A beautiful crystal chandelier.</value>
+  </data>
+  <data name="chest" xml:space="preserve">
+    <value>A large wooden chest.@ It is closed.</value>
+  </data>
+  <data name="columns" xml:space="preserve">
+    <value>Four Roman columns with intricate details carved in the white marble.</value>
+  </data>
+  <data name="compass" xml:space="preserve">
+    <value>A gold pocket compass.@ The compass needle points north.</value>
+  </data>
+  <data name="computer" xml:space="preserve">
+    <value>A Razorteeth Studios Personal computer.@ It is turned off.</value>
+  </data>
+  <data name="counter" xml:space="preserve">
+    <value>A simple white counter.</value>
+  </data>
+  <data name="crate" xml:space="preserve">
+    <value>A large wooden crate.@ It is empty.</value>
+  </data>
+  <data name="desk" xml:space="preserve">
+    <value>An oak wood desk.</value>
+  </data>
+  <data name="door" xml:space="preserve">
+    <value>A heavy door made of gold and embedded@ with jewels and other precious items.@ It is closed.</value>
+  </data>
+  <data name="doors" xml:space="preserve">
+    <value>Large and wooden double doors with gilded handles.@ They are closed.</value>
+  </data>
+  <data name="doorway" xml:space="preserve">
+    <value>A wooden doorway with an intricately carved pattern.</value>
+  </data>
+  <data name="drawbridge" xml:space="preserve">
+    <value>A massive wooden drawbridge.</value>
+  </data>
+  <data name="drive" xml:space="preserve">
+    <value>A drive accepting a 3 1/2-inch floppy disk.@ You will not be able to insert a diskette, as the drive is jammed.@ It can only be opened once before it breaks completely.@ It is closed.</value>
+  </data>
+  <data name="feather" xml:space="preserve">
+    <value>A long white feather with a sharp point.</value>
+  </data>
+  <data name="floppy_disk" xml:space="preserve">
+    <value>A standard (but outdated) 3 1/2-inch diskette. @ There is writing on it.</value>
+  </data>
+  <data name="flute" xml:space="preserve">
+    <value>An masterfully carved wooden flute.@ It has magical capabilities.</value>
+  </data>
+  <data name="gold" xml:space="preserve">
+    <value>Shiny gold.</value>
+  </data>
+  <data name="k" xml:space="preserve">
+    <value>A wooden door marked K.@ It is closed.</value>
+  </data>
+  <data name="kettle" xml:space="preserve">
+    <value>A small kettle made of porcelain.@ The kettle contains tea.</value>
+  </data>
+  <data name="key" xml:space="preserve">
+    <value>A tiny silver key.</value>
+  </data>
+  <data name="l" xml:space="preserve">
+    <value>A wooden door marked L.</value>
+  </data>
+  <data name="ladder" xml:space="preserve">
+    <value>A sturdy wooden ladder.</value>
+  </data>
+  <data name="leather_bag" xml:space="preserve">
+    <value>A small leather bag capable of holding some liquids and solids.@ It is closed.</value>
+  </data>
+  <data name="coffee" xml:space="preserve">
+    <value>A mug filled with coffee.@ It looks delicious, but an odd feeling warns you not to drink it.</value>
+  </data>
+  <data name="magic_staff" xml:space="preserve">
+    <value>It radiates with magic energy.</value>
+  </data>
+  <data name="match" xml:space="preserve">
+    <value>An ordinary match.</value>
+  </data>
+  <data name="mirror" xml:space="preserve">
+    <value>You see an ugly person staring back at you, @ framed within the large, round mirror.</value>
+  </data>
+  <data name="mirrorInvisible" xml:space="preserve">
+    <value>A large, round, talking mirror.@ You see no reflection.</value>
+  </data>
+  <data name="oak_trees" xml:space="preserve">
+    <value>A forest of ancient oak trees.</value>
+  </data>
+  <data name="oriental_rug" xml:space="preserve">
+    <value>A large oriental rug woven from silk.@ It is thick and heavy.</value>
+  </data>
+  <data name="recipe" xml:space="preserve">
+    <value>A recipe for tomato soup, taken from a cookbook.</value>
+  </data>
+  <data name="secret_door" xml:space="preserve">
+    <value>A small, round secret door.@ It blends in with the library wall.</value>
+  </data>
+  <data name="seeds" xml:space="preserve">
+    <value>Seeds from a red apple.</value>
+  </data>
+  <data name="shelf" xml:space="preserve">
+    <value>A tall and empty cherry wood shelf.</value>
+  </data>
+  <data name="shield" xml:space="preserve">
+    <value>A round, flat shield made of silver.</value>
+  </data>
+  <data name="silver" xml:space="preserve">
+    <value>Shiny silver from a melted key.</value>
+  </data>
+  <data name="sink" xml:space="preserve">
+    <value>A double basin, stainless steel sink.</value>
+  </data>
+  <data name="spellbook" xml:space="preserve">
+    <value>A brown leather-bound spellbook with yellowed pages.@ There is writing inside.</value>
+  </data>
+  <data name="spit" xml:space="preserve">
+    <value>Transparent saliva.</value>
+  </data>
+  <data name="stage" xml:space="preserve">
+    <value>An elevated theater stage.</value>
+  </data>
+  <data name="steps" xml:space="preserve">
+    <value>White marble steps.</value>
+  </data>
+  <data name="stove" xml:space="preserve">
+    <value>An stainless steel four-burner stove.</value>
+  </data>
+  <data name="strange_purple" xml:space="preserve">
+    <value>A strange blue book glowing with energy.@ There is writing inside, but the book is locked.</value>
+  </data>
+  <data name="table" xml:space="preserve">
+    <value>A long, rectangular cherry wood table used for fine dining.</value>
+  </data>
+  <data name="table2" xml:space="preserve">
+    <value>A small, rectangular table made of wood.</value>
+  </data>
+  <data name="throne" xml:space="preserve">
+    <value>An ornate golden throne engraved with intricate carvings.</value>
+  </data>
+  <data name="tomatoes" xml:space="preserve">
+    <value>Fresh, juicy, red tomatoes.</value>
+  </data>
+  <data name="trough" xml:space="preserve">
+    <value>A long, narrow feeding trough providing water for horses.</value>
+  </data>
+  <data name="tunnel" xml:space="preserve">
+    <value>A dark and eerie tunnel.</value>
+  </data>
+  <data name="snake" xml:space="preserve">
+    <value>A massive snake with menacing patterns along its long body.@ Sharp, vicious fangs extend out from its huge jaws.</value>
+  </data>
+  <data name="water" xml:space="preserve">
+    <value>Ordinary tap water.@ It has a slight golden shine.</value>
+  </data>
+  <data name="window" xml:space="preserve">
+    <value>A glass window.@ A perilous abyss lies behind it.@ The window is closed.</value>
+  </data>
+  <data name="vampire" xml:space="preserve">
+    <value>A pale vampire capable of transforming into a bat.</value>
+  </data>
+  <data name="display_case" xml:space="preserve">
+    <value>A glass display case.@ There is an oil lamp inside.</value>
+  </data>
+  <data name="oil_lamp" xml:space="preserve">
+    <value>An ancient Arabian oil lamp.@ A lazy, unhelpful genie inhabits the lamp and serves its owner.</value>
+  </data>
+  <data name="limestone_gate" xml:space="preserve">
+    <value>A massive limestone gate, three stories high.</value>
+  </data>
+  <data name="rope" xml:space="preserve">
+    <value>A long, thin rope.</value>
+  </data>
+  <data name="ship2" xml:space="preserve">
+    <value>A distant sailing ship.</value>
+  </data>
+  <data name="mast" xml:space="preserve">
+    <value>The main mast of the ship, an impressive 16 m tall.</value>
+  </data>
+  <data name="figurehead" xml:space="preserve">
+    <value>A figurehead depicting a majestic horse.@ It is securely fastened to the bowsprit.</value>
+  </data>
+  <data name="wheel" xml:space="preserve">
+    <value>The wooden steering wheel of the ship, supported by a pedestal.@ The wheel has eight handles.</value>
+  </data>
+  <data name="elf" xml:space="preserve">
+    <value>A mysterious elf wearing a red suit and red hat.</value>
+  </data>
+  <data name="rats" xml:space="preserve">
+    <value>Three nasty rats.</value>
+  </data>
+  <data name="cyclops" xml:space="preserve">
+    <value>A huge, green cyclops with one eye.</value>
+  </data>
+  <data name="cheese" xml:space="preserve">
+    <value>A piece of moldy cheese.@ Only the nastiest creatures would eat it.</value>
+  </data>
+  <data name="cookbook" xml:space="preserve">
+    <value>An orange cookbook with a picture of tomato soup on its cover.@ There is a recipe and writing inside.</value>
+  </data>
+  <data name="beanstalk" xml:space="preserve">
+    <value>A tall, green beanstalk surrounded by oak trees.</value>
+  </data>
+  <data name="troll" xml:space="preserve">
+    <value>An ugly, beige troll with red eyes.</value>
+  </data>
+  <data name="elevator" xml:space="preserve">
+    <value>A monolithic steel elevator.</value>
+  </data>
+  <data name="newspaper" xml:space="preserve">
+    <value>A black-and-white copy of the Haunted Herald.@ A cartoonist's representation of you is on the front page.@ There is writing on the newspaper.</value>
+  </data>
+  <data name="poetry" xml:space="preserve">
+    <value>A red book filled with poetry.@ There is writing inside.</value>
+  </data>
+  <data name="house" xml:space="preserve">
+    <value>Your colorful gingerbread house.</value>
+  </data>
+  <data name="observatory" xml:space="preserve">
+    <value>A tall, white observatory building.</value>
+  </data>
+  <data name="x" xml:space="preserve">
+    <value>A wooden door marked X.</value>
+  </data>
+  <data name="y" xml:space="preserve">
+    <value>A wooden door marked Y.</value>
+  </data>
+  <data name="crumbs" xml:space="preserve">
+    <value>Tiny breadcrumbs.</value>
+  </data>
+  <data name="monocle" xml:space="preserve">
+    <value>An old-fashioned glass eyepiece.</value>
+  </data>
+  <data name="rainforest" xml:space="preserve">
+    <value>An immense forest with trees on all sides.</value>
+  </data>
+  <data name="sphinx" xml:space="preserve">
+    <value>A majestic sphinx with a human head and the body of a lion.</value>
+  </data>
+  <data name="hook" xml:space="preserve">
+    <value>A hook.</value>
+  </data>
+  <data name="leprechaun" xml:space="preserve">
+    <value>A short leprechaun with a little green hat.</value>
+  </data>
+  <data name="werewolf" xml:space="preserve">
+    <value>A terrifying werewolf.</value>
+  </data>
+  <data name="dragon" xml:space="preserve">
+    <value>An immense, fire-breathing dragon.</value>
+  </data>
+</root>

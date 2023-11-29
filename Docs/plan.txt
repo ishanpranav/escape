@@ -1,0 +1,25 @@
+5 Scarab			10
+6 Spoon				20
+1 Pair of Rings		28
+3 Goblet			30
+2 Bracelet			40
+4 Tiara				40
+7 Ingot				64
+
+1 Entrepreneurial
+2 Enterprising
+3 Business-minded
+4 Opportunistic
+5 Greedy
+6 Ambitious
+7 Avaricious
+
+Snake = Python
+Window = Microsoft
+Apple = Apple
+Blackberry = BlackBerry
+Computer = IBM
+Strange Blue Book = Facebook
+Cup of Coffee = Java
+Rainforest = Amazon
+Flute = C#
